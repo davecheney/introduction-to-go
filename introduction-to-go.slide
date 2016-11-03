@@ -1,11 +1,15 @@
 Introduction to Go
 Tokyo, Japan
-11 Dec, 2016
+11 Dec 2016
 
 Dave Cheney
 dave@cheney.net
 http://dave.cheney.net/
 @davecheney
+
+* DRAFT PRESENTATION
+
+THIS IS A DRAFT PRESENTATION.
 
 * License and Materials
 
@@ -21,21 +25,435 @@ If you have suggestions or corrections to this presentation, please raise [[http
 
 * Agenda
 
-This workshop is aimed at programmers who have experience in another programming language, and want to learn how to apply their skills to Go.
+This workshop is aimed at programmers with experience in another programming language and want to learn how to apply their skills to Go.
 
-This workshop is roughly in five main sections:
+This workshop consists of five main sections:
 
-- A
-- B
-- C
-- D
-- E
+- Basic Syntax
+- Advanced Syntax
+- Development environment and tooling
+- The standard library
+- Packages and applications
 
 After each section we'll have time for questions.
+
+As we work through the day there will be less of me talking, and more exercises to help you learn Go via doing.
 
 * One more thing ...
 
 This isn't a lecture, it's a conversation.
 
 If you don't understand something, or think what you're hearing is incorrect, speak up.
+
+* Introduction to Go
+
+* Why a new language 
+
+- motivation of go
+ - when it started, 2007, released in 2009
+ - why it started,
+
+- opinionated
+ - major opinions
+
+* Basic Syntax
+
+* Basic Syntax
+
+- hello http
+ - this has a lot going on, it shows directly, or indirectly almost all of the features of the language
+ - compiled, concurrent, fast,
+- but ...
+ - this is my problem with the way that many languages are taught; they start with the big picture and immediately ask you, the student, to ignore, or take accept as true, many things which are not discussed until much later
+ - this can be overwhelming, and I think there is a better way to introuduce Go.
+
+TODO: intro
+
+* Constants
+
+A good place to start talking about Go are _Constants.
+
+Constants are values that do not change.
+
+Here are some examples of constants:
+
+ 1
+ "hello"
+ false
+ 1.3
+
+These are called literal constants, because the value of evaluating each of these is the constant itself.
+
+* Types of constants
+
+There are six kinds of constants
+
+- integer constants: `1`, `0`, `-6`, `9999999999999999999`, …
+- floating point constants: `3.14`, `7.`, `7.5e2`, …
+- complex number constants (rare): `1`-`0.707i`, …
+- string constants: `"Hello,`東京"`, … 
+- rune constants: `'a'`, `'す'`, `'シ'`, `'1'`, …
+- boolean constants: `true`, `false`
+
+* const
+
+To make a constant, we declare one with the `const` keyword.
+
+.play -edit src/const/const1/main.go /START OMIT/,/END OMIT/
+
+Whenever you see a *Run* button on a slide, you can execute the code.
+
+- Press the *Run* button now and see what happens. 
+- Press the *Close* button to close the output window.
+
+You can also edit the code right here in the slide.
+
+- Edit the code to replace my name, with yours.
+- All source code in Go is UTF-8, you can use Kanji.
+- Press the *Run* button to see the results.
+- If you make a mistake, just reload the page.
+
+* Identifiers
+
+This is a good time to talk about _identifiers_.
+
+An identifier is a name your give to something in your code.
+
+In Go an identifier is any word that starts with a _letter_.
+
+.play -edit src/const/const2/main.go /START OMIT/,/END OMIT/
+
+A letter is anything that Unicode defines to be a letter, this includes Kanji, Cyrilic, Aribic, etc.
+
+- Identifiers are not restricted to ASCII, edit the slide and change `students` to `学生の` and press *Run*.
+
+* Constant expressions
+
+* Declarations
+
+There are six kinds of _declarations_ in Go. We've already seen one of them.
+
+They are:
+
+- `const`: declares a new constant.
+- `var`: declares a new variable.
+- `type`: declares a new type.
+- `func`: declares a new function, or method.
+- `package`: declares the package this `.go` source file belongs to.
+- `import`: declares that this package imports declaractions from another. 
+
+We'll cover each of the remaining five declarations in this section, starting with `var`.
+
+* Numbers
+
+The easiest place to start with Go is numbers.
+
+Numbers in Go are much like you would be used to numbers in most other programming languages.
+
+.play -edit src/numbers/numbers.go /START OMIT/,/END OMIT/
+
+* Expressions
+
+Anywhere you see a *Play* button means you can run the code on this slide.
+
+* Variables
+
+Variables in Go are introduced with the `var` keyword.
+
+ var x = 1
+ 
+* Variables names
+
+Variable names 
+
+
+Assignment
+
+* Looping
+
+Go has a single loop construct that 
+
+ code
+
+Other languages have loops like `do; while`, or `repeat; until`.
+Go has unified these into a 
+
+* Infinite loop
+
+What does this program do?
+
+ infinite loop
+
+An infite loop
+
+* Conditionals
+
+* Contitionals
+
+Use `if` and `break` to print the numbers 1 to 10
+
+ var i = 1
+ for {
+       println(i)
+ }
+
+Switch
+
+* Types
+
+Go is a strongly typed language, like Java, C, C++, and Python.
+
+If you are used to languages like Javascript
+
+* Arrays
+
+
+* Slices
+
+* Subslices
+
+* Functions
+
+* Advanced Syntax
+
+* Advanced Syntax
+
+In the previous section we executed code 
+
+In this section we'll use the Go Playground, a simple online code editor to perform our exercises.
+
+The Go playground can format your code according to the canonical Go style.
+
+Follow [[https://play.golang.org/p/0Hz57BQdTA][this link]] and press the *Format* button to see this in action.
+
+Literals
+
+* Identifiers
+
+
+
+Constant expressions
+
+* Nil
+
+`nil` is Go's version of `NULL`, `null`, `void`.
+
+
+* Zero value
+
+In previous examples we've written code like this
+
+ var counter = 1
+ var name = "go"
+
+Which both _declares_ and _initalises_ the variables `counter` and `name` respectively.
+
+What happens if we have code like this
+
+ var counter int
+ var name string
+ println(name, counter)
+
+What will ths print?
+
+* Zero value (cont.)
+
+In Go, there is no unitialised memory. The Go runtime will always ensure that the memory allocated for every variable is initalised before use.
+
+If we write something like 
+
+ var counter int
+ var name string
+
+Then the memory assigned to the variables `counter` and `name` will be zeroed, as we have not provided an _initaliser_.
+
+The value of `counter` will be zero, because that is the value of an `int` if we wrote `0` to its memory location.
+
+The value of `name` will be `""` because that is the value of a string with zero length.
+
+* Zero value (cont.)
+
+Every type in Go has an associated _zero_value_. The value of that variable if we wrote zeros to its memory.
+
+- The zero value for integer types: `int`, `int8`, `uint`, `uint64`, etc, is `0`.
+- The zero value for floating point types: `float32`, `float64`, `complex128`, etc, is `0.0`.
+- The zero value for slices is `nil`.
+
+
+* Conversions
+
+Assignment requires that the type of the _expression_ on the right hand side
+
+* Type inference
+
+* Short Declaration syntax
+
+Maps
+Structs
+Scope
+Constants
+
+* Range
+
+ code
+
+You can use `range` over arrays, slices, maps, and channels.
+
+* Pointers
+
+* Methods (must talk about types and packages first)
+
+* Interfaces
+
+* Empty Interface
+
+* Development environment and tooling
+
+* Development environment and tooling
+
+This section focuses on the developer experience
+
+- Installing Go.
+- Setting up a `$GOPATH` workspace.
+- Introduction to the `go` command.
+- Writing unit tests with the go test command.
+
+* Installing Go
+
+The next NNN slides give examples of how to install Go on various systems.
+
+The official installation documentation is here:
+
+.link https://golang.org/doc/install
+
+The current version of Go is 1.7.3.
+
+Minor releases, 1.8, 1.9, etc, ship twice a year. 
+
+Historically 2 or 3 bug fix releases occur during each six month period.
+
+* Installing Go on OS X
+
+Installing Go on OS X (also known as `darwin`) can be acomplished with
+
+*Max OS Installer*
+
+The Go project provides an `.pkg` installer, use:
+
+.link https://storage.googleapis.com/golang/go1.7.3.darwin-amd64.pkg
+
+_note_: Go 1.7.3 is the current releases as of this class.
+
+*Homebrew*
+
+If you use Homebrew to manage third party software on your Mac, use:
+
+ brew install golang
+
+* Installing Go on Windows
+
+*MSI Installer*
+
+The Go project provides a `.msi` installer for 32bit and 64bit Windows, use:
+
+.link https://storage.googleapis.com/golang/go1.7.3.windows-amd64.msi Windows 64bit MSI installer
+.link https://storage.googleapis.com/golang/go1.7.3.windows-386.msi Windows 32bit MSI installer
+
+*.zip file*
+
+The Go project provides a `.zip` file of the Go compiler and standard library, use:
+
+.link https://storage.googleapis.com/golang/go1.7.3.windows-amd64.zip Windows 64bit zip file
+.link https://storage.googleapis.com/golang/go1.7.3.windows-386.zip Windows 32bit zip file
+
+Unzip the zip file and place it at `C:\Go`.
+
+_note_: Go 1.7.3 is the current releases as of this class.
+
+* Installing Go on Linux
+
+Depending on your Linux distribution they may have an up to date version of Go, but this is rare.
+
+The most reliable way to install the latest version of Go
+
+_note_: Go 1.7.3 is the current releases as of this class.
+
+* $GOPATH
+
+TODO, explain `$GOPATH`.
+
+* Go tool
+
+Your Go installation comes with a tool we call the `go` tool, because that's its name.
+
+The `go` tool can 
+
+- compile your programs
+- run your tests
+- display documentation for a package
+- fetch packages from the internet.
+
+* go build
+
+TODO: go build / go install
+
+* go test
+
+TODO: go test
+
+* Writing tests
+
+TODO: writing tests
+
+
+* go doc
+
+TODO: go doc / godoc 
+
+Also, godoc.org
+
+* Documenting packages with comments
+
+Go code is traditionally documented with comments in the source code.
+
+Show examples
+
+* go get
+
+TODO: go get
+
+error handling
+
+* The standard library
+
+* The standard library
+
+Go ships with a rich standard library of packages. This includes
+
+- compression
+- encoding and decoding of JSON and XML
+- network handling
+- HTTP client and server
+
+This section will focus on the important packages from the standard library with exercises.
+
+- katas
+ - count the number of lines in a file (using bufio.Scanner)
+
+* Packages and applications
+
+* Packages and applications
+
+- how to write a package
+- how to layout a project
+- package, project katas
+
+TODO
+
+* Conclusion
+
+* Conclusion
+
+Thank you very much for participating today, I hope that you enjoyed yourself and are encouraged to learn more about Go.
+
 
