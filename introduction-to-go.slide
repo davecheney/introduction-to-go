@@ -56,8 +56,6 @@ If you don't understand something, or think what you're hearing is incorrect, sp
 - opinionated
  - major opinions
 
-* Language Overview
-
 * Safety
 
 Typed, and type safe
@@ -249,15 +247,40 @@ The
 
 You _declare_ a new variable with the `var`
 
-
-
 Just like constants, variable _identifiers_ can be any any valid unicode word.
+
+* Explicit type declaration
+
+In the examples so far we've
+
+
+
 
 * Types
 
-Go is a strongly typed language, like Java, C, C++, and Python.
+Go is a strongly typed language, like Java, C, C++, and Python. Go has nine kinds of types, they are:
 
-If you are used to languages like Javascript
+- signed integers: `int8`, `int16`, `int32`, `int64`.
+- unsigned integers: `uint8`, `uint6`, `uint32`, `uint64`.
+- aliases: `byte` (`uint8`), `rune` (`int32`), `int` (`int32` or `int64`), `uint` (`uint32` or `uint64`).
+- booleans: `bool`.
+- strings: `string`.
+- IEEE floating point: `float32`, `float64`.
+- Complex types: `complex64`, `complex128`.
+- Compound types: `array`, `slice`, `map`, `struct`.
+- Pointer types: `*int`, `*bytes.Buffer`.
+
+We'll discuss the first seven kinds of types in this section, and the last two in the next section.
+
+* Integer types
+
+Integer types are the most common in Go.
+
+Integer types come in two types; signed and unsigned.
+
+Integer types also come in several sizes, represented by the number of bits they represent.
+
+Go has two integer types, `int` and `uint`, whose size depends on the platform you are running Go on.
 
 * Expressions 
 
@@ -291,7 +314,6 @@ In this example, we declare
 
 - Press *Run* to check that program prints, `1`, `2`, `4`.
 - Update the program to declare a new variable, `z`, which has a value 2x larger than `y`.
-
 
 * Assignment (cont.)
 
@@ -348,17 +370,45 @@ Switch
 
 * Packages
 
-- `package`: declares the package this `.go` source file belongs to.
+Go code is arranged into packages.
+
+Each source file in a Go program must begin with a `package` declaration, which declares.
+
+A package is the unit in which software is shared and reused in Go.
+
+We've been working in `package main`, which is the name of the package which contains the entry point to your program.
+
+When your Go program
+
+* main packages
+
+This 
+
+.play -edit src/packages/packages1/main.go
+
+In this example the package name is wrong.
+
+- Press *Run* and observe the compile error.
+- Change the `package` declaration to make the program compile.
+- Press *Run* to check that program prints its greeting.
 
 * Import
 
 - `import`: declares that this package imports declaractions from another. 
 
-* Advanced Syntax
+* Now you know the basics
+
+Now you know the basics of Go.
+
+You've learnt and experiemented with
+
+- Constants, variables, and assignment.
 
 * Advanced Syntax
 
-In the previous section we executed code 
+* Advanced Syntax
+
+In the previous section we executed code directly in this this deck.
 
 In this section we'll use the Go Playground, a simple online code editor to perform our exercises.
 
@@ -366,13 +416,9 @@ The Go playground can format your code according to the canonical Go style.
 
 Follow [[https://play.golang.org/p/0Hz57BQdTA][this link]] and press the *Format* button to see this in action.
 
-Literals
-
+* Literals
 
 * Constant expressions
-
-
-Constant expressions
 
 * Nil
 
@@ -419,12 +465,30 @@ Every type in Go has an associated _zero_value_. The value of that variable if w
 
 - The zero value for integer types: `int`, `int8`, `uint`, `uint64`, etc, is `0`.
 - The zero value for floating point types: `float32`, `float64`, `complex128`, etc, is `0.0`.
+- The zero value for arrays is the zero value for each element, ie. `[3]int` is `0`, `0`, `0`.
 - The zero value for slices is `nil`.
+- The zero valye for structs is the zero value for each field.
 
+* Type conversions
 
-* Conversions
+Sometimes you have variables of different integer types, you can _convert_ from one type to another using a conversion _expression_.
 
-Assignment requires that the type of the _expression_ on the right hand side
+.play -edit src/types/types1/main.go /START OMIT/,/END OMIT/
+
+In this example the assignment of `y`=`x` fails because `x` and `y` are different integer types.
+
+- Edit the code to _convert_ the type of `x` to `int` with `int(x)`.
+- Press the *Run* button to see the results, it should compile and print `1`.
+
+_note_: Other languages sometimes call this _casting_, we don't say this in Go because it is not the same.
+
+* Type conversions (cont.)
+
+SHOW WIDENING
+
+* Type conversions (cont.)
+
+SHOW NARROWING
 
 * Type inference
 
@@ -440,6 +504,10 @@ Constants
  code
 
 You can use `range` over arrays, slices, maps, and channels.
+
+* Multiple return values
+
+* Variadic functions.
 
 * Pointers
 
