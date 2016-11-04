@@ -243,16 +243,33 @@ We'll cover each of the remaining five declarations in this section.
 
 * Variables
 
-The 
+A variable holds a value that can be changed over time.
 
-You _declare_ a new variable with the `var`
+You _declare_ a new variable with the `var` declaration.
+
+.play -edit src/variable/variable1/main.go /START OMIT/,/END OMIT/
 
 Just like constants, variable _identifiers_ can be any any valid unicode word.
+
+- Press the *Run* button to see the result.
+
+* Unused variable declarations
+
+Unused variables are often the source of bugs. If you declare a variable in the scope of your function but do not use it, the Go compiler will complain.
+
+If the variable is unused, you should delete it, or assign it temporariliy to the magic variable called `_`.
+
+.play -edit src/variable/variable2/main.go /START OMIT/,/END OMIT/
+
+This program has four unused variables.
+
+- Fix the program by uncommenting the two lines at the bottom.
+- Delete, or comment out, the declaration of `自転車` as it is unused.
+- Press the *Run* button to check that your program compiles.
 
 * Explicit type declaration
 
 In the examples so far we've
-
 
 
 
@@ -276,11 +293,11 @@ We'll discuss the first seven kinds of types in this section, and the last two i
 
 Integer types are the most common in Go.
 
-Integer types come in two types; signed and unsigned.
+Integer types come in two types; _signed_ and _unsigned_.
 
-Integer types also come in several sizes, represented by the number of bits they represent.
+Integer types also come in several sizes, represented by the number of bits they represent; `int8`, `int16`, `int32`, `int64`, `uint8`, `uint16`, `uint32`, `uint64`.
 
-Go has two integer types, `int` and `uint`, whose size depends on the platform you are running Go on.
+Go has two integer types, `int` and `uint`, whose size depends on the platform you used to build your Go program.
 
 * Expressions 
 
@@ -327,22 +344,41 @@ It is a syntax error to assign a new value to a constant.
 - Edit the sample code to change the declaration of `x` from a constant (`const`) to a variable (`var`).
 - Press *Run* and and check the program compiles and prints the correct answer, 2.
 
+* Increment and decrement
+
+Go supports a limited form of variable post-increment and post-deincrement, ie. `x++`, `x--`.
+
+.play -edit src/increment/increment1/main.go /START OMIT/,/END OMIT/
+
+- Press *Run* and see the program prints `2`,
+- Edit the sample code to subtract `1` from `i` using the deincrement operator `i--`.
+- Press *Run* and and check the program compiles and prints the correct answer, 0.
+
+* Increment and decrement (cont.)
+
+`i++` and `i--` are _statements_, not an _expressions_, they do not produce a value.
+
+.play -edit src/increment/increment2/main.go /START OMIT/,/END OMIT/
+
+This program has a syntax error. 
+
+- Edit the sample code to correct the error by moving the `i++` statement above the declaraction of `var`j`.
+- Press *Run* and and check the program compiles and prints the correct answer, 2, 2.
+
 * Looping
 
-Go has a single loop construct that 
+Go has a single loop construct that replaces the 
+
+- `for` _condition_ `{`…`}`
+- `while` _condition_ `{`…`}`
+- `do`{`…`}`while` _condition_, `do`{`…`}`while` _condition_
+
+* Looping (cont.) 
 
  code
 
 Other languages have loops like `do; while`, or `repeat; until`.
 Go has unified these into a 
-
-* Infinite loop
-
-What does this program do?
-
- infinite loop
-
-An infite loop
 
 * Conditionals
 
@@ -359,14 +395,11 @@ Switch
 
 * Arrays
 
+TODO: example, initalise array
 
 * Slices
 
 * Subslices
-
-* Functions
-
-- `func`: declares a new function, or method.
 
 * Packages
 
@@ -414,6 +447,8 @@ In this section we'll use the Go Playground, a simple online code editor to perf
 
 The Go playground can format your code according to the canonical Go style.
 
+TODO: talk about gofmt style.
+
 Follow [[https://play.golang.org/p/0Hz57BQdTA][this link]] and press the *Format* button to see this in action.
 
 * Literals
@@ -426,6 +461,11 @@ Follow [[https://play.golang.org/p/0Hz57BQdTA][this link]] and press the *Format
 
 * Declaring your own types
 
+* Functions
+
+- `func`: declares a new function, or method.
+
+TODO: need to describe types before functions.
 
 * Zero value
 
@@ -473,6 +513,8 @@ Every type in Go has an associated _zero_value_. The value of that variable if w
 
 Sometimes you have variables of different integer types, you can _convert_ from one type to another using a conversion _expression_.
 
+The expression `T(v)` converts the value `v` to the type `T`.
+
 .play -edit src/types/types1/main.go /START OMIT/,/END OMIT/
 
 In this example the assignment of `y`=`x` fails because `x` and `y` are different integer types.
@@ -504,6 +546,10 @@ Constants
  code
 
 You can use `range` over arrays, slices, maps, and channels.
+
+* Multiple assignment
+
+var x, y = 1, 2
 
 * Multiple return values
 
