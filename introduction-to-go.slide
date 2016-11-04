@@ -56,9 +56,80 @@ If you don't understand something, or think what you're hearing is incorrect, sp
 - opinionated
  - major opinions
 
-* Basic Syntax
+* Language Overview
 
-* Basic Syntax
+* Safety
+
+Typed, and type safe
+
+        var i int = -1
+        var u uint = 200
+
+        i = u   // nope, incompatible types
+
+Array accesses are bounds checked
+
+        s := make([]string, 10)
+
+        for i := 0; i <= 10; i++ {
+                // oops
+        }
+
+* Safety (cont.)
+
+No dangling pointers, return a stack value from a function with impunity.
+
+- Compiler will move allocations to the heap if required.
+- Escape analysis will move them back if not.
+
+All memory is zeroed if not explicitly initialised
+
+        var q int       // initialised to 0
+        var f = 7       // initialised to 7, type defaults to int
+
+No implicit conversions; booleans and integers are not aliases
+
+        i := 2
+        if i { ... }    // nope, no coercion to bool
+
+* Good support for concurrency and communication
+
+- Multicore is a reality.
+- Multiprocessing is not a solution.
+- Networking support baked into the standard library, integrated into the runtime.
+
+* Garbage collected
+
+Go is a garbage collected language.
+
+- Eliminates the bookkeeping errors related to ownership of shared values.
+- Eliminates an entire class of use after free and memory leak bugs.
+- Enables simpler, cleaner, APIs.
+
+The garbage collector handles heaps into the 100's of GB range, and is designed for extremely low "stop the world" pauses. In Go 1.7 these pauses are now less than 100 microseconds.
+
+* Speed
+
+Go is often noted for its fast compilation, but this is only one facet of the idea of Go being a _fast_ language to program in.
+
+"False dichotomy of static languages being 'slow and painful' and dynamic languages being 'fast and fun'" -Rob Pike
+
+"Clumsy type systems drive people to dynamically typed languages" -Robert Griesemer
+
+Go is an attempt to demonstrate that a language can be both fast in terms of the programs it produces and fast (productive?) for the authors.
+
+* Opinionated
+
+Go is an opinionated language.
+
+- Unused local variables are an error.
+- Unused imports are also an error.
+- The compiler does not issue warnings, only errors.
+- A single way to format code as defined by `go`fmt`.
+
+* Hello, http!
+
+TODO: hello http example
 
 - hello http
  - this has a lot going on, it shows directly, or indirectly almost all of the features of the language
@@ -67,11 +138,11 @@ If you don't understand something, or think what you're hearing is incorrect, sp
  - this is my problem with the way that many languages are taught; they start with the big picture and immediately ask you, the student, to ignore, or take accept as true, many things which are not discussed until much later
  - this can be overwhelming, and I think there is a better way to introuduce Go.
 
-TODO: intro
+* Basic Syntax
 
 * Constants
 
-A good place to start talking about Go are _Constants.
+A good place to start talking about Go are _Constants_.
 
 Constants are values that do not change.
 
@@ -89,7 +160,7 @@ These are called literal constants, because the value of evaluating each of thes
 There are six kinds of constants
 
 - integer constants: `1`, `0`, `-6`, `9999999999999999999`, …
-- floating point constants: `3.14`, `7.`, `7.5e2`, …
+- floating point constants: `3.14`, `7.5e-2`, …
 - complex number constants (rare): `1`-`0.707i`, …
 - string constants: `"Hello,`東京"`, … 
 - rune constants: `'a'`, `'す'`, `'シ'`, `'1'`, …
@@ -121,17 +192,45 @@ An identifier is a name your give to something in your code.
 
 In Go an identifier is any word that starts with a _letter_.
 
-.play -edit src/const/const2/main.go /START OMIT/,/END OMIT/
+.play -edit src/identifier/identifier1/main.go /START OMIT/,/END OMIT/
 
 A letter is anything that Unicode defines to be a letter, this includes Kanji, Cyrilic, Aribic, etc.
 
 - Identifiers are not restricted to ASCII, edit the slide and change `students` to `学生の` and press *Run*.
+- If you make a mistake, just reload the page.
 
-* Constant expressions
+* Identifiers (cont.)
+
+An identifier must start with a unicode letter, or the underscore character, `_`.
+
+Numbers are not permitted at the start of an identifier, but can appear later in the identifier.
+
+.play -edit src/identifier/identifier2/main.go /START OMIT/,/END OMIT/
+
+Here are some examples of _invalid_ identifiers.
+
+- Change the name of the identifier so that the program compiles.
+- Press the *Run* button to see the results.
+- If you make a mistake, just reload the page.
+
+* Comments
+
+Go supports two kinds of comments:
+
+- Inline comments, which start with a double forward slash, `//`.
+- Block comments, which start with a forward slash and a start, `/*`, and end with a start and forward slash, `*/`.
+
+.play -edit src/comments/comments1/main.go /START OMIT/,/END OMIT/
+
+Code that is commented out will not be compiled or run.
+
+- Remove the comments in this program so it compiles.
+- Press the *Run* button to see the results, it should compile and print `1`2`3`.
+- If you make a mistake, just reload the page.
 
 * Declarations
 
-There are six kinds of _declarations_ in Go. We've already seen one of them.
+There are six kinds of _declarations_ in Go, we've seen one of them already.
 
 They are:
 
@@ -142,32 +241,69 @@ They are:
 - `package`: declares the package this `.go` source file belongs to.
 - `import`: declares that this package imports declaractions from another. 
 
-We'll cover each of the remaining five declarations in this section, starting with `var`.
-
-* Numbers
-
-The easiest place to start with Go is numbers.
-
-Numbers in Go are much like you would be used to numbers in most other programming languages.
-
-.play -edit src/numbers/numbers.go /START OMIT/,/END OMIT/
-
-* Expressions
-
-Anywhere you see a *Play* button means you can run the code on this slide.
+We'll cover each of the remaining five declarations in this section.
 
 * Variables
 
-Variables in Go are introduced with the `var` keyword.
+The 
 
- var x = 1
- 
-* Variables names
-
-Variable names 
+You _declare_ a new variable with the `var`
 
 
-Assignment
+
+Just like constants, variable _identifiers_ can be any any valid unicode word.
+
+* Types
+
+Go is a strongly typed language, like Java, C, C++, and Python.
+
+If you are used to languages like Javascript
+
+* Expressions 
+
+TODO: discuss before statements
+
+* Statements
+
+A statement in Go is a command to do something:
+
+- _Declare_a_new_integer_variable_x_and_assign_it_the_value_10_.
+- _While_x_less_than_20_perform_these_statements_.
+
+There are several kinds of statements in Go, we've seen a few already.
+
+The most common of _statements_ in Go are:
+
+- Declarations: `const`pi`=`3.14159265359`, `type`Counter`int32`, …
+- Assignments: `count`=`count`+`1`, …
+- Increment/Decrement: `x++`, `y--`
+- Conditionals: `if`…`{`…`}`else`{`…`}`, `switch`{`…`}`
+- Loops: `for`…`{`…`}`
+- Control flow: `break`, `fallthrough`, `continue`, `goto`, `return`.
+
+* Assignment
+
+It is common that you need to change the value stored in a variable, this is called _Assignment_.
+
+.play -edit src/assignment/assignment1/main.go /START OMIT/,/END OMIT/
+
+In this example, we declare
+
+- Press *Run* to check that program prints, `1`, `2`, `4`.
+- Update the program to declare a new variable, `z`, which has a value 2x larger than `y`.
+
+
+* Assignment (cont.)
+
+You can only assign a new value to _variables_.
+
+.play -edit src/assignment/assignment2/main.go /START OMIT/,/END OMIT/
+
+It is a syntax error to assign a new value to a constant.
+
+- Press *Run* and see the program does not compile.
+- Edit the sample code to change the declaration of `x` from a constant (`const`) to a variable (`var`).
+- Press *Run* and and check the program compiles and prints the correct answer, 2.
 
 * Looping
 
@@ -199,12 +335,6 @@ Use `if` and `break` to print the numbers 1 to 10
 
 Switch
 
-* Types
-
-Go is a strongly typed language, like Java, C, C++, and Python.
-
-If you are used to languages like Javascript
-
 * Arrays
 
 
@@ -213,6 +343,16 @@ If you are used to languages like Javascript
 * Subslices
 
 * Functions
+
+- `func`: declares a new function, or method.
+
+* Packages
+
+- `package`: declares the package this `.go` source file belongs to.
+
+* Import
+
+- `import`: declares that this package imports declaractions from another. 
 
 * Advanced Syntax
 
@@ -228,8 +368,8 @@ Follow [[https://play.golang.org/p/0Hz57BQdTA][this link]] and press the *Format
 
 Literals
 
-* Identifiers
 
+* Constant expressions
 
 
 Constant expressions
@@ -237,6 +377,8 @@ Constant expressions
 * Nil
 
 `nil` is Go's version of `NULL`, `null`, `void`.
+
+* Declaring your own types
 
 
 * Zero value
