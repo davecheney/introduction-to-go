@@ -415,7 +415,7 @@ Let's revisit our previous even numbers `for` loop example.
 
 This program counts from `1` to `10`, can you make it print only the _even_ numbers.
 
-- Uncomment the `if`i%2 ==`0`{` and `}` lines to make the program print only the even numbers between `1` and `10`.
+- Uncomment the `if`i%2`==`0`{` and `}` lines to make the program print only the even numbers between `1` and `10`.
 - Press *Run* and and check the program compiles and prints the correct answer, `2`, `4`, `6`, `8`, `10`.
 
 _note_: `%` is the _modulo_ operator in Go. All even numbers divide wholely by `2`, leaving `0` as their _modulo_ (or remainder).
@@ -430,13 +430,19 @@ We can rewrite the previous program using a new statement, `continue`, which _sk
 
 .play -edit src/conditionals/conditionals2/main.go /START OMIT/,/END OMIT/
 
-This is the same 
-
-- Uncomment the `if`i%2 ==`0`{` and `}` lines.
+- Uncomment the `if`i%1`==`1`{`, `continue`, and `}` lines.
 - Press *Run* and and check the program compiles and prints the correct answer, `2`, `4`, `6`, `8`, `10`.
 
+* break
 
-* infinite loop
+This program is an _infinite_loop_. There is no _condition_expression_ in the `for` loop.
+
+We can use the `break` statement, which breaks out of the _current_ loop, to fix it.
+
+.play -edit src/conditionals/conditionals3/main.go /START OMIT/,/END OMIT/
+
+- Uncomment the `if`i`>`10`{`, `break`, and `}` lines.
+- Press *Run* and and check the program compiles and prints the correct answer, `2`, `4`, `6`, `8`, `10`.
 
 * Switch
 
