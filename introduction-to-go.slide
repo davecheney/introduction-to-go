@@ -511,9 +511,41 @@ This program contains two type errors.
 
 * Functions
 
-- `func`: declares a new function, or method.
+Now it's time to talk about _functions_.
 
-TODO: need to describe types before functions.
+All Go you write is made up of functions, in fact, you've been writing functions all along.
+
+.play -edit src/functions/functions1/main.go /START OMIT/,/END OMIT/
+
+This is the same program as the previous example, showing the _function_declaration_, which was previously hidden.
+
+- All Go programs start in a fuction called `main`, we call this the _main_function_.
+
+* func
+
+You can declare your own functions with the `func` declaration.
+
+.play -edit src/functions/functions2/main.go /START OMIT/,/END OMIT/
+
+This program declares two functions, `main` and `hello`.
+
+- Uncomment the `println("こんにちは")` statement in `func`hello`.
+- Press *Run* and check the program compiles and prints こんにちは three times.
+
+_note_: `println` is a _built_in_ function provided by the Go compiler, you don't need to declare it.
+
+* Function parameters
+
+To make functions useful, you often need to pass _arguments_ to a function.
+
+To pass an argument to a function, the type of the argument and the type of the function's formal parameter must be the same.
+
+.play -edit src/functions/functions3/main.go /START OMIT/,/END OMIT/
+
+In this program the type of the argument passed to `hello` does not match the type of the `name` parameter.
+
+- Fix the declaration of `hello` so that the type of the parameter matches the type of the argument provided.
+- Press *Run* and check the program compiles and prints こんにちは David
 
 * Packages
 
