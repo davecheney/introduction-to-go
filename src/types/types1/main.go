@@ -2,10 +2,9 @@ package main
 
 func main() {
 	// START OMIT
-	var x uint = 1
-	var y int = 0
+	var x int8 = 400 // HL
+	var y uint = -7  // HL
 
-	y = x // HL
-	println(y)
+	println(x, y)
 	// END OMIT
 }

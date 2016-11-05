@@ -308,7 +308,7 @@ It is a syntax error to assign a new value to a constant.
 
 - Press *Run* and see the program does not compile.
 - Edit the sample code to change the declaration of `x` from a constant (`const`) to a variable (`var`).
-- Press *Run* and and check the program compiles and prints the correct answer, 2.
+- Press *Run* and check the program compiles and prints the correct answer, 2.
 
 * Increment and decrement
 
@@ -318,7 +318,7 @@ Go supports a limited form of variable post-increment and post-deincrement, ie. 
 
 - Press *Run* and see the program prints `2`,
 - Edit the sample code to subtract `1` from `i` using the deincrement operator `i--`.
-- Press *Run* and and check the program compiles and prints the correct answer, 0.
+- Press *Run* and check the program compiles and prints the correct answer, 0.
 
 * Increment and decrement (cont.)
 
@@ -329,7 +329,7 @@ Go supports a limited form of variable post-increment and post-deincrement, ie. 
 This program has a syntax error. 
 
 - Edit the sample code to correct the error by moving the `i++` statement above the declaraction of `var`j`.
-- Press *Run* and and check the program compiles and prints the correct answer, 2, 2.
+- Press *Run* and check the program compiles and prints the correct answer, 2, 2.
 
 * Looping
 
@@ -358,7 +358,7 @@ Let's practice using loops.
 This program counts from `1` to `10`, can you make it print only the _even_ numbers.
 
 - Edit the program to make it print only the even numbers between `1` and `10`, inclusive.
-- Press *Run* and and check the program compiles and prints the correct answer, `2`, `4`, `6`, `8`, `10`.
+- Press *Run* and check the program compiles and prints the correct answer, `2`, `4`, `6`, `8`, `10`.
 
 _note_: you do not need to put `(` braces around the `for` condition `)`.
 
@@ -371,7 +371,7 @@ Let's practice counting down, this is where you would use a `while` loop in othe
 This program counts down from `10` to `1`, can you make it count from `7` to `3`.
 
 - Edit the program to make it print only the numbers from `7` down to `3`.
-- Press *Run* and and check the program compiles and prints the correct answer, `7`, `6`, `5`, `4`, `3`.
+- Press *Run* and check the program compiles and prints the correct answer, `7`, `6`, `5`, `4`, `3`.
 
 _note_: this `for` loop only has a _condition_, there is no _init_statement_ or _post_statement_, so we can omit the semicolons, `;`.
 
@@ -410,7 +410,7 @@ Let's revisit our previous even numbers `for` loop example.
 This program counts from `1` to `10`, can you make it print only the _even_ numbers.
 
 - Uncomment the `if`i%2`==`0`{` and `}` lines to make the program print only the even numbers between `1` and `10`.
-- Press *Run* and and check the program compiles and prints the correct answer, `2`, `4`, `6`, `8`, `10`.
+- Press *Run* and check the program compiles and prints the correct answer, `2`, `4`, `6`, `8`, `10`.
 
 _note_: `%` is the _modulo_ operator in Go. All even numbers divide wholely by `2`, leaving `0` as their _modulo_ (or remainder).
 
@@ -425,7 +425,7 @@ We can rewrite the previous program using a new statement, `continue`, which _sk
 .play -edit src/conditionals/conditionals2/main.go /START OMIT/,/END OMIT/
 
 - Uncomment the `if`i%1`==`1`{`, `continue`, and `}` lines.
-- Press *Run* and and check the program compiles and prints the correct answer, `2`, `4`, `6`, `8`, `10`.
+- Press *Run* and check the program compiles and prints the correct answer, `2`, `4`, `6`, `8`, `10`.
 
 * break
 
@@ -436,7 +436,7 @@ We can use the `break` statement, which breaks out of the _current_ loop, to fix
 .play -edit src/conditionals/conditionals3/main.go /START OMIT/,/END OMIT/
 
 - Uncomment the `if`i`>`10`{`, `break`, and `}` lines.
-- Press *Run* and and check the program compiles and prints the correct answer, `2`, `4`, `6`, `8`, `10`.
+- Press *Run* and check the program compiles and prints the correct answer, `2`, `4`, `6`, `8`, `10`.
 
 * Switch
 
@@ -485,8 +485,6 @@ Go is a strongly typed language, like Java, C, C++, and Python. Go has nine kind
 - Compound types: `array`, `slice`, `map`, `struct`.
 - Pointer types: `*int`, `*bytes.Buffer`.
 
-We'll discuss the first seven kinds of types in this section, and the last two in the next section.
-
 * Integer types
 
 Integer types are the most common in Go.
@@ -496,6 +494,20 @@ Integer types come in two types; _signed_ and _unsigned_.
 Integer types also come in several sizes, represented by the number of bits they represent; `int8`, `int16`, `int32`, `int64`, `uint8`, `uint16`, `uint32`, `uint64`.
 
 Go has two integer types, `int` and `uint`, whose size depends on the platform you used to build your Go program.
+
+* Integer types
+
+Why does Go support so many kinds of integer types?
+
+Different _sized_ integer types can accomodate different ranges of numbers.
+
+.play -edit src/types/types1/main.go /START OMIT/,/END OMIT/
+
+This program contains two type errors.
+
+- Press *Run* to discover the two type errors.
+- Fix the program by changing the declared types of `x` and `y`.
+- Press *Run* and check the program compiles and prints the correct answer, `400`, `-7`
 
 * Functions
 
