@@ -269,38 +269,6 @@ This program has four unused variables.
 - Delete, or comment out, the declaration of `自転車` as it is unused.
 - Press the *Run* button to check that your program compiles.
 
-* Explicit type declaration
-
-In the examples so far we've
-
-
-
-* Types
-
-Go is a strongly typed language, like Java, C, C++, and Python. Go has nine kinds of types, they are:
-
-- signed integers: `int8`, `int16`, `int32`, `int64`.
-- unsigned integers: `uint8`, `uint6`, `uint32`, `uint64`.
-- aliases: `byte` (`uint8`), `rune` (`int32`), `int` (`int32` or `int64`), `uint` (`uint32` or `uint64`).
-- booleans: `bool`.
-- strings: `string`.
-- IEEE floating point: `float32`, `float64`.
-- Complex types: `complex64`, `complex128`.
-- Compound types: `array`, `slice`, `map`, `struct`.
-- Pointer types: `*int`, `*bytes.Buffer`.
-
-We'll discuss the first seven kinds of types in this section, and the last two in the next section.
-
-* Integer types
-
-Integer types are the most common in Go.
-
-Integer types come in two types; _signed_ and _unsigned_.
-
-Integer types also come in several sizes, represented by the number of bits they represent; `int8`, `int16`, `int32`, `int64`, `uint8`, `uint16`, `uint32`, `uint64`.
-
-Go has two integer types, `int` and `uint`, whose size depends on the platform you used to build your Go program.
-
 * Expressions 
 
 TODO: discuss before statements
@@ -411,18 +379,98 @@ This program counts down from `10` to `1`, can you make it count from `7` to `3`
 
 _note_: this `for` loop only has a _condition_, there is no _init_statement_ or _post_statement_, so we can omit the semicolons, `;`.
 
-* Conditionals
+* Conditional statements
 
-* Contitionals
+Go has two conditional statements, `if` and `switch`.
 
-Use `if` and `break` to print the numbers 1 to 10
+- `switch` is used to choose between several choices:
 
- var i = 1
- for {
-       println(i)
+ switch value {
+ case 
+ cals
+
+* if
+
+`if` is used when making a decision between two choices
+
+ if v > 0 {
+         println("v is greater than zero")
+ } else {
+         println("v is less than or equal to zero")
  }
 
-Switch
+In some cases the body of the `else` block may be omitted. This is very common when checking preconditions in a method of a function.
+
+ if v == 0 {
+         // nothing to do
+         return
+ }
+ // handle v
+
+* if (cont.)
+
+Let's revisit our previous even numbers `for` loop example.
+
+.play -edit src/conditionals/conditionals1/main.go /START OMIT/,/END OMIT/
+
+This program counts from `1` to `10`, can you make it print only the _even_ numbers.
+
+- Uncomment the `if`i%2 ==`0`{` and `}` lines to make the program print only the even numbers between `1` and `10`.
+- Press *Run* and and check the program compiles and prints the correct answer, `2`, `4`, `6`, `8`, `10`.
+
+_note_: `%` is the _modulo_ operator in Go. All even numbers divide wholely by `2`, leaving `0` as their _modulo_ (or remainder).
+
+* continue
+
+Unlike languages like Java, `if` statements in Go are often used as _guard_clauses_.
+
+We say that when everything is true the code reads from the top to the bottom of the page.
+
+We can rewrite the previous program using a new statement, `continue`, which _skips_ the body of the loop.
+
+.play -edit src/conditionals/conditionals2/main.go /START OMIT/,/END OMIT/
+
+This is the same 
+
+- Uncomment the `if`i%2 ==`0`{` and `}` lines.
+- Press *Run* and and check the program compiles and prints the correct answer, `2`, `4`, `6`, `8`, `10`.
+
+
+* infinite loop
+
+* Switch
+
+* Explicit type declaration
+
+In the examples so far we've
+
+* Types
+
+Go is a strongly typed language, like Java, C, C++, and Python. Go has nine kinds of types, they are:
+
+- signed integers: `int8`, `int16`, `int32`, `int64`.
+- unsigned integers: `uint8`, `uint6`, `uint32`, `uint64`.
+- aliases: `byte` (`uint8`), `rune` (`int32`), `int` (`int32` or `int64`), `uint` (`uint32` or `uint64`).
+- booleans: `bool`.
+- strings: `string`.
+- IEEE floating point: `float32`, `float64`.
+- Complex types: `complex64`, `complex128`.
+- Compound types: `array`, `slice`, `map`, `struct`.
+- Pointer types: `*int`, `*bytes.Buffer`.
+
+We'll discuss the first seven kinds of types in this section, and the last two in the next section.
+
+* Integer types
+
+Integer types are the most common in Go.
+
+Integer types come in two types; _signed_ and _unsigned_.
+
+Integer types also come in several sizes, represented by the number of bits they represent; `int8`, `int16`, `int32`, `int64`, `uint8`, `uint16`, `uint32`, `uint64`.
+
+Go has two integer types, `int` and `uint`, whose size depends on the platform you used to build your Go program.
+
+
 
 * Arrays
 
