@@ -253,6 +253,8 @@ Just like constants, variable _identifiers_ can be any any valid unicode word.
 
 - Press the *Run* button to see the result.
 
+_note_: The circumference is printed in scientific notication 😕, that's ok, we'll talk about how to fix it later when we talk about the `fmt` package.
+
 * Unused variable declarations
 
 Unused variables are often the source of bugs. If you declare a variable in the scope of your function but do not use it, the Go compiler will complain.
@@ -367,18 +369,47 @@ This program has a syntax error.
 
 * Looping
 
-Go has a single loop construct that replaces the 
+Go has a single `for` loop construct that combines
 
-- `for` _condition_ `{`…`}`
 - `while` _condition_ `{`…`}`
-- `do`{`…`}`while` _condition_, `do`{`…`}`while` _condition_
+- `do`{`…`}`while` _condition_
+- `do`{`…`}`until` _condition_
+
+into one syntax.
+
+- `for` _(init_statement)_; _condition_; _(post_statement)_ `{`…`}`
+
+The parts of a `for` statement are:
+
+- init statement: used to initalise the loop variable; `i`=`0`.
+- condition: user to test if the loop is done; `i`<`10`, `true` means keep looping.
+- post statement: user to increment the loop variable; `i++`, `i`=`i`-`1`.
 
 * Looping (cont.) 
 
- code
+Let's practice using loops.
 
-Other languages have loops like `do; while`, or `repeat; until`.
-Go has unified these into a 
+.play -edit src/loops/loops1/main.go /START OMIT/,/END OMIT/
+
+This program counts from `1` to `10`, can you make it print only the _even_ numbers.
+
+- Edit the program to make it print only the even numbers between `1` and `10`, inclusive.
+- Press *Run* and and check the program compiles and prints the correct answer, `2`, `4`, `6`, `8`, `10`.
+
+_note_: you do not need to put `(` braces around the `for` condition `)`.
+
+* Looping (cont.) 
+
+Let's practice counting down, this is where you would use a `while` loop in other languages.
+
+.play -edit src/loops/loops2/main.go /START OMIT/,/END OMIT/
+
+This program counts down from `10` to `1`, can you make it count from `7` to `3`.
+
+- Edit the program to make it print only the numbers from `7` down to `3`.
+- Press *Run* and and check the program compiles and prints the correct answer, `7`, `6`, `5`, `4`, `3`.
+
+_note_: this `for` loop only has a _condition_, there is no _init_statement_ or _post_statement_, so we can omit the semicolons, `;`.
 
 * Conditionals
 

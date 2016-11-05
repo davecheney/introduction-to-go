@@ -6,5 +6,9 @@ func main() {
 
 	var j = i++ // HL
 	println(i, j)
+	// OMIT
+	// OMIT
+	// OMIT
+	// OMIT
 	// END OMIT
 }
