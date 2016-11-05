@@ -151,7 +151,7 @@ Here are some examples of constants:
  false
  1.3
 
-These are called literal constants, because the value of evaluating each of these is the constant itself.
+These are called _literal_constants_ because the value of evaluating each of these is the constant itself.
 
 * Types of constants
 
@@ -269,10 +269,6 @@ This program has four unused variables.
 - Delete, or comment out, the declaration of `自転車` as it is unused.
 - Press the *Run* button to check that your program compiles.
 
-* Expressions 
-
-TODO: discuss before statements
-
 * Statements
 
 A statement in Go is a command to do something:
@@ -383,11 +379,9 @@ _note_: this `for` loop only has a _condition_, there is no _init_statement_ or 
 
 Go has two conditional statements, `if` and `switch`.
 
-- `switch` is used to choose between several choices:
+- `if` is used to choose between two choices based on a _condition_.
 
- switch value {
- case 
- cals
+- `switch` is used to choose between several choices:
 
 * if
 
@@ -446,9 +440,36 @@ We can use the `break` statement, which breaks out of the _current_ loop, to fix
 
 * Switch
 
+* Type inference
+
+In the examples so far we've avoided talking about types. This is because Go supports _type_inference_.
+
+Type inference lets you omit the type of a variable during declaration.
+
+For example:
+
+ var i = 7
+
+Go sees that `i` is being declared and initalised with the value `7`, which is an integer, so the compiler infers the type of `i` to be and `int`.
+
+However if we did
+
+ var s = "seven"
+
+Go sees that `s` is being initalised with the _string_ `"seven"`, so the compiler infers the type of `s` to be a `string`.
+
 * Explicit type declaration
 
-In the examples so far we've
+Sometimes you will want to tell Go to use a specific type.
+
+You do this when you declare a variable:
+
+ var i int = 4
+ var s string = "おはようございます"
+
+Which tells the compiler that you are declaring `i` explicitly to be an `int` with the value `7`, and `s` to be a `string` with the value `"おはようございます"`
+
+We'll talk about the kinds of types that Go supports on the next slide.
 
 * Types
 
@@ -476,15 +497,11 @@ Integer types also come in several sizes, represented by the number of bits they
 
 Go has two integer types, `int` and `uint`, whose size depends on the platform you used to build your Go program.
 
+* Functions
 
+- `func`: declares a new function, or method.
 
-* Arrays
-
-TODO: example, initalise array
-
-* Slices
-
-* Subslices
+TODO: need to describe types before functions.
 
 * Packages
 
@@ -544,13 +561,16 @@ Follow [[https://play.golang.org/p/0Hz57BQdTA][this link]] and press the *Format
 
 `nil` is Go's version of `NULL`, `null`, `void`.
 
+* Arrays
+
+TODO: example, initalise array
+
+* Slices
+
+* Subslices
+
+
 * Declaring your own types
-
-* Functions
-
-- `func`: declares a new function, or method.
-
-TODO: need to describe types before functions.
 
 * Zero value
 
