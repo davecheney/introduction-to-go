@@ -45,16 +45,18 @@ This isn't a lecture, it's a conversation.
 
 If you don't understand something, or think what you're hearing is incorrect, speak up.
 
-* Introduction to Go
+* The Go programming language
 
-* Why a new language 
+- Modern
+- Compact, concise, general-purpose
+- Imperative, statically type-checked, dynamically type-safe
+- Garbage-collected
+- Compiles to native code, statically linked
+- Fast compilation, efficient execution
 
-- motivation of go
- - when it started, 2007, released in 2009
- - why it started,
+Designed by programmers for programmers!
 
-- opinionated
- - major opinions
+.link https://talks.golang.org/2014/taste.slide#2 Source: Robert Griesemer, A Taste of Go.
 
 * Safety
 
@@ -127,14 +129,7 @@ Go is an opinionated language.
 
 * Hello, http!
 
-TODO: hello http example
-
-- hello http
- - this has a lot going on, it shows directly, or indirectly almost all of the features of the language
- - compiled, concurrent, fast,
-- but ...
- - this is my problem with the way that many languages are taught; they start with the big picture and immediately ask you, the student, to ignore, or take accept as true, many things which are not discussed until much later
- - this can be overwhelming, and I think there is a better way to introuduce Go.
+.play src/hellohttp/hellohttp.go
 
 * Basic Syntax
 
@@ -442,7 +437,7 @@ We can use the `break` statement, which breaks out of the _current_ loop, to fix
 
 * Type inference
 
-In the examples so far we've avoided talking about types. This is because Go supports _type_inference_.
+In the examples so far we've avoided talking about types, this is because Go supports _type_inference_.
 
 Type inference lets you omit the type of a variable during declaration.
 
@@ -495,7 +490,7 @@ Integer types also come in several sizes, represented by the number of bits they
 
 Go has two integer types, `int` and `uint`, whose size depends on the platform you used to build your Go program.
 
-* Integer types
+* Integer types (cont.)
 
 Why does Go support so many kinds of integer types?
 
@@ -508,6 +503,18 @@ This program contains two type errors.
 - Press *Run* to discover the two type errors.
 - Fix the program by changing the declared types of `x` and `y`.
 - Press *Run* and check the program compiles and prints the correct answer, `400`, `-7`
+
+* String types
+
+String types behave much as you would expect in other languages.
+
+.play -edit src/strings/strings1/main.go /START OMIT/,/END OMIT/
+
+Strings may be _concatenated_ with the `+` operator.
+
+- Press *Run* to see the result.
+
+_note_: In Go an empty string is `""`, not `null` or `nil`.
 
 * Functions
 
@@ -573,21 +580,31 @@ In this example the package name is wrong.
 
 * Import
 
+The final declaraction
+
 - `import`: declares that this package imports declaractions from another. 
 
-* Now you know the basics
+* Recap
 
-Now you know the basics of Go.
+Now you know the basics of Go!
 
-You've learnt and experiemented with
+You've learnt to:
 
+- Declare constants and variables
 - Constants, variables, and assignment.
+- Write `for` loops
+- Write functions
+- How types work
+- How packages
+- Import statments.
+
+Time for a quick break!
 
 * Advanced Syntax
 
 * Advanced Syntax
 
-In the previous section we executed code directly in this this deck.
+In the previous section we executed code directly inside this slide deck.
 
 In this section we'll use the Go Playground, a simple online code editor to perform our exercises.
 
