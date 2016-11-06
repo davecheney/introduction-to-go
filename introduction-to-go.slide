@@ -529,6 +529,8 @@ This is the same program as the previous example, showing the _function_declarat
 
 You can declare your own functions with the `func` declaration.
 
+A function's name must be a valid identifier, just like `const` and `var`.
+
 .play -edit src/functions/functions2/main.go /START OMIT/,/END OMIT/
 
 This program declares two functions, `main` and `hello`.
@@ -549,27 +551,27 @@ To pass an argument to a function, the type of the argument and the type of the 
 In this program the type of the argument passed to `hello` does not match the type of the `name` parameter.
 
 - Fix the declaration of `hello` so that the type of the parameter matches the type of the argument provided.
-- Press *Run* and check the program compiles and prints こんにちは David
+- Press *Run* and check the program compiles and prints `こんにちは`David`.
 
 * Packages
 
-Go code is arranged into packages.
+A package is the unit in which software is shared and reused in Go. All Go code is arranged into packages.
 
-Each source file in a Go program must begin with a `package` declaration, which declares.
+Each source file in a package must begin with a `package` declaration.
 
-A package is the unit in which software is shared and reused in Go.
-
-We've been working in `package main`, which is the name of the package which contains the entry point to your program.
-
-When your Go program
-
-* main packages
-
-This 
+A package's name must be a valid identifier, just like `const`, `var`, and `func`.
 
 .play -edit src/packages/packages1/main.go
 
-In this example the package name is wrong.
+This is the same example as the previous slide, revealing the `package` declaration.
+
+`package`main` is the name of the package which contains the entry point to your program, `func`main`.
+
+* main packages
+
+This program has the wrong `package` declaration.
+
+.play -edit src/packages/packages2/main.go
 
 - Press *Run* and observe the compile error.
 - Change the `package` declaration to make the program compile.
@@ -577,7 +579,7 @@ In this example the package name is wrong.
 
 * Import
 
-The final declaraction
+The final declaration we'll cover in this second is the _import_ declaration.
 
 - `import`: declares that this package imports declaractions from another. 
 

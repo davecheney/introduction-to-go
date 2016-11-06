@@ -1,5 +1,9 @@
-package greeting // HL
+package main // HL
+
+func hello(name string) {
+	println("こんにちは " + name)
+}
 
 func main() {
-	println("Hello Women Who Go!")
+	hello("David")
 }
