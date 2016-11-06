@@ -211,7 +211,7 @@ Here are some examples of _invalid_ identifiers.
 Go supports two kinds of comments:
 
 - Inline comments, which start with a double forward slash, `//`.
-- Block comments, which start with a forward slash and a start, `/*`, and end with a start and forward slash, `*/`.
+- Block comments, which start with a forward slash and a star, `/*`, and end with a star and forward slash, `*/`.
 
 .play -edit src/comments/comments1/main.go /START OMIT/,/END OMIT/
 
@@ -266,14 +266,13 @@ This program has four unused variables.
 
 * Statements
 
-A statement in Go is a command to do something:
+A _statement_ is a command to do something:
 
 - _Declare_a_new_integer_variable_x_and_assign_it_the_value_10_.
+- _Add_4_to_the_value_of_x_and_store_the_result_in_y_.
 - _While_x_less_than_20_perform_these_statements_.
 
-There are several kinds of statements in Go, we've seen a few already.
-
-The most common of _statements_ in Go are:
+There are several kinds of statements in Go, we've seen a few already. The most common statements are:
 
 - Declarations: `const`pi`=`3.14159265359`, `type`Counter`int32`, …
 - Assignments: `count`=`count`+`1`, …
@@ -432,8 +431,6 @@ We can use the `break` statement, which breaks out of the _current_ loop, to fix
 
 - Uncomment the `if`i`>`10`{`, `break`, and `}` lines.
 - Press *Run* and check the program compiles and prints the correct answer, `2`, `4`, `6`, `8`, `10`.
-
-* Switch
 
 * Type inference
 
@@ -630,6 +627,11 @@ TODO: example, initalise array
 
 * Subslices
 
+* Switch
+
+* for range
+
+TODO: requires slices
 
 * Declaring your own types
 
