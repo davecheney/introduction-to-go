@@ -627,15 +627,13 @@ _note_: If you are running this slide from [[https://go-talks.golang.org/][gotal
 
 Now you know the basics of Go!
 
-You've learnt to:
+You've learnt:
 
-- Declare constants and variables
-- Constants, variables, and assignment.
-- Write `for` loops
-- Write functions
-- How types work
-- How packages
-- Import statments.
+- How to declare constants and variables
+- How to write `for` loops and use `if`.
+- How types work.
+- How to write your own functions.
+- How packages and `import` statements work.
 
 Time for a quick break!
 
