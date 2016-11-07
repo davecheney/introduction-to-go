@@ -579,9 +579,49 @@ This program has the wrong `package` declaration.
 
 * Import
 
-The final declaration we'll cover in this second is the _import_ declaration.
+The final declaration we'll cover in this section is the _import_ declaration.
 
-- `import`: declares that this package imports declaractions from another. 
+The `import` declaration allows you to use code from other _packages_ into your package.
+
+ math.Sin	// denotes the Sin function in package math
+
+When you `import` a package, the _public_ types, functions, variables, and constants, are available with a prefix of the package's name.
+
+ import "fmt"
+ import "time"
+
+and
+
+ import (
+         "fmt"
+         "time"
+ )
+
+both import the `fmt` and `time` packages. The syntax is different, but they are equivilent.
+
+* Import (cont.)
+
+The `import` declaration must appear _after_ the `package` declaration, but before any `type`, `const`, `var`, or `func` declarations.
+
+.play -edit src/imports/imports1/main.go 
+
+This program does not compile as the `import` declaration is in the wrong place.
+
+- Move the `var`now`=`time.Now()` declaration _below_ the `import` declaration.
+- Press *Run* to check that program prints the current time.
+
+* Import (cont.)
+
+Packages contain both _public_ and _private_ symbols. We also call these _exported_ and _not_exported_, respectively.
+
+.play -edit src/imports/imports2/main.go 
+
+This program does not compile as it refers to two _private_ symbols.
+
+- Fix the program by using the correct case for `Println` and `Time`.
+- Press *Run* to check that program prints the current time.
+
+_note_: If you are running this slide from [[https://go-talks.golang.org/][gotalks.golang.org]], the time may be reported as `2009-11-10`23:00:00`+0000`UTC`. This is a technical limitation.
 
 * Recap
 
