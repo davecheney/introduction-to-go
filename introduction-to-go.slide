@@ -133,6 +133,20 @@ Go is an opinionated language.
 
 * Basic Syntax
 
+* Basic Syntax (Introduction)
+
+In this section we will walk through the basic syntax of a short Go program.
+
+For this section all the code exercises will be inside this slide deck itself.
+
+At the end of this section you'll know:
+
+- How to declare constants and variables
+- How to write `for` loops and use `if`.
+- How types work.
+- How to write your own functions.
+- How packages and `import` statements work.
+
 * Constants
 
 A good place to start talking about Go are _Constants_.
