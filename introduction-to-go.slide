@@ -682,67 +682,36 @@ Having one single style that all Go code is formatted in improves readabiliy and
 
 The Go playground can format your code according to the canonical Go style.
 
-Follow [[https://play.golang.org/p/0Hz57BQdTA][this link]] and press the *Format* button to see this in action.
-
-* Types
-
-- declarations without an initialiser
-
-* Literals
-
-* Constant expressions
-
-* Nil
-
-`nil` is Go's version of `NULL`, `null`, `void`.
-
-* Arrays
-
-TODO: example, initalise array
-
-* Slices
-
-* Subslices
-
-* Switch
-
-* for range
-
-TODO: requires slices
-
-* Declaring your own types
+- Follow [[https://play.golang.org/p/0Hz57BQdTA][this link]] and press the *Format* button to see this in action.
 
 * Zero value
 
 In previous examples we've written code like this
 
- var counter = 1
  var name = "go"
+ var counter = 1
 
-Which both _declares_ and _initalises_ the variables `counter` and `name` respectively.
+Which both _declares_ and _initalises_ the variables `counter` and `name` respectively. What happens if we have code like this?
 
-What happens if we have code like this
-
- var counter int
- var name string
- println(name, counter)
+.code src/zerovalue/zerovalue1/main.go
 
 What will ths print?
 
+- Follow [[https://play.golang.org/p/jioUB0t_LW][this link]] and press the *Run* button to see this in action.
+
 * Zero value (cont.)
 
-In Go, there is no unitialised memory. The Go runtime will always ensure that the memory allocated for every variable is initalised before use.
+In Go, there is no unitialised memory. The Go runtime will always ensure that the memory allocated for each variable is initalised before use.
 
 If we write something like 
 
- var counter int
  var name string
+ var counter int
 
-Then the memory assigned to the variables `counter` and `name` will be zeroed, as we have not provided an _initaliser_.
+Then the memory assigned to the variables `name` and `counter` will be zeroed, as we have not provided an _initaliser_.
 
-The value of `counter` will be zero, because that is the value of an `int` if we wrote `0` to its memory location.
-
-The value of `name` will be `""` because that is the value of a string with zero length.
+- The value of `name` will be `""` because that is the value of a string with zero length.
+- The value of `counter` will be zero, because that is the value of an `int` if we wrote `0` to its memory location.
 
 * Zero value (cont.)
 
@@ -752,7 +721,26 @@ Every type in Go has an associated _zero_value_. The value of that variable if w
 - The zero value for floating point types: `float32`, `float64`, `complex128`, etc, is `0.0`.
 - The zero value for arrays is the zero value for each element, ie. `[3]int` is `0`, `0`, `0`.
 - The zero value for slices is `nil`.
-- The zero valye for structs is the zero value for each field.
+- The zero value for structs is the zero value for each field.
+
+* Types
+
+TODO
+
+- arrays
+- slices
+
+* Arrays
+
+TODO: example, initalise array
+
+* Slices
+
+* Subslices
+
+* Nil
+
+`nil` is Go's version of `NULL`, `null`, `void`.
 
 * Type conversions
 
@@ -777,7 +765,19 @@ SHOW WIDENING
 
 SHOW NARROWING
 
-* Type inference
+* Literals
+
+* Constant expressions
+
+* Switch
+
+* for range
+
+TODO: requires slices
+
+You can use `range` over arrays, slices, maps, and channels.
+
+* Declaring your own types
 
 * Short Declaration syntax
 
@@ -785,12 +785,6 @@ Maps
 Structs
 Scope
 Constants
-
-* Range
-
- code
-
-You can use `range` over arrays, slices, maps, and channels.
 
 * Multiple assignment
 
