@@ -735,6 +735,30 @@ Trying to compare two variables of _different_ types is detected at runtime.
 - Fix the program by declaring `x` and `y` to be the _same_ type.
 - Press the *Run* button and confirm the program now prints `true`.
 
+* Type conversions
+
+Sometimes you have variables of different integer types, you can _convert_ from one type to another using a conversion _expression_.
+
+The expression `T(v)` converts the value `v` to the type `T`.
+
+.code -edit src/types/types1/main.go
+
+In this example the assignment of `y`=`x` fails because `x` and `y` are different integer types.
+
+- Edit the code to _convert_ the type of `x` to `int` with `int(x)`.
+- Press the *Run* button to see the results, it should compile and print `1`.
+
+_note_: Other languages sometimes call this _casting_, we don't say this in Go because it is not the same.
+
+* Type conversions (cont.)
+
+SHOW WIDENING
+
+* Type conversions (cont.)
+
+SHOW NARROWING
+
+
 * Types
 
 TODO
@@ -753,29 +777,6 @@ TODO: example, initalise array
 * Nil
 
 `nil` is Go's version of `NULL`, `null`, `void`.
-
-* Type conversions
-
-Sometimes you have variables of different integer types, you can _convert_ from one type to another using a conversion _expression_.
-
-The expression `T(v)` converts the value `v` to the type `T`.
-
-.play -edit src/types/types1/main.go /START OMIT/,/END OMIT/
-
-In this example the assignment of `y`=`x` fails because `x` and `y` are different integer types.
-
-- Edit the code to _convert_ the type of `x` to `int` with `int(x)`.
-- Press the *Run* button to see the results, it should compile and print `1`.
-
-_note_: Other languages sometimes call this _casting_, we don't say this in Go because it is not the same.
-
-* Type conversions (cont.)
-
-SHOW WIDENING
-
-* Type conversions (cont.)
-
-SHOW NARROWING
 
 * Literals
 
