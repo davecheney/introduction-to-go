@@ -723,6 +723,18 @@ Every type in Go has an associated _zero_value_. The value of that variable if w
 - The zero value for slices is `nil`.
 - The zero value for structs is the zero value for each field.
 
+* Equality
+
+As Go is a strongly typed language, for two variables to be equal, both their _type_and_their_value_ must be equal.
+
+Trying to compare two variables of _different_ types is detected at runtime.
+
+.code src/equality/equality1/main.go
+
+- Follow [[https://play.golang.org/p/LwiJm2xuXK][this link]] and press the *Run* button.
+- Fix the program by declaring `x` and `y` to be the _same_ type.
+- Press the *Run* button and confirm the program now prints `true`.
+
 * Types
 
 TODO
