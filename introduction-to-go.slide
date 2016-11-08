@@ -597,7 +597,7 @@ The final declaration we'll cover in this section is the _import_ declaration.
 
 The `import` declaration allows you to use code from other _packages_ into your package.
 
- math.Sin	// denotes the Sin function in package math
+ time.Now	// denotes the Now function in package time
 
 When you `import` a package, the _public_ types, functions, variables, and constants, are available with a prefix of the package's name.
 
@@ -637,6 +637,18 @@ This program does not compile as it refers to two _private_ symbols.
 
 _note_: If you are running this slide from [[https://go-talks.golang.org/][gotalks.golang.org]], the time may be reported as `2009-11-10`23:00:00`+0000`UTC`. This is a technical limitation.
 
+* fmt package
+
+Do you remember this program?
+
+.play -edit src/imports/imports3/main.go
+
+Here it is again, showing the `func`, `package` and `import` declarations making it a complete Go program.
+
+This program also uses the `Println` function from the `fmt` package, which is more capable than the built in `println` function.
+
+- Press *Run* to see how `fmt.Println` prints this output.
+
 * Recap
 
 Now you know the basics of Go!
@@ -655,15 +667,26 @@ Time for a quick break!
 
 * Advanced Syntax
 
-In the previous section we executed code directly inside this slide deck.
+This section builds on the previous by exploring each of the things we learnt in a little more detail.
 
 In this section we'll use the Go Playground, a simple online code editor to perform our exercises.
 
+* Coding style
+
+All Go code is formatted according to a single style guide which is enforced with a tool called `gofmt`
+
+Having one single style that all Go code is formatted in improves readabiliy and avoids the time wasted arguing about code formatting.
+
+"Gofmt's style is no one's favorite, yet gofmt is everyone's favorite."
+.caption [[https://go-proverbs.github.io/][Go Proverb]].
+
 The Go playground can format your code according to the canonical Go style.
 
-TODO: talk about gofmt style.
-
 Follow [[https://play.golang.org/p/0Hz57BQdTA][this link]] and press the *Format* button to see this in action.
+
+* Types
+
+- declarations without an initialiser
 
 * Literals
 
