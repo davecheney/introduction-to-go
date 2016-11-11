@@ -765,7 +765,7 @@ We can do the opposite and convert a wider type to a narrower type.
 
 .code -edit src/types/types4/main.go
 
-- Follow [[https://play.golang.org/p/NbNwRjbmRu]] and press the *Run* button. Does it print the answer you expected?
+- Follow [[https://play.golang.org/p/NbNwRjbmRu][this link]] and press the *Run* button. Does it print the answer you expected?
 - Fix the program by _declaring_ `y` as an `int32`.
 - Press the *Run* button and confirm the program now prints `64000`.
 
@@ -777,24 +777,71 @@ When you convert a variable with a _smaller_ number of bits to a variable with a
 
 When you convert a variable with a _larger_ number of bits to a variable with a smaller number of bits there is a risk of truncation, because there are less bits available to represent your number.
 
-- Follow [[https://play.golang.org/p/NbNwRjbmRu]] and press the *Run* button. Does it print the answer you expected?
+- Follow [[https://play.golang.org/p/NbNwRjbmRu][this link]] and press the *Run* button. Does it print the answer you expected?
 - Fix the program by reducing the value of `x`. Hint: the value needs to be less than 33,000.
 - Press the *Run* button and confirm the program now prints `y` correctly.
 
-* Types
+* Short declaration syntax
 
-TODO
+As you've probably noticed, Go has several ways to declare variables. All three of these are the same
 
-- arrays
-- slices
+ var x = 0
+ var x int = 0
+ var x int
 
-* Arrays
+If you've come from a language like Ruby or Python, you're probably wondering if this very common operation can be made more concise.
 
-TODO: example, initalise array
+ x := 0
+
+This is what we call a _short_declaration_, which is the same as 
+ 
+ var x int = 0
+
+Short declaration is very common in Go programs, you'll see it everywhere, so let's do some exercises to familarise you with its use.
+
+* Short declaration syntax (cont.)
+
+A common use of the short declaration syntax is in `for` loops. Consider this program
+
+ var i int
+ for i = 1; i < 11; i++ {
+         fmt.Println(i)
+ }
+
+This can be also written as
+
+ for i := 1; i < 11; i++ {
+         fmt.Println(i)
+ }
+
+[[https://play.golang.org/p/3Vl75w72JO][This program]] contains two `var` declarations and two `for` loops.
+
+- Follow [[https://play.golang.org/p/3Vl75w72JO][this link]] and press the *Run* button.
+- Rewrite the program using the short declaration syntax; there should be no `var` declarations, only `:=`.
+
+* Redeclaration
+
+
+* Scope
+
+Talk about scoping
 
 * Slices
 
+The next kind of type to discuss is the _Slice_. 
+
+A slice is a
+
+
+_note_: A slice is _not_ an array. 
+
 * Subslices
+
+* for range
+
+TODO: requires slices
+
+You can use `range` over arrays, slices, maps, and channels.
 
 * Nil
 
@@ -806,15 +853,8 @@ TODO: example, initalise array
 
 * Switch
 
-* for range
-
-TODO: requires slices
-
-You can use `range` over arrays, slices, maps, and channels.
-
 * Declaring your own types
 
-* Short Declaration syntax
 
 Maps
 Structs
