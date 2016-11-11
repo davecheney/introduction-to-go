@@ -741,23 +741,45 @@ Sometimes you have variables of different integer types, you can _convert_ from 
 
 The expression `T(v)` converts the value `v` to the type `T`.
 
-.code -edit src/types/types1/main.go
+.code -edit src/types/types2/main.go
 
 In this example the assignment of `y`=`x` fails because `x` and `y` are different integer types.
 
-- Edit the code to _convert_ the type of `x` to `int` with `int(x)`.
-- Press the *Run* button to see the results, it should compile and print `1`.
-
-_note_: Other languages sometimes call this _casting_, we don't say this in Go because it is not the same.
-
-* Type conversions (cont.)
-
-SHOW WIDENING
+- Follow [[https://play.golang.org/p/wvG41C0lH4][this link]] and press the *Run* button.
+- Fix the program by _converting_ `x` to an `int` with `int(x)`.
+- Press the *Run* button and confirm the program now prints `700`.
 
 * Type conversions (cont.)
 
-SHOW NARROWING
+If you have variables of different _widths_, you can _convert_ from one type to another.
 
+.code -edit src/types/types3/main.go
+
+- Follow [[https://play.golang.org/p/l4Q48pWAla][this link]] and press the *Run* button.
+- Fix the program by _converting_ `x` to an `int64` with `int64(x)`.
+- Press the *Run* button and confirm the program now prints `32000`.
+
+* Type conversions (cont.)
+
+We can do the opposite and convert a wider type to a narrower type.
+
+.code -edit src/types/types4/main.go
+
+- Follow [[https://play.golang.org/p/NbNwRjbmRu]] and press the *Run* button. Does it print the answer you expected?
+- Fix the program by _declaring_ `y` as an `int32`.
+- Press the *Run* button and confirm the program now prints `64000`.
+
+* Integer overflow
+
+Whenever you declare a variable in Go, you have to choose how many bits of memory it will consume.
+
+When you convert a variable with a _smaller_ number of bits to a variable with a larger number of bits, this is fine, because they all fit.
+
+When you convert a variable with a _larger_ number of bits to a variable with a smaller number of bits there is a risk of truncation, because there are less bits available to represent your number.
+
+- Follow [[https://play.golang.org/p/NbNwRjbmRu]] and press the *Run* button. Does it print the answer you expected?
+- Fix the program by reducing the value of `x`. Hint: the value needs to be less than 33,000.
+- Press the *Run* button and confirm the program now prints `y` correctly.
 
 * Types
 
