@@ -62,18 +62,18 @@ Designed by programmers for programmers!
 
 Typed, and type safe
 
-        var i int = -1
-        var u uint = 200
+ var i int = -1
+ var u uint = 200
 
-        i = u   // nope, incompatible types
+ i = u   // nope, incompatible types
 
 Array accesses are bounds checked
 
-        s := make([]string, 10)
+ s := make([]string, 10)
 
-        for i := 0; i <= 10; i++ {
-                // oops
-        }
+ for i := 0; i <= 10; i++ {
+         // oops
+ }
 
 * Safety (cont.)
 
@@ -84,13 +84,13 @@ No dangling pointers, return a stack value from a function with impunity.
 
 All memory is zeroed if not explicitly initialised
 
-        var q int       // initialised to 0
-        var f = 7       // initialised to 7, type defaults to int
+ var q int       // initialised to 0
+ var f = 7       // initialised to 7, type defaults to int
 
 No implicit conversions; booleans and integers are not aliases
 
-        i := 2
-        if i { ... }    // nope, no coercion to bool
+ i := 2
+ if i { ... }    // nope, no coercion to bool
 
 * Good support for concurrency and communication
 
@@ -133,7 +133,7 @@ Go is an opinionated language.
 
 * Basic Syntax
 
-* Basic Syntax (Introduction)
+* Basic Syntax 
 
 In this section we will walk through the basic syntax of a short Go program.
 
@@ -819,60 +819,6 @@ This can be also written as
 - Follow [[https://play.golang.org/p/3Vl75w72JO][this link]] and press the *Run* button.
 - Rewrite the program using the short declaration syntax; there should be no `var` declarations, only `:=`.
 
-* Redeclaration
-
-
-* Scope
-
-We've talked about all the ways to declare a variable in Go, now we need to discuss scope.
-
-.code -edit src/scope/scope1/main.go
-
-This program declares `x` four times. All four `x` 's are _different_ because they exist in different scopes.
-
-- Follow [[https://play.golang.org/p/nIcOXVXgwl][this link]] and press the *Run* button.
-
-* Scope (cont.)
-
-The scope of a declaration is bound to the closest pair of curly braces, `{` and `}`.
-
-.code -edit src/scope/scope2/main.go
-
-In this example, we declare `x` to be 100 inside `main`, and 200 inside `f`.
-
-- Follow [[https://play.golang.org/p/Xfi3GOhTiC][this link]] and press the *Run* button.
-- Did the program print what you expected?
-
-* Scope (cont.)
-
-What do you expect this program will print?
-
-.code -edit src/scope/scope3/main.go
-
-- Follow [[https://play.golang.org/p/7uxrebFzmK][this link]] and press the *Run* button.
-- Did you guess the right answer?
-
-* Scope (cont.)
-
-What do you expect this program will print?
-
-.code -edit src/scope/scope4/main.go
-
-- Follow [[https://play.golang.org/p/7hpZre9LhI][this link]] and press the *Run* button.
-- Did you guess the right answer?
-
-* Shadowing
-
-What you are seeing is called _shadowing_.
-
-.code -edit src/scope/scope5/main.go /START1 OMIT/,/END1 OMIT/
-
-Most of you will be comfortable with a _function_scoped_ variable shadowing a _package_scoped_ variable.
-
-.code -edit src/scope/scope5/main.go /START2 OMIT/,/END2 OMIT/
-
-But a _block_scoped_ variable shadowing a _function_scoped_ variable may be surprising.
-
 * Slices
 
 The next kind of type to discuss is the _Slice_. 
@@ -888,6 +834,8 @@ In this example,
 
 - `i` is a variable of type `int`. 
 - `j` is a variable of type `[]int`, that is, a slice of `int`.
+
+Slices are very important in Go programs, so we'll spend a bit of time discussiong them.
 
 _note_: A slice is _not_ an array. Go also supports arrays, but you'll see later than they aren't very common, or very easy to use, so we won't discuss them at the moment.
 
@@ -987,7 +935,7 @@ Go supports a method of assignment where we both _declare_ and _initalise_ the s
 
 .play -edit src/slices/slices7/main.go
 
-This is called the _compact_literal_ syntax.
+This is called the _composite_literal_ syntax.
 
 - Follow [[https://play.golang.org/p/97Qbg52xLO][this link]] and press the *Run* button.
 - Complete the exercises for this example.
@@ -1006,13 +954,25 @@ You can `append` mutliple values in one statement, providing they are all the sa
 
 * Subslices
 
-* for range
+What if we have a large slice, and want to refer to only a part of it. 
 
-We s
+We call this slicing a slice, or _subslicing_.
 
-TODO: requires slices
+Subslicing looks similar to the _indexing_ operation we saw a few slide ago, except it refers to a range of slice indexes.
 
-You can use `range` over arrays, slices, maps, and channels.
+ s2 := s1[5:10]
+
+The expression s1[5:10] evaluates to the contents of the 6th to the 10th value of the slice `s1`.
+
+- write a program to return only 
+
+* Subslices (cont.)
+
+An important thing to remember when slicing a slice, is that both slices refer to the _same_ underying data.
+
+.play -edit src/slices/slices10/main.go
+
+To create two independant slice values, you would use the `copy` function, which we'll discuss later.
 
 * Bounds checking
 
@@ -1020,13 +980,12 @@ Each slice has a length which is decided when it is made.
 
 You can increase the length of the slice with the `append` function, and create a smaller slice from a larger one using the slice operator.
 
-What happens if you accidentally exceed the counds of the slice?
+What happens if you accidentally exceed the bounds of the slice?
 
+.play -edit src/slices/slices11/main.go
 
-
-* Nil
-
-`nil` is Go's version of `NULL`, `null`, `void`.
+- Follow [[https://play.golang.org/p/mIWm0a1amp][this link]] and press the *Run* button.
+- Comment out `fmt.Println(primes[-1])` and see what happens.
 
 * Multiple assignment
 
@@ -1088,19 +1047,126 @@ If we wanted to use only the first and third values we can ignore the second by 
 
 * Maps
 
-Requires multiple return values.
+Go has a built in Hash Map type, called a `map`.
 
-* Structs
+Maps map values of key type K to values of type V
 
-So far we've discussed two kinds of types; _primative_ types and _slice_ types.
+ var m map[string]int
 
-Go supports what we call _compound_ types, that is, types that are _composed_ of other types. 
+Just like making a slice, making a map is acomplished with the `make` built-in.
 
-We call these _Struct_ (for _structure_) types. The name will become clear shortly.
+ m := make(map[string]int)
 
-* Declaring a struct
+* Compact literal initalisation
 
-To declare a new struct type 
+Just like slices, maps support compact literal initalisation, which declares and initalises the map.
+
+ days := map[int]string {
+         1: "Monday",
+         2: "Tuesday",
+         3: "Wednesday",
+         4: "Thursday",
+         5: "Friday",
+         6: "Saturday",
+         7: "Sunday",
+ }
+
+* Assigning a value to a map
+
+
+
+* Retrieving a valur from a map
+
+TODO: Requires multiple return values.
+
+TODO: requires zero value
+
+* Deleting a value from a map
+
+To delete a value from a map, you use the built in `delete` function.
+
+ var m map[int]string
+ delete(m, 20)
+
+
+
+
+* Iterating over a map
+
+TODO: requires range
+
+for key, value := range m {
+    // order of key sequence different each time
+}
+
+Map iteration order is not specified:
+
+* Scope
+
+We've talked about all the ways to declare a variable in Go, now we need to discuss scope.
+
+.code -edit src/scope/scope1/main.go
+
+This program declares `x` four times. All four `x` 's are _different_ because they exist in different scopes.
+
+- Follow [[https://play.golang.org/p/nIcOXVXgwl][this link]] and press the *Run* button.
+
+* Scope (cont.)
+
+The scope of a declaration is bound to the closest pair of curly braces, `{` and `}`.
+
+.code -edit src/scope/scope2/main.go
+
+In this example, we declare `x` to be 100 inside `main`, and 200 inside `f`.
+
+- Follow [[https://play.golang.org/p/Xfi3GOhTiC][this link]] and press the *Run* button.
+- Did the program print what you expected?
+
+* Scope (cont.)
+
+What do you expect this program will print?
+
+.code -edit src/scope/scope3/main.go
+
+- Follow [[https://play.golang.org/p/7uxrebFzmK][this link]] and press the *Run* button.
+- Did you guess the right answer?
+
+* Scope (cont.)
+
+What do you expect this program will print?
+
+.code -edit src/scope/scope4/main.go
+
+- Follow [[https://play.golang.org/p/7hpZre9LhI][this link]] and press the *Run* button.
+- Did you guess the right answer?
+
+* Shadowing
+
+What you are seeing is called _shadowing_.
+
+.code -edit src/scope/scope5/main.go /START1 OMIT/,/END1 OMIT/
+
+Most of you will be comfortable with a _function_scoped_ variable shadowing a _package_scoped_ variable.
+
+.code -edit src/scope/scope5/main.go /START2 OMIT/,/END2 OMIT/
+
+But a _block_scoped_ variable shadowing a _function_scoped_ variable may be surprising.
+
+* Recap
+
+Now you know most of Go!
+
+You've learnt:
+
+- How Go code is formatted.
+- How what the zero value is and how it works.
+- Equality and type conversions
+- The short declaration syntax
+- Multiple assignment.
+- How slices work.
+- How maps work.
+
+Time for lunch!
 
 * Development environment and tooling
 
@@ -1173,10 +1239,6 @@ The most reliable way to install the latest version of Go
 
 _note_: Go 1.7.3 is the current releases as of this class.
 
-* $GOPATH
-
-TODO, explain `$GOPATH`.
-
 * Go tool
 
 Your Go installation comes with a tool we call the `go` tool, because that's its name.
@@ -1187,6 +1249,16 @@ The `go` tool can
 - run your tests
 - display documentation for a package
 - fetch packages from the internet.
+
+* $GOPATH
+
+The `go` tool works inside a workspace where _all_ your Go source code is stored.
+
+All the source code for this workshop is included with this repository.
+
+You can set `$GOPATH` to be the base directory where you checked out this repository. eg.
+
+ % export GOPATH=$HOME/introduction-to-go
 
 * go build
 
@@ -1200,7 +1272,27 @@ TODO: go test
 
 TODO: writing tests
 
+* for range
+
+We s
+
+TODO: requires slices
+
+You can use `range` over arrays, slices, maps, and channels.
+
+* Structs
+
+So far we've discussed two kinds of types; _primative_ types and _slice_ types.
+
+Go supports what we call _compound_ types, that is, types that are _composed_ of other types. 
+
+We call these _Struct_ (for _structure_) types. The name will become clear shortly.
+
 * Pointers
+
+* Nil
+
+`nil` is Go's version of `NULL`, `null`, `void`.
 
 * Methods (must talk about types and packages first)
 
@@ -1224,9 +1316,6 @@ Go ships with a rich standard library of packages. This includes
 - HTTP client and server
 
 This section will focus on the important packages from the standard library with exercises.
-
-- katas
- - count the number of lines in a file (using bufio.Scanner)
 
 * Packages and applications
 
@@ -1252,6 +1341,20 @@ Show examples
 
 TODO: go get
 
+* Katas
+
+- String formatting, with the `fmt` package
+- Sorting with the `sort` pacakge
+- Telling time, sleeping and waiting with the `time` package
+- Reading and writing files
+- bufio
+- count the number of lines in a file (using bufio.Scanner)
+- Walking directories
+- parsing strings
+- Random numbers with the `math/rand` package
+- json parsin with the `encoding/json` package
+- executing child processes
+- os package, exit
 
 TODO
 
