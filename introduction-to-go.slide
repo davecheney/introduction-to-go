@@ -968,14 +968,41 @@ What is the value of each of the elements of a newly created, with make, slice?
 
 .play -edit src/slices/slices5/main.go
 
+- Follow [[https://play.golang.org/p/kGh_C1l6KW][this link]] and press the *Run* button.
+- Did the program print the result you expected?
 
-* Literals
+* Slice initialisation
+
+Suppose we wanted to create a slice of the first 10 prime numbers, how could we do this?
+
+One solution could be to create the slice and assign a value to each element in the slice.
+
+.play -edit src/slices/slices6/main.go
+
+* Slice initialisation (cont.)
+
+Doing this manually is verbose and boring; how would you do this for the first 50 primes?
+
+Go supports a method of assignment where we both _declare_ and _initalise_ the slice at once.
+
+.play -edit src/slices/slices7/main.go
+
+This is called the _compact_literal_ syntax.
+
+- Follow [[https://play.golang.org/p/97Qbg52xLO][this link]] and press the *Run* button.
+- Complete the exercises for this example.
 
 * append
 
-To add another
+So far we've been using slices with a known length. You can extend the contents of a slice with the built-in `append` function.
 
-* append (cont.)
+.play -edit src/slices/slices8/main.go
+
+`append` increases the length of the slice to accomodate the new items, then returns a new slice value.
+
+You can `append` mutliple values in one statement, providing they are all the same type.
+
+.link https://blog.golang.org/slices Further reading: Arrays, slices (and strings): The mechanics of 'append' (blog.golang.org)
 
 * Subslices
 
@@ -989,7 +1016,13 @@ You can use `range` over arrays, slices, maps, and channels.
 
 * Bounds checking
 
-* Maps
+Each slice has a length which is decided when it is made.
+
+You can increase the length of the slice with the `append` function, and create a smaller slice from a larger one using the slice operator.
+
+What happens if you accidentally exceed the counds of the slice?
+
+
 
 * Nil
 
@@ -1013,7 +1046,49 @@ We can write the same thing like this
 
 * Multiple return values
 
-* Declaring your own types
+Multiple assignment is important to understand because you can return multiple values from a function.
+
+ func f(i int)
+
+This is a function declaration for `f` which takes one argument, an `int`.
+
+ func g(i int, j int, k string) int
+
+This is a function declaration for `g`, which takes three arguments, two `int` s and a `string`, and returns an `int`.
+
+ func h(i, j int) (int, int, string)
+
+This is a function declaration for `h`, which takes two arguments, two `ints`, and returns three values, two `int` s and a `string`.
+
+// TODO discuss returning a value.
+
+* Assigning multiple return values
+
+When you call a function that returns multiple values, you must assign _all_ of them or _none_ of them.
+
+ func f() (int, bool, string)
+
+ func main() {
+         a, b, c := f()
+         fmt.Println(a, b, c)
+ }
+
+`f` returns three values, so we assign them to `a`, `b`, and `c` using the short declaration syntax.
+
+If we wanted to use only the first and third values we can ignore the second by assigning it to the underscore variable, `_`.
+
+ func main() {
+         a, _, c := f()
+         fmt.Println(a, c)
+ }
+
+* Multiple return values.
+
+
+
+* Maps
+
+Requires multiple return values.
 
 * Structs
 
@@ -1026,18 +1101,6 @@ We call these _Struct_ (for _structure_) types. The name will become clear short
 * Declaring a struct
 
 To declare a new struct type 
-
-* Pointers
-
-* Methods (must talk about types and packages first)
-
-* Interfaces
-
-* Empty Interface
-
-* Variadic functions.
-
-* fmt package
 
 * Development environment and tooling
 
@@ -1137,22 +1200,15 @@ TODO: go test
 
 TODO: writing tests
 
+* Pointers
 
-* go doc
+* Methods (must talk about types and packages first)
 
-TODO: go doc / godoc 
+* Interfaces
 
-Also, godoc.org
+* Empty Interface
 
-* Documenting packages with comments
-
-Go code is traditionally documented with comments in the source code.
-
-Show examples
-
-* go get
-
-TODO: go get
+* fmt package
 
 error handling
 
@@ -1180,6 +1236,23 @@ This section will focus on the important packages from the standard library with
 - how to layout a project
 - package, project katas
 
+* go doc
+
+TODO: go doc / godoc 
+
+Also, godoc.org
+
+* Documenting packages with comments
+
+Go code is traditionally documented with comments in the source code.
+
+Show examples
+
+* go get
+
+TODO: go get
+
+
 TODO
 
 * Conclusion
@@ -1190,4 +1263,9 @@ Thank you very much for participating today, I hope that you enjoyed yourself an
 
 * Out of scope
 
+Stuff that is out of scope for a one day event
+
+- Channels
+- Concurrency
 - Constant expressions
+- Variadic functions.
