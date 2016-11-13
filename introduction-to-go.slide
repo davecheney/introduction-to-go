@@ -940,39 +940,92 @@ Let's do a quick exercise to familarise yourself with using slices.
 - Declare a variable called `s` which is a slice of 4 `string`.
 - Does your program print the expected result, `5`9`4`?
 
+* Index expressions
+
+To access, or assign, the contents of a slice element at index `i`, use the form `s[i]`.
+
+When the _index_expression_ appears on the _left_hand_side_ of the equals operator, `=`
+
+ s[7] = 20
+
+We are assigning the number 20 to the 8'th (slices indexes start at 0) element of the slice `s`.
+
+When the _index_expression_ appears on the _right_hand_side_ of the equals operator, `=`
+
+ x := s[7]
+
+We are assigning the value at the 8th element of `s` to the variable `x`.
+
+* Slice zero value
+
+We saw earlier that the _zero_value_ of the slice
+
+ var s []int
+
+was and empty slice, a slice with length of zero.
+
+What is the value of each of the elements of a newly created, with make, slice?
+
+.play -edit src/slices/slices5/main.go
+
+
+* Literals
+
+* append
+
+To add another
+
+* append (cont.)
+
 * Subslices
 
 * for range
+
+We s
 
 TODO: requires slices
 
 You can use `range` over arrays, slices, maps, and channels.
 
+* Bounds checking
+
+* Maps
+
 * Nil
 
 `nil` is Go's version of `NULL`, `null`, `void`.
 
-* Literals
-
-* Constant expressions
-
-* Switch
-
-* Declaring your own types
-
-
-Maps
-Structs
-Scope
-Constants
-
 * Multiple assignment
 
-var x, y = 1, 2
+Go allows you to perform multiple assignments and declarations in one statement.
+
+For example, if we wanted to declare, `x`, `y`, and `z`, with the values `1`, `2`, and `3` respectively. We could write
+
+ var x = 1
+ var y = 2
+ var z = 3
+
+We can write the same thing like this
+
+ var x, y, z = 1, 2, 3
+
+- Follow [[https://play.golang.org/p/d2hDJQAfkt][this link]] for some examples of multiple declaration.
 
 * Multiple return values
 
-* Variadic functions.
+* Declaring your own types
+
+* Structs
+
+So far we've discussed two kinds of types; _primative_ types and _slice_ types.
+
+Go supports what we call _compound_ types, that is, types that are _composed_ of other types. 
+
+We call these _Struct_ (for _structure_) types. The name will become clear shortly.
+
+* Declaring a struct
+
+To declare a new struct type 
 
 * Pointers
 
@@ -981,6 +1034,10 @@ var x, y = 1, 2
 * Interfaces
 
 * Empty Interface
+
+* Variadic functions.
+
+* fmt package
 
 * Development environment and tooling
 
@@ -1131,4 +1188,6 @@ TODO
 
 Thank you very much for participating today, I hope that you enjoyed yourself and are encouraged to learn more about Go.
 
+* Out of scope
 
+- Constant expressions
