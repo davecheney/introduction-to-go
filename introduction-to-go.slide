@@ -1,6 +1,6 @@
 Introduction to Go
 Tokyo, Japan
-11 Dec 2016
+10 Dec 2016
 
 Dave Cheney
 dave@cheney.net
@@ -877,10 +877,68 @@ But a _block_scoped_ variable shadowing a _function_scoped_ variable may be surp
 
 The next kind of type to discuss is the _Slice_. 
 
-A slice is a
+A slice is an ordered collection of values of a _single_ type.
 
+The syntax for declaring a slice variable is very similar to declaraing a _scalar_ variable.
 
-_note_: A slice is _not_ an array. 
+ var i int
+ var j []int
+
+In this example, 
+
+- `i` is a variable of type `int`. 
+- `j` is a variable of type `[]int`, that is, a slice of `int`.
+
+_note_: A slice is _not_ an array. Go also supports arrays, but you'll see later than they aren't very common, or very easy to use, so we won't discuss them at the moment.
+
+* How large is a slice?
+
+If I declare a slice, `[]int`, how many items can it hold?
+
+The _zero_value_ of a slice is empty, that is, it has a _length_ of zero; it can hold 0 items.
+
+.code -edit src/slices/slices1/main.go
+
+We can retrieve the length of a slice with the built-in `len` function.
+
+- Follow [[https://play.golang.org/p/gZYvdE2zbT][this link]] and press the *Run* button.
+- Did you guess the right answer?
+
+* Making a slice
+
+We can create a slice with space to hold items using the built-in `make` function.
+
+.code -edit src/slices/slices2/main.go
+
+In this example, on the first line `var i []int` declares `i` to be a slice of `int`.
+
+On the second line, `i` is _assigned_ the result of `make([]int,`20)`.
+
+- Follow [[https://play.golang.org/p/i_IWqjik6u][this link]] and press the *Run* button.
+- Did `fmt.Println(len(i))` print the result you expected?
+
+* Making a slice (cont.)
+
+Because declaring a slice variable and initalising it with `make` is a common operation, it is common to see the _short_variable_declaration_ used to combine this operations.
+
+.code -edit src/slices/slices3/main.go
+
+This example declares `i` _and_ initalises it to be a slice of `int` with a length of 20.
+
+- Follow [[https://play.golang.org/p/b92SJ0Gx9s][this link]] and press the *Run* button.
+- Did `fmt.Println(len(i))` print the result you expected?
+
+* Slice exercises
+
+Let's do a quick exercise to familarise yourself with using slices.
+
+.code -edit src/slices/slices4/main.go
+
+- Follow [[https://play.golang.org/p/AJk1Jgp1iE][this link]] for instructions.
+- Declare a variable called `i` which is a slice of 5 `int`.
+- Declare a variable called `f` which is a slice of 9 `float64`.
+- Declare a variable called `s` which is a slice of 4 `string`.
+- Does your program print the expected result, `5`9`4`?
 
 * Subslices
 
