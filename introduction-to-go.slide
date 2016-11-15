@@ -201,7 +201,7 @@ In Go an identifier is any word that starts with a _letter_.
 
 .play -edit src/identifier/identifier1/main.go /START OMIT/,/END OMIT/
 
-A letter is anything that Unicode defines to be a letter, this includes Kanji, Cyrilic, Aribic, etc.
+A letter is anything that Unicode defines to be a letter, this includes Kanji, Cyrilic, Latin, etc.
 
 - Identifiers are not restricted to ASCII, edit the slide and change `students` to `学生の` and press *Run*.
 - If you make a mistake, just reload the page.
@@ -274,7 +274,7 @@ If the variable is unused, you should delete it, or assign it temporariliy to th
 
 This program has four unused variables.
 
-- Fix the program by uncommenting the two lines at the bottom.
+- Fix the program by removing the comment from the two lines at the bottom.
 - Delete, or comment out, the declaration of `自転車` as it is unused.
 - Press the *Run* button to check that your program compiles.
 
