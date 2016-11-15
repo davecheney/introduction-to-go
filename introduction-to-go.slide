@@ -201,7 +201,7 @@ In Go an identifier is any word that starts with a _letter_.
 
 .play -edit src/identifier/identifier1/main.go /START OMIT/,/END OMIT/
 
-A letter is anything that Unicode defines to be a letter, this includes Kanji, Cyrilic, Latin, etc.
+A letter is anything that Unicode defines to be a letter, this includes Kanji, Cyrillic, Latin, etc.
 
 - Identifiers are not restricted to ASCII, edit the slide and change `students` to `学生の` and press *Run*.
 - If you make a mistake, just reload the page.
@@ -246,7 +246,7 @@ They are:
 - `type`: declares a new type.
 - `func`: declares a new function, or method.
 - `package`: declares the package this `.go` source file belongs to.
-- `import`: declares that this package imports declaractions from another. 
+- `import`: declares that this package imports declarations from another. 
 
 We'll cover each of the remaining five declarations in this section.
 
@@ -262,13 +262,13 @@ Just like constants, variable _identifiers_ can be any any valid unicode word.
 
 - Press the *Run* button to see the result.
 
-_note_: The circumference is printed in scientific notication 😕, that's ok, we'll talk about how to fix it later when we talk about the `fmt` package.
+_note_: The circumference is printed in scientific notation 😕, that's ok, we'll talk about how to fix it later when we talk about the `fmt` package.
 
 * Unused variable declarations
 
 Unused variables are often the source of bugs. If you declare a variable in the scope of your function but do not use it, the Go compiler will complain.
 
-If the variable is unused, you should delete it, or assign it temporariliy to the magic variable called `_`.
+If the variable is unused, you should delete it, or assign it temporarily to the magic variable called `_`.
 
 .play -edit src/variable/variable2/main.go /START OMIT/,/END OMIT/
 
@@ -336,7 +336,7 @@ Go supports a limited form of variable post-increment and post-deincrement, ie. 
 
 This program has a syntax error. 
 
-- Edit the sample code to correct the error by moving the `i++` statement above the declaraction of `var`j`.
+- Edit the sample code to correct the error by moving the `i++` statement above the declaration of `var`j`.
 - Press *Run* and check the program compiles and prints the correct answer, 2, 2.
 
 * Looping
@@ -420,7 +420,7 @@ This program counts from `1` to `10`, can you make it print only the _even_ numb
 - Uncomment the `if`i%2`==`0`{` and `}` lines to make the program print only the even numbers between `1` and `10`.
 - Press *Run* and check the program compiles and prints the correct answer, `2`, `4`, `6`, `8`, `10`.
 
-_note_: `%` is the _modulo_ operator in Go. All even numbers divide wholely by `2`, leaving `0` as their _modulo_ (or remainder).
+_note_: `%` is the _modulo_ operator in Go. All even numbers divide wholly by `2`, leaving `0` as their _modulo_ (or remainder).
 
 * continue
 
@@ -537,7 +537,7 @@ All Go you write is made up of functions, in fact, you've been writing functions
 
 This is the same program as the previous example, showing the _function_declaration_, which was previously hidden.
 
-- All Go programs start in a fuction called `main`, we call this the _main_function_.
+- All Go programs start in a function called `main`, we call this the _main_function_.
 
 * func
 
@@ -611,7 +611,7 @@ and
          "time"
  )
 
-both import the `fmt` and `time` packages. The syntax is different, but they are equivilent.
+both import the `fmt` and `time` packages. The syntax is different, but they are equivalent.
 
 * Import (cont.)
 
@@ -675,7 +675,7 @@ In this section we'll use the Go Playground, a simple online code editor to perf
 
 All Go code is formatted according to a single style guide which is enforced with a tool called `gofmt`
 
-Having one single style that all Go code is formatted in improves readabiliy and avoids the time wasted arguing about code formatting.
+Having one single style that all Go code is formatted in improves readability and avoids the time wasted arguing about code formatting.
 
 "Gofmt's style is no one's favorite, yet gofmt is everyone's favorite."
 .caption [[https://go-proverbs.github.io/][Go Proverb]].
