@@ -304,7 +304,7 @@ It is common that you need to change the value stored in a variable, this is cal
 In this example, we declare
 
 - Press *Run* to check that program prints, `1`, `2`, `4`.
-- Update the program to declare a new variable, `z`, which has a value 2x larger than `y`.
+# - Update the program to declare a new variable, `z`, which has a value 2x larger than `y`.
 
 * Assignment (cont.)
 
@@ -368,7 +368,7 @@ This program counts from `1` to `10`, can you make it print only the _even_ numb
 - Edit the program to make it print only the even numbers between `1` and `10`, inclusive.
 - Press *Run* and check the program compiles and prints the correct answer, `2`, `4`, `6`, `8`, `10`.
 
-_note_: you do not need to put `(` braces around the `for` condition `)`.
+_note_: you do not need to put `(` braces around the `for` condition `)`. In fact, if you do it's a syntax error. Try it.
 
 * Looping (cont.) 
 
@@ -387,13 +387,7 @@ _note_: this `for` loop only has a _condition_, there is no _init_statement_ or 
 
 Go has two conditional statements, `if` and `switch`.
 
-- `if` is used to choose between two choices based on a _condition_.
-
-- `switch` is used to choose between several choices:
-
-* if
-
-`if` is used when making a decision between two choices
+`if` is used to choose between two choices based on a _condition_.
 
  if v > 0 {
          println("v is greater than zero")
@@ -409,7 +403,7 @@ In some cases the body of the `else` block may be omitted. This is very common w
  }
  // handle v
 
-* if (cont.)
+* if
 
 Let's revisit our previous even numbers `for` loop example.
 
@@ -456,13 +450,13 @@ For example:
 
  var i = 7
 
-Go sees that `i` is being declared and initalised with the value `7`, which is an integer, so the compiler infers the type of `i` to be and `int`.
+Go sees that `i` is being declared and initalised with the value `7`, so the compiler infers the type of `i` is an `int`.
 
 However if we did
 
  var s = "seven"
 
-Go sees that `s` is being initalised with the _string_ `"seven"`, so the compiler infers the type of `s` to be a `string`.
+Go sees that `s` is being initalised with the _string_ `"seven"`, so the compiler infers the type of `s` is a `string`.
 
 * Explicit type declaration
 
@@ -481,25 +475,47 @@ We'll talk about the kinds of types that Go supports on the next slide.
 
 Go is a strongly typed language, like Java, C, C++, and Python. Go has nine kinds of types, they are:
 
+- strings: `string`.
 - signed integers: `int8`, `int16`, `int32`, `int64`.
 - unsigned integers: `uint8`, `uint6`, `uint32`, `uint64`.
-- aliases: `byte` (`uint8`), `rune` (`int32`), `int` (`int32` or `int64`), `uint` (`uint32` or `uint64`).
+- aliases: `byte`, `rune`, `int`, `uint`.
 - booleans: `bool`.
-- strings: `string`.
 - IEEE floating point: `float32`, `float64`.
 - Complex types: `complex64`, `complex128`.
 - Compound types: `array`, `slice`, `map`, `struct`.
 - Pointer types: `*int`, `*bytes.Buffer`.
 
+* String types
+
+Strings are the most common data type in Go programs.
+
+String types behave much as you would expect in other languages.
+
+.play -edit src/strings/strings1/main.go /START OMIT/,/END OMIT/
+
+Strings may be _concatenated_ with the `+` operator.
+
+- Press *Run* to see the result.
+
+_note_: In Go an empty string is `""`, not `null` or `nil`.
+
 * Integer types
 
-Integer types are the most common in Go.
+Integer types are the second most common in Go.
 
 Integer types come in two types; _signed_ and _unsigned_.
 
-Integer types also come in several sizes, represented by the number of bits they represent; `int8`, `int16`, `int32`, `int64`, `uint8`, `uint16`, `uint32`, `uint64`.
+Integer types also come in several sizes, represented by the number of bits they represent;
 
-Go has two integer types, `int` and `uint`, whose size depends on the platform you used to build your Go program.
+- Signed integers: `int8`, `int16`, `int32`, `int64`.
+- Unsigned integers: `uint8`, `uint16`, `uint32`, `uint64`.
+
+Go has two integer types
+
+- `int`, alias for `int32` or `int64` depending on platform.
+- `uint`, alias for `uint32` or `uint64` depending on platform.
+
+whose size depends on the platform you used to build your Go program.
 
 * Integer types (cont.)
 
@@ -514,18 +530,6 @@ This program contains two type errors.
 - Press *Run* to discover the two type errors.
 - Fix the program by changing the declared types of `x` and `y`.
 - Press *Run* and check the program compiles and prints the correct answer, `400`, `-7`
-
-* String types
-
-String types behave much as you would expect in other languages.
-
-.play -edit src/strings/strings1/main.go /START OMIT/,/END OMIT/
-
-Strings may be _concatenated_ with the `+` operator.
-
-- Press *Run* to see the result.
-
-_note_: In Go an empty string is `""`, not `null` or `nil`.
 
 * Functions
 
@@ -552,13 +556,13 @@ This program declares two functions, `main` and `hello`.
 - Uncomment the `println("こんにちは")` statement in `func`hello`.
 - Press *Run* and check the program compiles and prints こんにちは three times.
 
-_note_: `println` is a _built_in_ function provided by the Go compiler, you don't need to declare it.
+_note_: `println` is a _built_in_ function provided, you don't need to declare it.
 
 * Function parameters
 
 To make functions useful, you often need to pass _arguments_ to a function.
 
-To pass an argument to a function, the type of the argument and the type of the function's formal parameter must be the same.
+To pass an argument to a function, the type of the argument and the type of the function's _formal_parameter_ must be the same.
 
 .play -edit src/functions/functions3/main.go /START OMIT/,/END OMIT/
 
@@ -571,7 +575,7 @@ In this program the type of the argument passed to `hello` does not match the ty
 
 A package is the unit in which software is shared and reused in Go. All Go code is arranged into packages.
 
-Each source file in a package must begin with a `package` declaration.
+Each source file in a package must begin with the same `package` declaration.
 
 A package's name must be a valid identifier, just like `const`, `var`, and `func`.
 
@@ -597,9 +601,11 @@ The final declaration we'll cover in this section is the _import_ declaration.
 
 The `import` declaration allows you to use code from other _packages_ into your package.
 
+When you `import` a package, the _public_ types, functions, variables, types, and constants, are available with a prefix of the package's name.
+
  time.Now	// denotes the Now function in package time
 
-When you `import` a package, the _public_ types, functions, variables, and constants, are available with a prefix of the package's name.
+Note that
 
  import "fmt"
  import "time"
