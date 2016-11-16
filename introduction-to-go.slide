@@ -795,7 +795,7 @@ As you've probably noticed, Go has several ways to declare variables. All three 
  var x int = 0
  var x int
 
-If you've come from a language like Ruby or Python, you're probably wondering if this very common operation can be made more concise.
+If you've come from a language like Ruby or Python, you're probably wondering if this very common operation can be made more concise. Indeed it can.
 
  x := 0
 
@@ -833,8 +833,8 @@ A slice is an ordered collection of values of a _single_ type.
 
 The syntax for declaring a slice variable is very similar to declaraing a _scalar_ variable.
 
- var i int
- var j []int
+ var i int      // an int called i
+ var j []int    // a slice of ints called j
 
 In this example, 
 
@@ -927,7 +927,7 @@ What is the value of each of the elements of a newly created, with make, slice?
 
 * Slice initialisation
 
-Suppose we wanted to create a slice of the first 10 prime numbers, how could we do this?
+We want to create an `[]int` slice of the first 10 prime numbers, how could we do this?
 
 One solution could be to create the slice and assign a value to each element in the slice.
 
@@ -943,8 +943,7 @@ Go supports a method of assignment where we both _declare_ and _initalise_ the s
 
 This is called the _composite_literal_ syntax.
 
-- Follow [[https://play.golang.org/p/97Qbg52xLO][this link]] and press the *Run* button.
-- Complete the exercises for this example.
+- Follow [[https://play.golang.org/p/P-eBqzPCWh][this link]] and complete the exercise.
 
 * append
 
@@ -970,7 +969,7 @@ Subslicing looks similar to the _indexing_ operation we saw a few slide ago, exc
 
 The expression s1[5:10] evaluates to the contents of the 6th to the 10th value of the slice `s1`.
 
-- write a program to return only 
+- Follow [[https://play.golang.org/p/d1-jl42aTF][this link]] and complete the exercise.
 
 * Subslices (cont.)
 
