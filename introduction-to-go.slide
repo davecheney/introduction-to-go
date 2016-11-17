@@ -898,11 +898,13 @@ Let's do a quick exercise to familarise yourself with using slices.
 
 To access, or assign, the contents of a slice element at index `i`, use the form `s[i]`.
 
+Slices are zero indexed, so `s[0]` is the 1st element, `s[1]` is the second element, and so on.
+
 When the _index_expression_ appears on the _left_hand_side_ of the equals operator, `=`
 
  s[7] = 20
 
-We are assigning the number 20 to the 8'th (slices indexes start at 0) element of the slice `s`.
+We are assigning the number 20 to the 8'th element of the slice `s`.
 
 When the _index_expression_ appears on the _right_hand_side_ of the equals operator, `=`
 
@@ -965,9 +967,9 @@ We call this slicing a slice, or _subslicing_.
 
 Subslicing looks similar to the _indexing_ operation we saw a few slide ago, except it refers to a range of slice indexes.
 
- s2 := s1[5:10]
+.play -edit src/slices/slices12/main.go
 
-The expression s1[5:10] evaluates to the contents of the 6th to the 10th value of the slice `s1`.
+The expression `brothers[0:3]` evaluates to a slice of the 1st to 3rd Marx brother.
 
 - Follow [[https://play.golang.org/p/d1-jl42aTF][this link]] and complete the exercise.
 
@@ -1045,10 +1047,6 @@ If we wanted to use only the first and third values we can ignore the second by 
          a, _, c := f()
          fmt.Println(a, c)
  }
-
-* Multiple return values.
-
-
 
 * Maps
 
