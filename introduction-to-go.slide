@@ -1026,7 +1026,11 @@ This is a function declaration for `g`, which takes three arguments, two `int` s
 
 This is a function declaration for `h`, which takes two arguments, two `ints`, and returns three values, two `int` s and a `string`.
 
-// TODO discuss returning a value.
+* Multiple return values (cont.)
+
+Your program must return the number of values specified in the function signature.
+
+.play -edit src/functions/functions4/main.go
 
 * Assigning multiple return values
 
@@ -1058,41 +1062,49 @@ Maps map values of key type K to values of type V
 
 Just like making a slice, making a map is acomplished with the `make` built-in.
 
- m := make(map[string]int)
+.play -edit src/maps/maps1/main.go
+
+* Inserting values into a map
+
+Inserting a value into a map looks similar to assigning a value to a slice element.
+
+.play -edit src/maps/maps2/main.go
+
+If an entry already exits with that key, it will be overwritten.
+
+- Follow [[https://play.golang.org/p/a-V5I0nZ5l][this link]] and complete the exercise.
+
+_note_: maps are always _unordered_.
 
 * Compact literal initalisation
 
 Just like slices, maps support compact literal initalisation, which declares and initalises the map.
 
- days := map[int]string {
-         1: "Monday",
-         2: "Tuesday",
-         3: "Wednesday",
-         4: "Thursday",
-         5: "Friday",
-         6: "Saturday",
-         7: "Sunday",
- }
+.play -edit src/maps/maps3/main.go
 
-* Assigning a value to a map
+* Retrieving a values from a map
 
+Just like a slice, you can retrieve the value stored in a map with the syntax `m[key]`.
 
+If value will be returned if it is present, if not the _zero_value_ will be returned.
 
-* Retrieving a valur from a map
+.play -edit src/maps/maps4/main.go
 
-TODO: Requires multiple return values.
+* Checking if a map value exists
 
-TODO: requires zero value
+In the previous slide we saw that `moons["Neptune"]` returned `0`.
+
+How can we tell if Neptune actually has no moons, or if `0` was returned because there is no entry for Neptune?
+
+Map lookups support a second syntax.
+
+.play -edit src/maps/maps5/main.go
 
 * Deleting a value from a map
 
 To delete a value from a map, you use the built in `delete` function.
 
- var m map[int]string
- delete(m, 20)
-
-
-
+.play -edit src/maps/maps6/main.go
 
 * Iterating over a map
 
