@@ -825,6 +825,58 @@ This can be also written as
 - Follow [[https://play.golang.org/p/3Vl75w72JO][this link]] and press the *Run* button.
 - Rewrite the program using the short declaration syntax; there should be no `var` declarations, only `:=`.
 
+* Scope
+
+We've talked about all the ways to declare a variable in Go, now we need to discuss scope.
+
+.code -edit src/scope/scope1/main.go
+
+This program declares `x` four times. All four `x` 's are _different_ because they exist in different scopes.
+
+- Follow [[https://play.golang.org/p/nIcOXVXgwl][this link]] and press the *Run* button.
+
+* Scope (cont.)
+
+The scope of a declaration is bound to the closest pair of curly braces, `{` and `}`.
+
+.code -edit src/scope/scope2/main.go
+
+In this example, we declare `x` to be 100 inside `main`, and 200 inside `f`.
+
+- Follow [[https://play.golang.org/p/Xfi3GOhTiC][this link]] and press the *Run* button.
+- Did the program print what you expected?
+
+* Scope (cont.)
+
+What do you expect this program will print?
+
+.code -edit src/scope/scope3/main.go
+
+- Follow [[https://play.golang.org/p/7uxrebFzmK][this link]] and press the *Run* button.
+- Did you guess the right answer?
+
+* Scope (cont.)
+
+What do you expect this program will print?
+
+.code -edit src/scope/scope4/main.go
+
+- Follow [[https://play.golang.org/p/7hpZre9LhI][this link]] and press the *Run* button.
+- Did you guess the right answer?
+
+* Shadowing
+
+What you are seeing is called _shadowing_.
+
+.code -edit src/scope/scope5/main.go /START1 OMIT/,/END1 OMIT/
+
+Most of you will be comfortable with a _function_scoped_ variable shadowing a _package_scoped_ variable.
+
+.code -edit src/scope/scope5/main.go /START2 OMIT/,/END2 OMIT/
+
+But a _block_scoped_ variable shadowing a _function_scoped_ variable may be surprising.
+
+
 * Slices
 
 The next kind of type to discuss is the _Slice_. 
@@ -1086,7 +1138,7 @@ Just like slices, maps support compact literal initalisation, which declares and
 
 Just like a slice, you can retrieve the value stored in a map with the syntax `m[key]`.
 
-If value will be returned if it is present, if not the _zero_value_ will be returned.
+If it is present the value will be returned, if not the _zero_value_ will be returned.
 
 .play -edit src/maps/maps4/main.go
 
@@ -1108,64 +1160,72 @@ To delete a value from a map, you use the built in `delete` function.
 
 * Iterating over a map
 
-TODO: requires range
+If we wanted to print out all the values in a map we can use a form of the `for` syntax which is known as `range`.
 
-for key, value := range m {
-    // order of key sequence different each time
-}
+.play -edit src/range/range1/main.go
 
-Map iteration order is not specified:
+`range` loops over each entry in the map, assigning the map key to `name`, and the map value to `pop`.
 
-* Scope
+* Range over slices
 
-We've talked about all the ways to declare a variable in Go, now we need to discuss scope.
+We say previously that `for`range` works with maps, it also works with slices.
 
-.code -edit src/scope/scope1/main.go
+.play -edit src/range/range2/main.go
 
-This program declares `x` four times. All four `x` 's are _different_ because they exist in different scopes.
+- Follow [[https://play.golang.org/p/AmQW-OrPC1][this link]] and complete the exercise.
+- If you cannot figure it out, don't worry, there is an answer on the next slide.
 
-- Follow [[https://play.golang.org/p/nIcOXVXgwl][this link]] and press the *Run* button.
+* Switch
 
-* Scope (cont.)
+If you completed the previous exercise you may have written something like this
 
-The scope of a declaration is bound to the closest pair of curly braces, `{` and `}`.
+.play -edit src/range/range2a/main.go /START OMIT/,/END OMIT/
 
-.code -edit src/scope/scope2/main.go
+Heavily nested `if`else`if` blocks are discouraged in Go.
 
-In this example, we declare `x` to be 100 inside `main`, and 200 inside `f`.
+Instead we can use the other condition statement, `switch`.
 
-- Follow [[https://play.golang.org/p/Xfi3GOhTiC][this link]] and press the *Run* button.
-- Did the program print what you expected?
+* Switch (cont.)
 
-* Scope (cont.)
+`switch` can be used 
 
-What do you expect this program will print?
+.play -edit src/switch/switch1/main.go /START OMIT/,/END OMIT/
 
-.code -edit src/scope/scope3/main.go
+* fmt
 
-- Follow [[https://play.golang.org/p/7uxrebFzmK][this link]] and press the *Run* button.
-- Did you guess the right answer?
+Let's conclude this section by talking about the fmt package.
 
-* Scope (cont.)
+`fmt` standard for formatted printing; the name is inhereted from Go's Plan 9 legacy.
 
-What do you expect this program will print?
+We've use `fmt.Println` a lot up to this point, but the `fmt` package has many other useful functions.
 
-.code -edit src/scope/scope4/main.go
+We'll focus on `fmt.Printf`, the `f` stands for _formatted_output_.
 
-- Follow [[https://play.golang.org/p/7hpZre9LhI][this link]] and press the *Run* button.
-- Did you guess the right answer?
+Here is an example.
 
-* Shadowing
+.play -edit src/fmt/fmt1/main.go /START OMIT/,/END OMIT/
 
-What you are seeing is called _shadowing_.
+- Follow [[https://play.golang.org/p/UuzPWcwDrE][this link]] to experiment.
 
-.code -edit src/scope/scope5/main.go /START1 OMIT/,/END1 OMIT/
+* Formatting verbs
 
-Most of you will be comfortable with a _function_scoped_ variable shadowing a _package_scoped_ variable.
+If you're used to languages like Python or C, you're probably used to the idea of _formatting_verbs_.
 
-.code -edit src/scope/scope5/main.go /START2 OMIT/,/END2 OMIT/
+The `fmt` package supports a large number of formatting verbs and modifiers. In the previous example you saw `%s` and `%d`, for `string` and `int` respectively.
 
-But a _block_scoped_ variable shadowing a _function_scoped_ variable may be surprising.
+The `fmt` package is smart enough to spot when you use the wrong formatting verb, or don't provide enough arguments to `fmt.Printf`.
+
+.play -edit src/fmt/fmt2/main.go /START OMIT/,/END OMIT/
+
+* Formatting verbs (cont.)
+
+Having to choose the correct verb that matches the type of the value you want to print is boring.
+
+To make it easier to use `fmt.Printf` in the simple case, you can use the `%v` verb, which know how to print _any_ value.
+
+.play -edit src/fmt/fmt3/main.go /START OMIT/,/END OMIT/
+
+- Follow [[https://play.golang.org/p/B-E7JOJ1Db][this link]] to experiment with a few more formatting verbs.
 
 * Recap
 
@@ -1180,6 +1240,7 @@ You've learnt:
 - Multiple assignment.
 - How slices work.
 - How maps work.
+- How the `fmt` package works.
 
 Time for lunch!
 
@@ -1286,14 +1347,6 @@ TODO: go test
 * Writing tests
 
 TODO: writing tests
-
-* for range
-
-We s
-
-TODO: requires slices
-
-You can use `range` over arrays, slices, maps, and channels.
 
 * Structs
 
