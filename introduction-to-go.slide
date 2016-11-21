@@ -825,58 +825,6 @@ This can be also written as
 - Follow [[https://play.golang.org/p/3Vl75w72JO][this link]] and press the *Run* button.
 - Rewrite the program using the short declaration syntax; there should be no `var` declarations, only `:=`.
 
-* Scope
-
-We've talked about all the ways to declare a variable in Go, now we need to discuss scope.
-
-.code -edit src/scope/scope1/main.go
-
-This program declares `x` four times. All four `x` 's are _different_ because they exist in different scopes.
-
-- Follow [[https://play.golang.org/p/nIcOXVXgwl][this link]] and press the *Run* button.
-
-* Scope (cont.)
-
-The scope of a declaration is bound to the closest pair of curly braces, `{` and `}`.
-
-.code -edit src/scope/scope2/main.go
-
-In this example, we declare `x` to be 100 inside `main`, and 200 inside `f`.
-
-- Follow [[https://play.golang.org/p/Xfi3GOhTiC][this link]] and press the *Run* button.
-- Did the program print what you expected?
-
-* Scope (cont.)
-
-What do you expect this program will print?
-
-.code -edit src/scope/scope3/main.go
-
-- Follow [[https://play.golang.org/p/7uxrebFzmK][this link]] and press the *Run* button.
-- Did you guess the right answer?
-
-* Scope (cont.)
-
-What do you expect this program will print?
-
-.code -edit src/scope/scope4/main.go
-
-- Follow [[https://play.golang.org/p/7hpZre9LhI][this link]] and press the *Run* button.
-- Did you guess the right answer?
-
-* Shadowing
-
-What you are seeing is called _shadowing_.
-
-.code -edit src/scope/scope5/main.go /START1 OMIT/,/END1 OMIT/
-
-Most of you will be comfortable with a _function_scoped_ variable shadowing a _package_scoped_ variable.
-
-.code -edit src/scope/scope5/main.go /START2 OMIT/,/END2 OMIT/
-
-But a _block_scoped_ variable shadowing a _function_scoped_ variable may be surprising.
-
-
 * Slices
 
 The next kind of type to discuss is the _Slice_. 
@@ -1440,3 +1388,56 @@ Stuff that is out of scope for a one day event
 - Concurrency
 - Constant expressions
 - Variadic functions.
+
+* Scope
+
+We've talked about all the ways to declare a variable in Go, now we need to discuss scope.
+
+.code -edit src/scope/scope1/main.go
+
+This program declares `x` four times. All four `x` 's are _different_ because they exist in different scopes.
+
+- Follow [[https://play.golang.org/p/nIcOXVXgwl][this link]] and press the *Run* button.
+
+* Scope (cont.)
+
+The scope of a declaration is bound to the closest pair of curly braces, `{` and `}`.
+
+.code -edit src/scope/scope2/main.go
+
+In this example, we declare `x` to be 100 inside `main`, and 200 inside `f`.
+
+- Follow [[https://play.golang.org/p/Xfi3GOhTiC][this link]] and press the *Run* button.
+- Did the program print what you expected?
+
+* Scope (cont.)
+
+What do you expect this program will print?
+
+.code -edit src/scope/scope3/main.go
+
+- Follow [[https://play.golang.org/p/7uxrebFzmK][this link]] and press the *Run* button.
+- Did you guess the right answer?
+
+* Scope (cont.)
+
+What do you expect this program will print?
+
+.code -edit src/scope/scope4/main.go
+
+- Follow [[https://play.golang.org/p/7hpZre9LhI][this link]] and press the *Run* button.
+- Did you guess the right answer?
+
+* Shadowing
+
+What you are seeing is called _shadowing_.
+
+.code -edit src/scope/scope5/main.go /START1 OMIT/,/END1 OMIT/
+
+Most of you will be comfortable with a _function_scoped_ variable shadowing a _package_scoped_ variable.
+
+.code -edit src/scope/scope5/main.go /START2 OMIT/,/END2 OMIT/
+
+But a _block_scoped_ variable shadowing a _function_scoped_ variable may be surprising.
+
+
