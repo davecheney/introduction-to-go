@@ -39,12 +39,6 @@ After each section we'll have time for questions.
 
 As we work through the day there will be less of me talking, and more exercises to help you learn Go via doing.
 
-* One more thing ...
-
-This isn't a lecture, it's a conversation.
-
-If you don't understand something, or think what you're hearing is incorrect, speak up.
-
 * The Go programming language
 
 - Modern
@@ -58,36 +52,36 @@ Designed by programmers for programmers!
 
 .link https://talks.golang.org/2014/taste.slide#2 Source: Robert Griesemer, A Taste of Go.
 
+* Speed
+
+Go is often noted for its fast compilation, but this is only one facet of the idea of Go being a _fast_ language to program in.
+
+"False dichotomy of static languages being 'slow and painful' and dynamic languages being 'fast and fun'" -Rob Pike
+
+"Clumsy type systems drive people to dynamically typed languages" -Robert Griesemer
+
+Go is an attempt to demonstrate that a language can be both fast in terms of the programs it produces and fast (productive?) for the authors.
+
+
 * Safety
 
-Typed, and type safe
+- Typed, and type safe
 
  var i int = -1
  var u uint = 200
-
  i = u   // nope, incompatible types
 
-Array accesses are bounds checked
+- Array accesses are bounds checked
 
  s := make([]string, 10)
+ x := s[20] // will panic at runtime
 
- for i := 0; i <= 10; i++ {
-         // oops
- }
-
-* Safety (cont.)
-
-No dangling pointers, return a stack value from a function with impunity.
-
-- Compiler will move allocations to the heap if required.
-- Escape analysis will move them back if not.
-
-All memory is zeroed if not explicitly initialised
+- All memory is zeroed if not explicitly initialised
 
  var q int       // initialised to 0
  var f = 7       // initialised to 7, type defaults to int
 
-No implicit conversions; booleans and integers are not aliases
+- No implicit conversions; booleans and integers are not aliases
 
  i := 2
  if i { ... }    // nope, no coercion to bool
@@ -107,16 +101,6 @@ Go is a garbage collected language.
 - Enables simpler, cleaner, APIs.
 
 The garbage collector handles heaps into the 100's of GB range, and is designed for extremely low "stop the world" pauses. In Go 1.7 these pauses are now less than 100 microseconds.
-
-* Speed
-
-Go is often noted for its fast compilation, but this is only one facet of the idea of Go being a _fast_ language to program in.
-
-"False dichotomy of static languages being 'slow and painful' and dynamic languages being 'fast and fun'" -Rob Pike
-
-"Clumsy type systems drive people to dynamically typed languages" -Robert Griesemer
-
-Go is an attempt to demonstrate that a language can be both fast in terms of the programs it produces and fast (productive?) for the authors.
 
 * Opinionated
 
@@ -1205,17 +1189,16 @@ This section focuses on the developer experience
 
 * Installing Go
 
-The next NNN slides give examples of how to install Go on various systems.
+The next few slides give examples of how to install Go on various systems.
 
 The official installation documentation is here:
 
 .link https://golang.org/doc/install
 
-The current version of Go is 1.7.3.
+The current version of Go is 1.7.4.
 
-Minor releases, 1.8, 1.9, etc, ship twice a year. 
-
-Historically 2 or 3 bug fix releases occur during each six month period.
+- New minor releases, Go 1.8, Go 1.9, etc, ship twice a year. 
+- Historically 2–4 bug fix or security releases occur during each six month period.
 
 * Installing Go on OS X
 
@@ -1225,9 +1208,7 @@ Installing Go on OS X (also known as `darwin`) can be acomplished with
 
 The Go project provides an `.pkg` installer, use:
 
-.link https://storage.googleapis.com/golang/go1.7.3.darwin-amd64.pkg
-
-_note_: Go 1.7.3 is the current releases as of this class.
+.link https://storage.googleapis.com/golang/go1.7.4.darwin-amd64.pkg
 
 *Homebrew*
 
@@ -1235,33 +1216,49 @@ If you use Homebrew to manage third party software on your Mac, use:
 
  brew install golang
 
+*MacPorts*
+
+If you use MacPorts to manage third party software on your Mac, use:
+
+ sudo port install go
+
 * Installing Go on Windows
 
-*MSI Installer*
+*MSI*Installer*
 
 The Go project provides a `.msi` installer for 32bit and 64bit Windows, use:
 
-.link https://storage.googleapis.com/golang/go1.7.3.windows-amd64.msi Windows 64bit MSI installer
-.link https://storage.googleapis.com/golang/go1.7.3.windows-386.msi Windows 32bit MSI installer
+.link https://storage.googleapis.com/golang/go1.7.4.windows-amd64.msi Windows 64bit MSI installer
+.link https://storage.googleapis.com/golang/go1.7.4.windows-386.msi Windows 32bit MSI installer
 
-*.zip file*
+*.zip*file*
 
 The Go project provides a `.zip` file of the Go compiler and standard library, use:
 
-.link https://storage.googleapis.com/golang/go1.7.3.windows-amd64.zip Windows 64bit zip file
-.link https://storage.googleapis.com/golang/go1.7.3.windows-386.zip Windows 32bit zip file
+.link https://storage.googleapis.com/golang/go1.7.4.windows-amd64.zip Windows 64bit zip file
+.link https://storage.googleapis.com/golang/go1.7.4.windows-386.zip Windows 32bit zip file
 
 Unzip the zip file and place it at `C:\Go`.
-
-_note_: Go 1.7.3 is the current releases as of this class.
 
 * Installing Go on Linux
 
 Depending on your Linux distribution they may have an up to date version of Go, but this is rare.
 
-The most reliable way to install the latest version of Go
+The most reliable way to install the latest version of Go is to untar
 
-_note_: Go 1.7.3 is the current releases as of this class.
+.link https://storage.googleapis.com/golang/go1.7.4.linux-amd64.tar.gz
+
+to the directory
+
+ /usr/local
+
+and add 
+ 
+ /usr/local/go/bin
+
+to your `$PATH`.
+
+ echo "export PATH=$PATH:/usr/local/go/bin" >> ~/.bash_profile
 
 * Go tool
 
@@ -1286,15 +1283,88 @@ You can set `$GOPATH` to be the base directory where you checked out this reposi
 
 * go build
 
-TODO: go build / go install
+Go is a compiled language, so the usual workflow is 
+
+- Edit code
+- `go`build`
+- Run program
+
+Let's try building a Go program
+
+- `cd`$GOPATH/src/helloworld`
+- Read the source for `hello.go`
+- Build the source with, `go`build`
+- Run the program `./helloworld`
+
+* What time is it (exercise)
+
+Let's write a clock, a program that prints out the current time
+
+- `cd`$GOPATH/src/whattimeisit`
+- edit `main.go` and finish the program (if you get stuck the answer is in `answer.go`)
+- Build the program with, `go`build` (if you make an error, go back and edit `main.go`)
+- Run your program `./whattimeisit`, it should print something like this
+
+ The current time is 2016-12-05 12:33:18.222821474 +0900 JST
+
+* Testing
+
+I wanted to spend some time on testing because for the rest of the day we'll be using tests to complete code katas.
+
+The testing package can also contain benchmark functions and examples, which show up in godoc.
+
+You should include tests for each package that you write.
+
+The `testing` package is ideal for _unit_tests_. It's _ok_ for functional tests, but not really suitable for complex integration tests.
+
 
 * go test
 
-TODO: go test
+`go`test` is the unit testing framework built into the Go standard library. It lives in the `testing` package.
+
+Tests live in `_test.go` files, eg. the `strings` package has these files:
+
+- `strings.go` functions to manipulate UTF-8 encoded strings.
+- `strings_test.go` tests for the `strings` package.
+
+Each test is a function in the form
+
+ func TestNameOfTest(t *testing.T) { ... }
+
+- `NameOfTest` is the name of your test, it _must_ start with an upper case letter.
+- Test functions take a `testing.T` value, which provides helpers like `t.Error` and `t.Fail`.
 
 * Writing tests
 
-TODO: writing tests
+Let's write some tests using our own version of the strings package, called `simplestrings`.
+
+- The code for this exercise is in `$GOPATH/src/simplestrings/`
+- Read the source code for `simplestrings.go`
+
+Together we'll write some tests for the functions in our `simplestrings` package.
+
+* Test coverage
+
+`go`test` can report coverage
+
+ go test -coverprofile=cover.out
+
+This produces a coverage file, `cover.out`
+
+- `go`tool`cover`-func=cover.out` will print the coverage report
+- `go`tool`cover`-html=cover.out` will open the report in a browser
+
+_Protip_: I use these little shell functions to make this easier
+
+ cover () {
+   t=$(mktemp -t cover)
+   go test $COVERFLAGS -coverprofile=$t $@ && go tool cover -func=$t && unlink $t
+ }
+
+ cover-web() {
+   t=$(mktemp -t cover)
+   go test $COVERFLAGS -coverprofile=$t $@ && go tool cover -html=$t && unlink $t
+ }
 
 * Structs
 
@@ -1313,10 +1383,6 @@ We call these _Struct_ (for _structure_) types. The name will become clear short
 * Methods (must talk about types and packages first)
 
 * Interfaces
-
-* Empty Interface
-
-* fmt package
 
 error handling
 
@@ -1440,4 +1506,6 @@ Most of you will be comfortable with a _function_scoped_ variable shadowing a _p
 
 But a _block_scoped_ variable shadowing a _function_scoped_ variable may be surprising.
 
+* Empty Interface
 
+* Go install
