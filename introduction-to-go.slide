@@ -1281,6 +1281,14 @@ You can set `$GOPATH` to be the base directory where you checked out this reposi
 
  % export GOPATH=$HOME/introduction-to-go
 
+Using a workspace allows you to import code from other packages with a fixed name. eg.
+
+ import "github.com/pkg/profile"
+
+Will import the code for the `profile` package stored in
+
+ $GOPATH/src/github.com/pkg/profile
+
 * go build
 
 Go is a compiled language, so the usual workflow is 
@@ -1317,7 +1325,6 @@ You should include tests for each package that you write.
 
 The `testing` package is ideal for _unit_tests_. It's _ok_ for functional tests, but not really suitable for complex integration tests.
 
-
 * go test
 
 `go`test` is the unit testing framework built into the Go standard library. It lives in the `testing` package.
@@ -1343,6 +1350,8 @@ Let's write some tests using our own version of the strings package, called `sim
 
 Together we'll write some tests for the functions in our `simplestrings` package.
 
+We'll use the test coverage (see next slide) tool to check our work.
+
 * Test coverage
 
 `go`test` can report coverage
@@ -1366,25 +1375,17 @@ _Protip_: I use these little shell functions to make this easier
    go test $COVERFLAGS -coverprofile=$t $@ && go tool cover -html=$t && unlink $t
  }
 
-* Structs
-
-So far we've discussed two kinds of types; _primative_ types and _slice_ types.
-
-Go supports what we call _compound_ types, that is, types that are _composed_ of other types. 
-
-We call these _Struct_ (for _structure_) types. The name will become clear shortly.
-
 * Pointers
+
+* Methods (must talk about types and packages first)
 
 * Nil
 
 `nil` is Go's version of `NULL`, `null`, `void`.
 
-* Methods (must talk about types and packages first)
-
 * Interfaces
 
-error handling
+* error handling
 
 * The standard library
 
@@ -1392,6 +1393,8 @@ error handling
 
 Go ships with a rich standard library of packages. This includes
 
+- file input / output
+- string handling
 - compression
 - encoding and decoding of JSON and XML
 - network handling
@@ -1399,7 +1402,113 @@ Go ships with a rich standard library of packages. This includes
 
 This section will focus on the important packages from the standard library with exercises.
 
-* Packages and applications
+* Katas
+
+* Katas
+
+For the rest of the day let's practice writing Go code together.
+
+The Ruby community have a tradition of _code_katas_, small exercises to make the test pass.
+
+As we work through the katas, we'll visit some more of the Go standard library.
+
+* String formatting
+
+As a warmup, let's do a small kata together. 
+
+The code for this kata is in `$GOPATH/src/katas/sprintf`
+
+If you get stuck, the answers are in `$GOPATH/src/katas/sprintf/answers_test.go`.
+
+* Structs
+
+So far we've discussed two kinds of types; _primative_ types and _slice_ types.
+
+Go supports what we call _compound_ types, that is, types that are _composed_ of other types. 
+
+These are called _struct_ (for _structure_) types. We declare a struct like this:
+
+ type Point struct {
+          X int
+          Y int
+ }
+
+`Point` is a position in two dimensional space, it has two fields, `X` and `Y`.
+
+- Complete the kata in `$GOPATH/src/katas/points` by making all the tests pass.
+
+* Methods
+
+To this point we've talked about functions, which belong to a package
+
+ // Max returns the larger of a or b.
+ func Max(a, b int) int
+
+In Go, you can attach a function to a type that you declare, this is called a _method_.
+
+ type Point struct { X, Y int }
+
+ func (p Point) String() string {
+          return fmt.Sprintf("point: x=%d, y=%d", p.X, p.Y)
+ }
+
+- Complete the kata in `$GOPATH/src/katas/methods` by making all the tests pass.
+
+* Pointers
+
+
+
+
+
+* Interfaces
+
+TODO, needs methods
+
+* Reading input
+
+This kata asks you to write a function that reads lines from an io.Reader and returns a string containing all the lines read.
+
+The code for this kata is in `$GOPATH/src/katas/input`
+
+* Reading and Writing files
+
+- introduces io and os 
+- introduces error handling
+- introduce the log package (log.Fatal)
+
+_Note_:
+
+- The go tool ignores any directory called `testdata`, or starts with a `.` or `_`.
+
+* Talk about interfaces
+
+
+
+* Counting the number of lines in a file
+
+
+
+* flag parsing
+
+* Walking directories
+
+* Sorting
+
+maps in Go are not storted.
+
+- introduces sort, reflect
+
+
+* HTTP request
+
+
+* JSON parsing
+
+- write the number of lines of a file
+
+- Telling time, sleeping and waiting with the `time` package
+- parsing strings
+- http service
 
 * Packages and applications
 
@@ -1407,44 +1516,42 @@ This section will focus on the important packages from the standard library with
 - how to layout a project
 - package, project katas
 
-* go doc
-
-TODO: go doc / godoc 
-
-Also, godoc.org
-
 * Documenting packages with comments
 
-Go code is traditionally documented with comments in the source code.
+Go code is traditionally documented with comments in the source code. This is similar to Python's heredoc convetion.
 
-Show examples
+Here are some examples
 
-* go get
+ // simplestrings provides simple helper functions to work with strings
+ package simplestrings
 
-TODO: go get
+ // APIVersion is the version of this package's API
+ const APIVersion = 3
 
-* Katas
+ // NextID returns the next ID in the sequence
+ func NextID() uint64 { ... }
 
-- String formatting, with the `fmt` package
-- Sorting with the `sort` pacakge
-- Telling time, sleeping and waiting with the `time` package
-- Reading and writing files
-- bufio
-- count the number of lines in a file (using bufio.Scanner)
-- Walking directories
-- parsing strings
-- Random numbers with the `math/rand` package
-- json parsin with the `encoding/json` package
-- executing child processes
-- os package, exit
+_Notes_
 
-TODO
+- Comments directly preceed the thing they apply to, don't put an extra newline in between the comment and the symbol
+- You should comment both Public and private symbols, but godoc will only show you the documents
+
 
 * Conclusion
 
 * Conclusion
 
 Thank you very much for participating today, I hope that you enjoyed yourself and are encouraged to learn more about Go.
+
+I would like to recommend several online resources:
+
+.link https://tour.golang.org/welcome/1 tour.golang.org
+.link https://gobyexample.com/ Go by example
+
+I would like to recommend two books:
+
+.link https://www.amazon.co.jp/exec/obidos/ASIN/4621300253 プログラミング言語Go
+.link https://www.amazon.co.jp/exec/obidos/ASIN/477418392X/ みんなのGo言語【現場で使える実践テクニック】
 
 * Out of scope
 
