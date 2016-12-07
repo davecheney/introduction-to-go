@@ -1544,10 +1544,18 @@ Complete the program so it reads the number of lines sent to it via stdin.
  % cat testdata/moby.txt | ./linecount 
  22659
 
+* Handling multiple files
 
+Let's extend our `linecount` program to handle files passed on the command line.
 
+The code for this kata is in `$GOPATH/src/katas/countmanyfiles`
 
-* flag parsing
+Complete the program so it counts the lines in files passed via the command line.
+
+ % ./countmanyfiles testdata/*
+ testdata/dracula.txt    15973
+ testdata/pride-and-prejudice.txt        13427
+ testdata/sherlock.txt   13052
 
 * Walking directories
 
