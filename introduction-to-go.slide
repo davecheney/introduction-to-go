@@ -1452,13 +1452,19 @@ In Go, you can attach a function to a type that you declare, this is called a _m
           return fmt.Sprintf("point: x=%d, y=%d", p.X, p.Y)
  }
 
+Any type that implements a `String()`string` method will be used by the `fmt` package when it prints the value.
+
 - Complete the kata in `$GOPATH/src/katas/methods` by making all the tests pass.
 
 * Pointers
 
+Whenever you pass a value to a function or method, the value is _copied_.
 
+In Go, the method's receiver is also a value, so it's copied when you call a method.
 
+.play -edit src/pointers/pointers1.go /START OMIT/,/END OMIT/
 
+- Complete the kata in `$GOPATH/src/katas/pointers` by making the test pass.
 
 * Interfaces
 
