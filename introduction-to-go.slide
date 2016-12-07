@@ -1375,18 +1375,6 @@ _Protip_: I use these little shell functions to make this easier
    go test $COVERFLAGS -coverprofile=$t $@ && go tool cover -html=$t && unlink $t
  }
 
-* Pointers
-
-* Methods (must talk about types and packages first)
-
-* Nil
-
-`nil` is Go's version of `NULL`, `null`, `void`.
-
-* Interfaces
-
-* error handling
-
 * The standard library
 
 * The standard library
@@ -1468,7 +1456,19 @@ In Go, the method's receiver is also a value, so it's copied when you call a met
 
 * Interfaces
 
-TODO, needs methods
+Go is an object oriented language; we have methods on types, but Go does not support inheritence or subclasses.
+
+Go supports polymorphism, _has_a_ (not _is_a_) with _interfaces_.
+
+An interface declaration looks like this:
+
+ type Reader interface { 
+          Read(buf []byte) (int, error) 
+ }
+
+This is the [[https://golang.org/pkg/io/#Reader][`io.Reader`]] interface declaration from the [[https://golang.org/pkg/io/][`io`]] package.
+
+Go does not have an _implements_ keyword, any type with the correct set of methods.
 
 * Reading input
 
@@ -1476,34 +1476,70 @@ This kata asks you to write a function that reads lines from an io.Reader and re
 
 The code for this kata is in `$GOPATH/src/katas/input`
 
-* Reading and Writing files
+* Error handling
 
-- introduces io and os 
-- introduces error handling
-- introduce the log package (log.Fatal)
+You probably spotted that lots of methods and functions in the Go standard library return a value of type `error`. 
 
-_Note_:
+`error` is a _predeclared_type_, just like `int`, `string`, etc.
 
-- The go tool ignores any directory called `testdata`, or starts with a `.` or `_`.
+`error` is an interface, it's declaration is
 
-* Talk about interfaces
+ type error interface {
+         Error() string
+ }
 
+Any type that has an `Error()`string` method, _implements_ the `error` interface.         
 
+* Nil
+
+`nil` is Go's version of `NULL`, `null`, `void`.
+
+- The zero value of an interface type is `nil`.
+- The zero value of a pointer type is `nil`.
+
+Go uses the `error` interface and a simple convention to implement error handling.
+
+- If no error occurs, the `err` value returned from a fuction or method will equal nil.
+- If an error occurs, the `err` value returned from a fuction or method will not equal nil.
+
+ if err != nil {
+          // cleanup and handle error
+ }
 
 * Counting the number of lines in a file
 
+Now we know about `io.Reader`'s, `error`'s, we can write some more useful programs.
 
+The code for this kata is in `$GOPATH/src/katas/countlines`
+
+_Note_:
+
+- `go`test` always executes from the package's source directory, this makes it simple to include fixtures for your tests.
+- The go tool ignores any directory called `testdata`, or starts with a `.` or `_`.
+
+* defer
+
+In `CountLines` from our previous example, if an error happened during reading lines, `f` may not be closed.
+
+Go has a keyword `defer` to ensure operations _always_ happen.
+
+.code -edit src/defer/defer1.go /START OMIT/,/END OMIT/
+
+* Error handling (cont.)
+
+In the previous counting example, if an error happened, the program would exit.
+
+In this kata, we'll handle errors by returning them to the caller.
+
+The code for this kata is in `$GOPATH/src/katas/errorhandling`
+
+- return error from 
+
+* Passing in a reader
 
 * flag parsing
 
 * Walking directories
-
-* Sorting
-
-maps in Go are not storted.
-
-- introduces sort, reflect
-
 
 * HTTP request
 
@@ -1622,3 +1658,11 @@ But a _block_scoped_ variable shadowing a _function_scoped_ variable may be surp
 * Empty Interface
 
 * Go install
+
+* Sorting
+
+maps in Go are not storted.
+
+- introduces sort, reflect
+
+
