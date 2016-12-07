@@ -1552,23 +1552,72 @@ The code for this kata is in `$GOPATH/src/katas/countmanyfiles`
 
 Complete the program so it counts the lines in files passed via the command line.
 
- % ./countmanyfiles testdata/*
+ % ./countmanyfiles testdata/*.txt
  testdata/dracula.txt    15973
  testdata/pride-and-prejudice.txt        13427
  testdata/sherlock.txt   13052
 
-* Walking directories
+* Reading all the *.txt files in a directory
+
+In the previous example we used the shell to list files to process.
+
+In this kata, let's extend our `countmanyfiles` program to walk the directory listing itself.
+
+To do this we use the [[https://golang.org/pkg/os/#File.Readdir][`ReadDir`]] method on [[https://golang.org/pkg/os/#File][`os.File`]].
+
+_Note_: Be careful to only read _files_, not directories, and do not read files that don't end in `.txt`
+
+The code for this kata is in `$GOPATH/src/katas/countdir`
+
+Complete the program so it counts the lines in files passed via the command line.
+
+ % ./countdir testdata/
+ testdata/christmas-carol.txt    4236
+ testdata/tom-sawyer.txt 9209
+
+* Let's take a break
 
 * HTTP request
 
+The Go standard library supports writing HTTP clients and servers with the [[https://golang.org/pkg/net/http/][`net/http`]] package.
+
+Using the `net/http` package is very straight forward:
+
+ resp, err := http.Get("http://example.com/")
+ if err != nil {
+         // handle error
+ }
+ 
+`resp` is a [[https://golang.org/pkg/net/http/#Response][`http.Response`]] structure, which has lots of interesting fields.
+
+Let's write a simple HTTP client that can fetch HTTP URLs.
+
+ % ./httpget http://httpbin.org/ip
+ {
+   "origin": "125.203.122.114"
+ }
+
+The code for this kata is in `$GOPATH/src/katas/httpget`
 
 * JSON parsing
 
-- write the number of lines of a file
+The service at `http://httpbin.org/` returns JSON bodies.
 
-- Telling time, sleeping and waiting with the `time` package
-- parsing strings
-- http service
+The [[https://golang.org/pkg/encoding/json/][`encoding/json`]] package can decode JSON data into a map.
+
+ result := make(map[string]string)
+ dec := json.NewDecoder(resp.Body)
+ err := dec.Decode(&result)
+ if err != nil {
+         // handle error
+ }
+
+Let's use this to write a program that will tell us our public IP address.
+
+ % ./whatismyip 
+ My IP address is: 125.203.122.114
+
+The code for this kata is in `$GOPATH/src/katas/whatismyip`
 
 * Packages and applications
 
