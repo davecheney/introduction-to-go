@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"html/template"
 	"log"
 	"net/http"
@@ -19,7 +18,7 @@ func HelloServer(w http.ResponseWriter, req *http.Request) {
 }
 
 func main() {
-	fmt.Println("please connect to localhost:7777/hello")
-	http.HandleFunc("/hello", HelloServer)
+	log.Println("please connect to http://localhost:7777/")
+	http.HandleFunc("/", HelloServer)
 	log.Fatal(http.ListenAndServe(":7777", nil))
 }

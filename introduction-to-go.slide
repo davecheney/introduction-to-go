@@ -88,7 +88,7 @@ Go is an attempt to demonstrate that a language can be both fast in terms of the
 
 * Good support for concurrency and communication
 
-- Multicore is a reality.
+- Multicore CPUs are a reality.
 - Multiprocessing is not a solution.
 - Networking support baked into the standard library, integrated into the runtime.
 
@@ -100,7 +100,9 @@ Go is a garbage collected language.
 - Eliminates an entire class of use after free and memory leak bugs.
 - Enables simpler, cleaner, APIs.
 
-The garbage collector handles heaps into the 100's of GB range, and is designed for extremely low "stop the world" pauses. In Go 1.7 these pauses are now less than 100 microseconds.
+The garbage collector handles heaps into the 100's of GB range, and is designed for extremely low "stop the world" pauses.
+
+In Go 1.7 these pauses are now less than 100 microseconds.
 
 * Opinionated
 
@@ -113,7 +115,7 @@ Go is an opinionated language.
 
 * Hello, http!
 
-.play src/hellohttp/hellohttp.go
+.play -edit src/hellohttp/hellohttp.go
 
 * Basic Syntax
 
@@ -1301,7 +1303,7 @@ Let's try building a Go program
 
 - `cd`$GOPATH/src/helloworld`
 - Read the source for `hello.go`
-- Build the source with, `go`build`
+- Build the source with `go`build`
 - Run the program `./helloworld`
 
 * What time is it (exercise)
@@ -1377,8 +1379,6 @@ _Protip_: I use these little shell functions to make this easier
 
 * The standard library
 
-* The standard library
-
 Go ships with a rich standard library of packages. This includes
 
 - file input / output
@@ -1387,10 +1387,6 @@ Go ships with a rich standard library of packages. This includes
 - encoding and decoding of JSON and XML
 - network handling
 - HTTP client and server
-
-This section will focus on the important packages from the standard library with exercises.
-
-* Katas
 
 * Katas
 
@@ -1618,6 +1614,28 @@ Let's use this to write a program that will tell us our public IP address.
  My IP address is: 125.203.122.114
 
 The code for this kata is in `$GOPATH/src/katas/whatismyip`
+
+* JSON encoding
+
+If you're writing a RESTful web service it's common to have to return JSON encoded data.
+
+In Go the [[https://godoc.org/encoding/json][`encoding/json`]] package can turn Go maps and data structures into JSON.
+
+.play -edit src/jsonenc/jsonenc1.go /START OMIT/,/END OMIT/
+
+* Controlling JSON encoding
+
+The `encoding/json` package requires the fields of a struct to be public (start with an upper case letter), this means the keys in your JSON document will be upper case.
+
+We can fix this and control the output of the JSON with a _tag_.
+
+The format of the JSON tag is documented on the [[https://golang.org/pkg/encoding/json/#Marshal][`json.Encode`]] method.
+
+.play -edit src/jsonenc/jsonenc2.go /START OMIT/,/END OMIT/
+
+* JSON encoding kata
+
+The code for this kata is in `$GOPATH/src/katas/jsonenc`
 
 * Packages and applications
 
