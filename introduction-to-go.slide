@@ -1707,12 +1707,12 @@ Features:
 - The response to the client should be in JSON format and include the number of lines and the title of the book.
 - Book directory is configurable.
 
- % ./httpwc ../../../books/ &
+ % ./httplinecount ../../../books/ &
  [1] 17554
  % curl http://localhost:8080/books/moby.txt
  {"title":"moby.txt","lines":"22659"}
 
-The code for this kata is in `$GOPATH/src/katas/httpwc`
+The code for this kata is in `$GOPATH/src/katas/httplinecount`
 
 * Time for a break
 
