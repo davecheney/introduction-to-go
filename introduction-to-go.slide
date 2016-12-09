@@ -62,7 +62,6 @@ Go is often noted for its fast compilation, but this is only one facet of the id
 
 Go is an attempt to demonstrate that a language can be both fast in terms of the programs it produces and fast (productive?) for the authors.
 
-
 * Safety
 
 - Typed, and type safe
@@ -1464,7 +1463,14 @@ An interface declaration looks like this:
 
 This is the [[https://golang.org/pkg/io/#Reader][`io.Reader`]] interface declaration from the [[https://golang.org/pkg/io/][`io`]] package.
 
-Go does not have an _implements_ keyword, any type with the correct set of methods.
+Go does not have an _implements_ keyword, any type with the correct set of methods _is_ an implementation of the interface.
+
+* Readers
+
+To familarise you with the `io.Reader` implementations available in the `io` package, this kata is all about Readers.
+
+- Complete the kata in `$GOPATH/src/katas/readers` by making the test pass.
+- If you get stuck, consult the documetation in the [[https://golang.org/pkg/io/][`io`]] package.
 
 * Reading input
 
