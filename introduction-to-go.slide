@@ -1637,6 +1637,94 @@ The format of the JSON tag is documented on the [[https://golang.org/pkg/encodin
 
 The code for this kata is in `$GOPATH/src/katas/jsonenc`
 
+* Writing http servers
+
+Go's [[https://golang.org/pkg/net/http][`net/http`]] library can be used to write production web applications.
+
+Writing web servers in Go can be as simple as a few lines. Here is an example:
+
+.play -edit src/http/http1.go
+
+* Writing http servers (cont.)
+
+This is a simple HTTP handler
+
+ func index(w http.ResponseWriter, r *http.Request) {
+        fmt.Fprintln(w, "This is the index page")
+ }
+
+it takes two pameters
+
+- `w`, a `http.ResponseWriter` which is used to send data to the client
+- `r`, a `http.Request` which contains the uri, query parameters, and request body.
+
+ mux := http.NewServeMux()
+
+`http.NewServeMux` returns a `ServeMux`, what we usually call a HTTP router.
+ 
+* Writing http servers (cont.)
+
+ mux.HandleFunc("/", index)
+
+Registers our `index` function, with the top level route, `"/"`.
+
+ http.ListenAndServe(":8000", mux)
+
+Opens a socket on port 8080 and sends and requests to our `mux` (our router).
+
+`http.ListenAndServe` won't return unless something happens to that listening socket (wifi drops, cable unplugs)
+
+* go get
+
+`go`get` is a simple wrapper around `git` that knows how fetch packages from GitHub (and a few other places).
+
+If a package's import path follows the `go`get` convention, `go`get` knows how to fetch the source code and download it to your `$GOPATH`.
+
+`go`get` isn't a complete dependency manager like rubygems or npm, etc, but it good enough for writing many applications.
+
+We'll use `go`get` to fetch the source for `gorilla/mux`, a more advanced HTTP router
+
+ % go get github.com/gorilla/mux 
+ % ls $GOPATH/src/github.com/gorilla/mux
+ LICENSE                 context_gorilla.go      context_native_test.go  mux_test.go
+ README.md               context_gorilla_test.go doc.go                  old_test.go
+ bench_test.go           context_native.go       mux.go                  regexp.go
+ route.go
+
+* Using gorilla/mux
+
+The standard HTTP router, `http.ServeMux` is quite basic, so we'll upgrade to the `gorilla/mux` http router.
+
+.play -edit src/http/http2.go
+
+* Line counting HTTP service
+
+Let's write a HTTP service that counts the lines in a book via http.
+
+Features:
+
+- When the client requests `/books/{book}` we look up the book and return the number of lines counted.
+- The response to the client should be in JSON format and include the number of lines and the title of the book.
+- Book directory is configurable.
+
+ % ./httpwc ../../../books/ &
+ [1] 17554
+ % curl http://localhost:8080/books/moby.txt
+ {"title":"moby.txt","lines":"22659"}
+
+The code for this kata is in `$GOPATH/src/katas/httpwc`
+
+* Time for a break
+
+* Concurrency
+
+* Go
+
+* Channels
+
+* Select
+
+
 * Packages and applications
 
 - how to write a package
@@ -1662,23 +1750,6 @@ _Notes_
 
 - Comments directly preceed the thing they apply to, don't put an extra newline in between the comment and the symbol
 - You should comment both Public and private symbols, but godoc will only show you the documents
-
-
-* Conclusion
-
-* Conclusion
-
-Thank you very much for participating today, I hope that you enjoyed yourself and are encouraged to learn more about Go.
-
-I would like to recommend several online resources:
-
-.link https://tour.golang.org/welcome/1 tour.golang.org
-.link https://gobyexample.com/ Go by example
-
-I would like to recommend two books:
-
-.link https://www.amazon.co.jp/exec/obidos/ASIN/4621300253 プログラミング言語Go
-.link https://www.amazon.co.jp/exec/obidos/ASIN/477418392X/ みんなのGo言語【現場で使える実践テクニック】
 
 * Out of scope
 
@@ -1740,14 +1811,19 @@ Most of you will be comfortable with a _function_scoped_ variable shadowing a _p
 
 But a _block_scoped_ variable shadowing a _function_scoped_ variable may be surprising.
 
-* Empty Interface
+* Conclusion
 
-* Go install
+* Conclusion
 
-* Sorting
+Thank you very much for participating today, I hope that you enjoyed yourself and are encouraged to learn more about Go.
 
-maps in Go are not storted.
+I would like to recommend several online resources:
 
-- introduces sort, reflect
+.link https://tour.golang.org/welcome/1 tour.golang.org
+.link https://gobyexample.com/ Go by example
 
+I would like to recommend two books:
+
+.link https://www.amazon.co.jp/exec/obidos/ASIN/4621300253 プログラミング言語Go
+.link https://www.amazon.co.jp/exec/obidos/ASIN/477418392X/ みんなのGo言語【現場で使える実践テクニック】
 
