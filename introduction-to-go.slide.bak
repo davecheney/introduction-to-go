@@ -7,10 +7,6 @@ dave@cheney.net
 http://dave.cheney.net/
 @davecheney
 
-* DRAFT PRESENTATION
-
-THIS IS A DRAFT PRESENTATION.
-
 * License and Materials
 
 This presentation is licensed under the [[https://creativecommons.org/licenses/by-sa/4.0/][Creative Commons Attribution-ShareAlike 4.0 International]] licence.
@@ -39,12 +35,6 @@ After each section we'll have time for questions.
 
 As we work through the day there will be less of me talking, and more exercises to help you learn Go via doing.
 
-* One more thing ...
-
-This isn't a lecture, it's a conversation.
-
-If you don't understand something, or think what you're hearing is incorrect, speak up.
-
 * The Go programming language
 
 - Modern
@@ -58,43 +48,42 @@ Designed by programmers for programmers!
 
 .link https://talks.golang.org/2014/taste.slide#2 Source: Robert Griesemer, A Taste of Go.
 
+* Speed
+
+Go is often noted for its fast compilation, but this is only one facet of the idea of Go being a _fast_ language to program in.
+
+"False dichotomy of static languages being 'slow and painful' and dynamic languages being 'fast and fun'" -Rob Pike
+
+"Clumsy type systems drive people to dynamically typed languages" -Robert Griesemer
+
+Go is an attempt to demonstrate that a language can be both fast in terms of the programs it produces and fast (productive?) for the authors.
+
 * Safety
 
-Typed, and type safe
+- Typed, and type safe
 
  var i int = -1
  var u uint = 200
-
  i = u   // nope, incompatible types
 
-Array accesses are bounds checked
+- Array accesses are bounds checked
 
  s := make([]string, 10)
+ x := s[20] // will panic at runtime
 
- for i := 0; i <= 10; i++ {
-         // oops
- }
-
-* Safety (cont.)
-
-No dangling pointers, return a stack value from a function with impunity.
-
-- Compiler will move allocations to the heap if required.
-- Escape analysis will move them back if not.
-
-All memory is zeroed if not explicitly initialised
+- All memory is zeroed if not explicitly initialised
 
  var q int       // initialised to 0
  var f = 7       // initialised to 7, type defaults to int
 
-No implicit conversions; booleans and integers are not aliases
+- No implicit conversions; booleans and integers are not aliases
 
  i := 2
  if i { ... }    // nope, no coercion to bool
 
 * Good support for concurrency and communication
 
-- Multicore is a reality.
+- Multicore CPUs are a reality.
 - Multiprocessing is not a solution.
 - Networking support baked into the standard library, integrated into the runtime.
 
@@ -106,17 +95,9 @@ Go is a garbage collected language.
 - Eliminates an entire class of use after free and memory leak bugs.
 - Enables simpler, cleaner, APIs.
 
-The garbage collector handles heaps into the 100's of GB range, and is designed for extremely low "stop the world" pauses. In Go 1.7 these pauses are now less than 100 microseconds.
+The garbage collector handles heaps into the 100's of GB range, and is designed for extremely low "stop the world" pauses.
 
-* Speed
-
-Go is often noted for its fast compilation, but this is only one facet of the idea of Go being a _fast_ language to program in.
-
-"False dichotomy of static languages being 'slow and painful' and dynamic languages being 'fast and fun'" -Rob Pike
-
-"Clumsy type systems drive people to dynamically typed languages" -Robert Griesemer
-
-Go is an attempt to demonstrate that a language can be both fast in terms of the programs it produces and fast (productive?) for the authors.
+In Go 1.7 these pauses are now less than 100 microseconds.
 
 * Opinionated
 
@@ -129,7 +110,7 @@ Go is an opinionated language.
 
 * Hello, http!
 
-.play src/hellohttp/hellohttp.go
+.play -edit src/hellohttp/hellohttp.go
 
 * Basic Syntax
 
@@ -201,7 +182,7 @@ In Go an identifier is any word that starts with a _letter_.
 
 .play -edit src/identifier/identifier1/main.go /START OMIT/,/END OMIT/
 
-A letter is anything that Unicode defines to be a letter, this includes Kanji, Cyrilic, Latin, etc.
+A letter is anything that Unicode defines to be a letter, this includes Kanji, Cyrillic, Latin, etc.
 
 - Identifiers are not restricted to ASCII, edit the slide and change `students` to `学生の` and press *Run*.
 - If you make a mistake, just reload the page.
@@ -246,7 +227,7 @@ They are:
 - `type`: declares a new type.
 - `func`: declares a new function, or method.
 - `package`: declares the package this `.go` source file belongs to.
-- `import`: declares that this package imports declaractions from another. 
+- `import`: declares that this package imports declarations from another. 
 
 We'll cover each of the remaining five declarations in this section.
 
@@ -262,13 +243,13 @@ Just like constants, variable _identifiers_ can be any any valid unicode word.
 
 - Press the *Run* button to see the result.
 
-_note_: The circumference is printed in scientific notication 😕, that's ok, we'll talk about how to fix it later when we talk about the `fmt` package.
+_note_: The circumference is printed in scientific notation 😕, that's ok, we'll talk about how to fix it later when we talk about the `fmt` package.
 
 * Unused variable declarations
 
 Unused variables are often the source of bugs. If you declare a variable in the scope of your function but do not use it, the Go compiler will complain.
 
-If the variable is unused, you should delete it, or assign it temporariliy to the magic variable called `_`.
+If the variable is unused, you should delete it, or assign it temporarily to the magic variable called `_`.
 
 .play -edit src/variable/variable2/main.go /START OMIT/,/END OMIT/
 
@@ -304,7 +285,7 @@ It is common that you need to change the value stored in a variable, this is cal
 In this example, we declare
 
 - Press *Run* to check that program prints, `1`, `2`, `4`.
-- Update the program to declare a new variable, `z`, which has a value 2x larger than `y`.
+# - Update the program to declare a new variable, `z`, which has a value 2x larger than `y`.
 
 * Assignment (cont.)
 
@@ -336,7 +317,7 @@ Go supports a limited form of variable post-increment and post-deincrement, ie. 
 
 This program has a syntax error. 
 
-- Edit the sample code to correct the error by moving the `i++` statement above the declaraction of `var`j`.
+- Edit the sample code to correct the error by moving the `i++` statement above the declaration of `var`j`.
 - Press *Run* and check the program compiles and prints the correct answer, 2, 2.
 
 * Looping
@@ -368,7 +349,7 @@ This program counts from `1` to `10`, can you make it print only the _even_ numb
 - Edit the program to make it print only the even numbers between `1` and `10`, inclusive.
 - Press *Run* and check the program compiles and prints the correct answer, `2`, `4`, `6`, `8`, `10`.
 
-_note_: you do not need to put `(` braces around the `for` condition `)`.
+_note_: you do not need to put `(` braces around the `for` condition `)`. In fact, if you do it's a syntax error. Try it.
 
 * Looping (cont.) 
 
@@ -387,13 +368,7 @@ _note_: this `for` loop only has a _condition_, there is no _init_statement_ or 
 
 Go has two conditional statements, `if` and `switch`.
 
-- `if` is used to choose between two choices based on a _condition_.
-
-- `switch` is used to choose between several choices:
-
-* if
-
-`if` is used when making a decision between two choices
+`if` is used to choose between two choices based on a _condition_.
 
  if v > 0 {
          println("v is greater than zero")
@@ -409,7 +384,7 @@ In some cases the body of the `else` block may be omitted. This is very common w
  }
  // handle v
 
-* if (cont.)
+* if
 
 Let's revisit our previous even numbers `for` loop example.
 
@@ -420,7 +395,7 @@ This program counts from `1` to `10`, can you make it print only the _even_ numb
 - Uncomment the `if`i%2`==`0`{` and `}` lines to make the program print only the even numbers between `1` and `10`.
 - Press *Run* and check the program compiles and prints the correct answer, `2`, `4`, `6`, `8`, `10`.
 
-_note_: `%` is the _modulo_ operator in Go. All even numbers divide wholely by `2`, leaving `0` as their _modulo_ (or remainder).
+_note_: `%` is the _modulo_ operator in Go. All even numbers divide wholly by `2`, leaving `0` as their _modulo_ (or remainder).
 
 * continue
 
@@ -456,13 +431,13 @@ For example:
 
  var i = 7
 
-Go sees that `i` is being declared and initalised with the value `7`, which is an integer, so the compiler infers the type of `i` to be and `int`.
+Go sees that `i` is being declared and initalised with the value `7`, so the compiler infers the type of `i` is an `int`.
 
 However if we did
 
  var s = "seven"
 
-Go sees that `s` is being initalised with the _string_ `"seven"`, so the compiler infers the type of `s` to be a `string`.
+Go sees that `s` is being initalised with the _string_ `"seven"`, so the compiler infers the type of `s` is a `string`.
 
 * Explicit type declaration
 
@@ -481,25 +456,47 @@ We'll talk about the kinds of types that Go supports on the next slide.
 
 Go is a strongly typed language, like Java, C, C++, and Python. Go has nine kinds of types, they are:
 
+- strings: `string`.
 - signed integers: `int8`, `int16`, `int32`, `int64`.
 - unsigned integers: `uint8`, `uint6`, `uint32`, `uint64`.
-- aliases: `byte` (`uint8`), `rune` (`int32`), `int` (`int32` or `int64`), `uint` (`uint32` or `uint64`).
+- aliases: `byte`, `rune`, `int`, `uint`.
 - booleans: `bool`.
-- strings: `string`.
 - IEEE floating point: `float32`, `float64`.
 - Complex types: `complex64`, `complex128`.
 - Compound types: `array`, `slice`, `map`, `struct`.
 - Pointer types: `*int`, `*bytes.Buffer`.
 
+* String types
+
+Strings are the most common data type in Go programs.
+
+String types behave much as you would expect in other languages.
+
+.play -edit src/strings/strings1/main.go /START OMIT/,/END OMIT/
+
+Strings may be _concatenated_ with the `+` operator.
+
+- Press *Run* to see the result.
+
+_note_: In Go an empty string is `""`, not `null` or `nil`.
+
 * Integer types
 
-Integer types are the most common in Go.
+Integer types are the second most common in Go.
 
 Integer types come in two types; _signed_ and _unsigned_.
 
-Integer types also come in several sizes, represented by the number of bits they represent; `int8`, `int16`, `int32`, `int64`, `uint8`, `uint16`, `uint32`, `uint64`.
+Integer types also come in several sizes, represented by the number of bits they represent;
 
-Go has two integer types, `int` and `uint`, whose size depends on the platform you used to build your Go program.
+- Signed integers: `int8`, `int16`, `int32`, `int64`.
+- Unsigned integers: `uint8`, `uint16`, `uint32`, `uint64`.
+
+Go has two integer types
+
+- `int`, alias for `int32` or `int64` depending on platform.
+- `uint`, alias for `uint32` or `uint64` depending on platform.
+
+whose size depends on the platform you used to build your Go program.
 
 * Integer types (cont.)
 
@@ -515,18 +512,6 @@ This program contains two type errors.
 - Fix the program by changing the declared types of `x` and `y`.
 - Press *Run* and check the program compiles and prints the correct answer, `400`, `-7`
 
-* String types
-
-String types behave much as you would expect in other languages.
-
-.play -edit src/strings/strings1/main.go /START OMIT/,/END OMIT/
-
-Strings may be _concatenated_ with the `+` operator.
-
-- Press *Run* to see the result.
-
-_note_: In Go an empty string is `""`, not `null` or `nil`.
-
 * Functions
 
 Now it's time to talk about _functions_.
@@ -537,7 +522,7 @@ All Go you write is made up of functions, in fact, you've been writing functions
 
 This is the same program as the previous example, showing the _function_declaration_, which was previously hidden.
 
-- All Go programs start in a fuction called `main`, we call this the _main_function_.
+- All Go programs start in a function called `main`, we call this the _main_function_.
 
 * func
 
@@ -552,13 +537,13 @@ This program declares two functions, `main` and `hello`.
 - Uncomment the `println("こんにちは")` statement in `func`hello`.
 - Press *Run* and check the program compiles and prints こんにちは three times.
 
-_note_: `println` is a _built_in_ function provided by the Go compiler, you don't need to declare it.
+_note_: `println` is a _built_in_ function provided, you don't need to declare it.
 
 * Function parameters
 
 To make functions useful, you often need to pass _arguments_ to a function.
 
-To pass an argument to a function, the type of the argument and the type of the function's formal parameter must be the same.
+To pass an argument to a function, the type of the argument and the type of the function's _formal_parameter_ must be the same.
 
 .play -edit src/functions/functions3/main.go /START OMIT/,/END OMIT/
 
@@ -571,7 +556,7 @@ In this program the type of the argument passed to `hello` does not match the ty
 
 A package is the unit in which software is shared and reused in Go. All Go code is arranged into packages.
 
-Each source file in a package must begin with a `package` declaration.
+Each source file in a package must begin with the same `package` declaration.
 
 A package's name must be a valid identifier, just like `const`, `var`, and `func`.
 
@@ -597,9 +582,11 @@ The final declaration we'll cover in this section is the _import_ declaration.
 
 The `import` declaration allows you to use code from other _packages_ into your package.
 
+When you `import` a package, the _public_ types, functions, variables, types, and constants, are available with a prefix of the package's name.
+
  time.Now	// denotes the Now function in package time
 
-When you `import` a package, the _public_ types, functions, variables, and constants, are available with a prefix of the package's name.
+Note that
 
  import "fmt"
  import "time"
@@ -611,7 +598,7 @@ and
          "time"
  )
 
-both import the `fmt` and `time` packages. The syntax is different, but they are equivilent.
+both import the `fmt` and `time` packages. The syntax is different, but they are equivalent.
 
 * Import (cont.)
 
@@ -675,7 +662,7 @@ In this section we'll use the Go Playground, a simple online code editor to perf
 
 All Go code is formatted according to a single style guide which is enforced with a tool called `gofmt`
 
-Having one single style that all Go code is formatted in improves readabiliy and avoids the time wasted arguing about code formatting.
+Having one single style that all Go code is formatted in improves readability and avoids the time wasted arguing about code formatting.
 
 "Gofmt's style is no one's favorite, yet gofmt is everyone's favorite."
 .caption [[https://go-proverbs.github.io/][Go Proverb]].
@@ -789,7 +776,7 @@ As you've probably noticed, Go has several ways to declare variables. All three 
  var x int = 0
  var x int
 
-If you've come from a language like Ruby or Python, you're probably wondering if this very common operation can be made more concise.
+If you've come from a language like Ruby or Python, you're probably wondering if this very common operation can be made more concise. Indeed it can.
 
  x := 0
 
@@ -827,8 +814,8 @@ A slice is an ordered collection of values of a _single_ type.
 
 The syntax for declaring a slice variable is very similar to declaraing a _scalar_ variable.
 
- var i int
- var j []int
+ var i int      // an int called i
+ var j []int    // a slice of ints called j
 
 In this example, 
 
@@ -892,11 +879,13 @@ Let's do a quick exercise to familarise yourself with using slices.
 
 To access, or assign, the contents of a slice element at index `i`, use the form `s[i]`.
 
+Slices are zero indexed, so `s[0]` is the 1st element, `s[1]` is the second element, and so on.
+
 When the _index_expression_ appears on the _left_hand_side_ of the equals operator, `=`
 
  s[7] = 20
 
-We are assigning the number 20 to the 8'th (slices indexes start at 0) element of the slice `s`.
+We are assigning the number 20 to the 8'th element of the slice `s`.
 
 When the _index_expression_ appears on the _right_hand_side_ of the equals operator, `=`
 
@@ -921,7 +910,7 @@ What is the value of each of the elements of a newly created, with make, slice?
 
 * Slice initialisation
 
-Suppose we wanted to create a slice of the first 10 prime numbers, how could we do this?
+We want to create an `[]int` slice of the first 10 prime numbers, how could we do this?
 
 One solution could be to create the slice and assign a value to each element in the slice.
 
@@ -937,8 +926,7 @@ Go supports a method of assignment where we both _declare_ and _initalise_ the s
 
 This is called the _composite_literal_ syntax.
 
-- Follow [[https://play.golang.org/p/97Qbg52xLO][this link]] and press the *Run* button.
-- Complete the exercises for this example.
+- Follow [[https://play.golang.org/p/P-eBqzPCWh][this link]] and complete the exercise.
 
 * append
 
@@ -960,11 +948,11 @@ We call this slicing a slice, or _subslicing_.
 
 Subslicing looks similar to the _indexing_ operation we saw a few slide ago, except it refers to a range of slice indexes.
 
- s2 := s1[5:10]
+.play -edit src/slices/slices12/main.go
 
-The expression s1[5:10] evaluates to the contents of the 6th to the 10th value of the slice `s1`.
+The expression `brothers[0:3]` evaluates to a slice of the 1st to 3rd Marx brother.
 
-- write a program to return only 
+- Follow [[https://play.golang.org/p/d1-jl42aTF][this link]] and complete the exercise.
 
 * Subslices (cont.)
 
@@ -1019,7 +1007,11 @@ This is a function declaration for `g`, which takes three arguments, two `int` s
 
 This is a function declaration for `h`, which takes two arguments, two `ints`, and returns three values, two `int` s and a `string`.
 
-// TODO discuss returning a value.
+* Multiple return values (cont.)
+
+Your program must return the number of values specified in the function signature.
+
+.play -edit src/functions/functions4/main.go
 
 * Assigning multiple return values
 
@@ -1041,10 +1033,6 @@ If we wanted to use only the first and third values we can ignore the second by 
          fmt.Println(a, c)
  }
 
-* Multiple return values.
-
-
-
 * Maps
 
 Go has a built in Hash Map type, called a `map`.
@@ -1055,51 +1043,706 @@ Maps map values of key type K to values of type V
 
 Just like making a slice, making a map is acomplished with the `make` built-in.
 
- m := make(map[string]int)
+.play -edit src/maps/maps1/main.go
+
+* Inserting values into a map
+
+Inserting a value into a map looks similar to assigning a value to a slice element.
+
+.play -edit src/maps/maps2/main.go
+
+If an entry already exits with that key, it will be overwritten.
+
+- Follow [[https://play.golang.org/p/a-V5I0nZ5l][this link]] and complete the exercise.
+
+_note_: maps are always _unordered_.
 
 * Compact literal initalisation
 
 Just like slices, maps support compact literal initalisation, which declares and initalises the map.
 
- days := map[int]string {
-         1: "Monday",
-         2: "Tuesday",
-         3: "Wednesday",
-         4: "Thursday",
-         5: "Friday",
-         6: "Saturday",
-         7: "Sunday",
- }
+.play -edit src/maps/maps3/main.go
 
-* Assigning a value to a map
+* Retrieving a values from a map
 
+Just like a slice, you can retrieve the value stored in a map with the syntax `m[key]`.
 
+If it is present the value will be returned, if not the _zero_value_ will be returned.
 
-* Retrieving a valur from a map
+.play -edit src/maps/maps4/main.go
 
-TODO: Requires multiple return values.
+* Checking if a map value exists
 
-TODO: requires zero value
+In the previous slide we saw that `moons["Neptune"]` returned `0`.
+
+How can we tell if Neptune actually has no moons, or if `0` was returned because there is no entry for Neptune?
+
+Map lookups support a second syntax.
+
+.play -edit src/maps/maps5/main.go
 
 * Deleting a value from a map
 
 To delete a value from a map, you use the built in `delete` function.
 
- var m map[int]string
- delete(m, 20)
-
-
-
+.play -edit src/maps/maps6/main.go
 
 * Iterating over a map
 
-TODO: requires range
+If we wanted to print out all the values in a map we can use a form of the `for` syntax which is known as `range`.
 
-for key, value := range m {
-    // order of key sequence different each time
-}
+.play -edit src/range/range1/main.go
 
-Map iteration order is not specified:
+`range` loops over each entry in the map, assigning the map key to `name`, and the map value to `pop`.
+
+* Range over slices
+
+We say previously that `for`range` works with maps, it also works with slices.
+
+.play -edit src/range/range2/main.go
+
+- Follow [[https://play.golang.org/p/AmQW-OrPC1][this link]] and complete the exercise.
+- If you cannot figure it out, don't worry, there is an answer on the next slide.
+
+* Switch
+
+If you completed the previous exercise you may have written something like this
+
+.play -edit src/range/range2a/main.go /START OMIT/,/END OMIT/
+
+Heavily nested `if`else`if` blocks are discouraged in Go.
+
+Instead we can use the other condition statement, `switch`.
+
+* Switch (cont.)
+
+`switch` can be used 
+
+.play -edit src/switch/switch1/main.go /START OMIT/,/END OMIT/
+
+* fmt
+
+Let's conclude this section by talking about the fmt package.
+
+`fmt` standard for formatted printing; the name is inhereted from Go's Plan 9 legacy.
+
+We've use `fmt.Println` a lot up to this point, but the `fmt` package has many other useful functions.
+
+We'll focus on `fmt.Printf`, the `f` stands for _formatted_output_.
+
+Here is an example.
+
+.play -edit src/fmt/fmt1/main.go /START OMIT/,/END OMIT/
+
+- Follow [[https://play.golang.org/p/UuzPWcwDrE][this link]] to experiment.
+
+* Formatting verbs
+
+If you're used to languages like Python or C, you're probably used to the idea of _formatting_verbs_.
+
+The `fmt` package supports a large number of formatting verbs and modifiers. In the previous example you saw `%s` and `%d`, for `string` and `int` respectively.
+
+The `fmt` package is smart enough to spot when you use the wrong formatting verb, or don't provide enough arguments to `fmt.Printf`.
+
+.play -edit src/fmt/fmt2/main.go /START OMIT/,/END OMIT/
+
+* Formatting verbs (cont.)
+
+Having to choose the correct verb that matches the type of the value you want to print is boring.
+
+To make it easier to use `fmt.Printf` in the simple case, you can use the `%v` verb, which know how to print _any_ value.
+
+.play -edit src/fmt/fmt3/main.go /START OMIT/,/END OMIT/
+
+- Follow [[https://play.golang.org/p/B-E7JOJ1Db][this link]] to experiment with a few more formatting verbs.
+
+* Recap
+
+Now you know most of Go!
+
+You've learnt:
+
+- How Go code is formatted.
+- How what the zero value is and how it works.
+- Equality and type conversions
+- The short declaration syntax
+- Multiple assignment.
+- How slices work.
+- How maps work.
+- How the `fmt` package works.
+
+Time for lunch!
+
+* Development environment and tooling
+
+* Development environment and tooling
+
+This section focuses on the developer experience
+
+- Installing Go.
+- Setting up a `$GOPATH` workspace.
+- Introduction to the `go` command.
+- Writing unit tests with the go test command.
+
+* Installing Go
+
+The next few slides give examples of how to install Go on various systems.
+
+The official installation documentation is here:
+
+.link https://golang.org/doc/install
+
+The current version of Go is 1.7.4.
+
+- New minor releases, Go 1.8, Go 1.9, etc, ship twice a year. 
+- Historically 2–4 bug fix or security releases occur during each six month period.
+
+* Installing Go on OS X
+
+Installing Go on OS X (also known as `darwin`) can be acomplished with
+
+*Max OS Installer*
+
+The Go project provides an `.pkg` installer, use:
+
+.link https://storage.googleapis.com/golang/go1.7.4.darwin-amd64.pkg
+
+*Homebrew*
+
+If you use Homebrew to manage third party software on your Mac, use:
+
+ brew install golang
+
+*MacPorts*
+
+If you use MacPorts to manage third party software on your Mac, use:
+
+ sudo port install go
+
+* Installing Go on Windows
+
+*MSI*Installer*
+
+The Go project provides a `.msi` installer for 32bit and 64bit Windows, use:
+
+.link https://storage.googleapis.com/golang/go1.7.4.windows-amd64.msi Windows 64bit MSI installer
+.link https://storage.googleapis.com/golang/go1.7.4.windows-386.msi Windows 32bit MSI installer
+
+*.zip*file*
+
+The Go project provides a `.zip` file of the Go compiler and standard library, use:
+
+.link https://storage.googleapis.com/golang/go1.7.4.windows-amd64.zip Windows 64bit zip file
+.link https://storage.googleapis.com/golang/go1.7.4.windows-386.zip Windows 32bit zip file
+
+Unzip the zip file and place it at `C:\Go`.
+
+* Installing Go on Linux
+
+Depending on your Linux distribution they may have an up to date version of Go, but this is rare.
+
+The most reliable way to install the latest version of Go is to untar
+
+.link https://storage.googleapis.com/golang/go1.7.4.linux-amd64.tar.gz
+
+to the directory
+
+ /usr/local
+
+and add 
+ 
+ /usr/local/go/bin
+
+to your `$PATH`.
+
+ echo "export PATH=$PATH:/usr/local/go/bin" >> ~/.bash_profile
+
+* Go tool
+
+Your Go installation comes with a tool we call the `go` tool, because that's its name.
+
+The `go` tool can 
+
+- compile your programs
+- run your tests
+- display documentation for a package
+- fetch packages from the internet.
+
+* $GOPATH
+
+The `go` tool works inside a workspace where _all_ your Go source code is stored.
+
+All the source code for this workshop is included with this repository.
+
+You can set `$GOPATH` to be the base directory where you checked out this repository. eg.
+
+ % export GOPATH=$HOME/introduction-to-go
+
+Using a workspace allows you to import code from other packages with a fixed name. eg.
+
+ import "github.com/pkg/profile"
+
+Will import the code for the `profile` package stored in
+
+ $GOPATH/src/github.com/pkg/profile
+
+* go build
+
+Go is a compiled language, so the usual workflow is 
+
+- Edit code
+- `go`build`
+- Run program
+
+Let's try building a Go program
+
+- `cd`$GOPATH/src/helloworld`
+- Read the source for `hello.go`
+- Build the source with `go`build`
+- Run the program `./helloworld`
+
+* What time is it (exercise)
+
+Let's write a clock, a program that prints out the current time
+
+- `cd`$GOPATH/src/whattimeisit`
+- edit `main.go` and finish the program (if you get stuck the answer is in `answer.go`)
+- Build the program with, `go`build` (if you make an error, go back and edit `main.go`)
+- Run your program `./whattimeisit`, it should print something like this
+
+ The current time is 2016-12-05 12:33:18.222821474 +0900 JST
+
+* Testing
+
+I wanted to spend some time on testing because for the rest of the day we'll be using tests to complete code katas.
+
+The testing package can also contain benchmark functions and examples, which show up in godoc.
+
+You should include tests for each package that you write.
+
+The `testing` package is ideal for _unit_tests_. It's _ok_ for functional tests, but not really suitable for complex integration tests.
+
+* go test
+
+`go`test` is the unit testing framework built into the Go standard library. It lives in the `testing` package.
+
+Tests live in `_test.go` files, eg. the `strings` package has these files:
+
+- `strings.go` functions to manipulate UTF-8 encoded strings.
+- `strings_test.go` tests for the `strings` package.
+
+Each test is a function in the form
+
+ func TestNameOfTest(t *testing.T) { ... }
+
+- `NameOfTest` is the name of your test, it _must_ start with an upper case letter.
+- Test functions take a `testing.T` value, which provides helpers like `t.Error` and `t.Fail`.
+
+* Writing tests
+
+Let's write some tests using our own version of the strings package, called `simplestrings`.
+
+- The code for this exercise is in `$GOPATH/src/simplestrings/`
+- Read the source code for `simplestrings.go`
+
+Together we'll write some tests for the functions in our `simplestrings` package.
+
+We'll use the test coverage (see next slide) tool to check our work.
+
+* Test coverage
+
+`go`test` can report coverage
+
+ go test -coverprofile=cover.out
+
+This produces a coverage file, `cover.out`
+
+- `go`tool`cover`-func=cover.out` will print the coverage report
+- `go`tool`cover`-html=cover.out` will open the report in a browser
+
+_Protip_: I use these little shell functions to make this easier
+
+ cover () {
+   t=$(mktemp -t cover)
+   go test $COVERFLAGS -coverprofile=$t $@ && go tool cover -func=$t && unlink $t
+ }
+
+ cover-web() {
+   t=$(mktemp -t cover)
+   go test $COVERFLAGS -coverprofile=$t $@ && go tool cover -html=$t && unlink $t
+ }
+
+* The standard library
+
+Go ships with a rich standard library of packages. This includes
+
+- file input / output
+- string handling
+- compression
+- encoding and decoding of JSON and XML
+- network handling
+- HTTP client and server
+
+* Katas
+
+For the rest of the day let's practice writing Go code together.
+
+The Ruby community have a tradition of _code_katas_, small exercises to make the test pass.
+
+As we work through the katas, we'll visit some more of the Go standard library.
+
+* String formatting
+
+As a warmup, let's do a small kata together. 
+
+The code for this kata is in `$GOPATH/src/katas/sprintf`
+
+If you get stuck, the answers are in `$GOPATH/src/katas/sprintf/answers_test.go`.
+
+* Structs
+
+So far we've discussed two kinds of types; _primative_ types and _slice_ types.
+
+Go supports what we call _compound_ types, that is, types that are _composed_ of other types. 
+
+These are called _struct_ (for _structure_) types. We declare a struct like this:
+
+ type Point struct {
+          X int
+          Y int
+ }
+
+`Point` is a position in two dimensional space, it has two fields, `X` and `Y`.
+
+- Complete the kata in `$GOPATH/src/katas/points` by making all the tests pass.
+
+* Methods
+
+To this point we've talked about functions, which belong to a package
+
+ // Max returns the larger of a or b.
+ func Max(a, b int) int
+
+In Go, you can attach a function to a type that you declare, this is called a _method_.
+
+ type Point struct { X, Y int }
+
+ func (p Point) String() string {
+          return fmt.Sprintf("point: x=%d, y=%d", p.X, p.Y)
+ }
+
+Any type that implements a `String()`string` method will be used by the `fmt` package when it prints the value.
+
+- Complete the kata in `$GOPATH/src/katas/methods` by making all the tests pass.
+
+* Pointers
+
+Whenever you pass a value to a function or method, the value is _copied_.
+
+In Go, the method's receiver is also a value, so it's copied when you call a method.
+
+.play -edit src/pointers/pointers1.go /START OMIT/,/END OMIT/
+
+- Complete the kata in `$GOPATH/src/katas/pointers` by making the test pass.
+
+* Interfaces
+
+Go is an object oriented language; we have methods on types, but Go does not support inheritence or subclasses.
+
+Go supports polymorphism, _has_a_ (not _is_a_) with _interfaces_.
+
+An interface declaration looks like this:
+
+ type Reader interface { 
+          Read(buf []byte) (int, error) 
+ }
+
+This is the [[https://golang.org/pkg/io/#Reader][`io.Reader`]] interface declaration from the [[https://golang.org/pkg/io/][`io`]] package.
+
+Go does not have an _implements_ keyword, any type with the correct set of methods _is_ an implementation of the interface.
+
+* Reading input
+
+This kata asks you to write a function that reads lines from an io.Reader and returns a string containing all the lines read.
+
+The code for this kata is in `$GOPATH/src/katas/input`
+
+* Readers
+
+To familarise you with the `io.Reader` implementations available in the `io` package, this kata is all about Readers.
+
+- Complete the kata in `$GOPATH/src/katas/readers` by making the test pass.
+- If you get stuck, consult the documetation in the [[https://golang.org/pkg/io/][`io`]] package.
+
+* Error handling
+
+You probably spotted that lots of methods and functions in the Go standard library return a value of type `error`. 
+
+`error` is a _predeclared_type_, just like `int`, `string`, etc.
+
+`error` is an interface, it's declaration is
+
+ type error interface {
+         Error() string
+ }
+
+Any type that has an `Error()`string` method, _implements_ the `error` interface.         
+
+* Nil
+
+`nil` is Go's version of `NULL`, `null`, `void`.
+
+- The zero value of an interface type is `nil`.
+- The zero value of a pointer type is `nil`.
+
+Go uses the `error` interface and a simple convention to implement error handling.
+
+- If no error occurs, the `err` value returned from a fuction or method will equal nil.
+- If an error occurs, the `err` value returned from a fuction or method will not equal nil.
+
+ if err != nil {
+          // cleanup and handle error
+ }
+
+* Counting the number of lines in a file
+
+Now we know about `io.Reader`'s, `error`'s, we can write some more useful programs.
+
+The code for this kata is in `$GOPATH/src/katas/countlines`
+
+_Note_:
+
+- `go`test` always executes from the package's source directory, this makes it simple to include fixtures for your tests.
+- The go tool ignores any directory called `testdata`, or starts with a `.` or `_`.
+
+* defer
+
+In `CountLines` from our previous example, if an error happened during reading lines, `f` may not be closed.
+
+Go has a keyword `defer` to ensure operations _always_ happen.
+
+.code -edit src/defer/defer1.go /START OMIT/,/END OMIT/
+
+* Error handling (cont.)
+
+In the previous counting example, if an error happened, the program would exit.
+
+In this kata, we'll handle errors by returning them to the caller.
+
+The code for this kata is in `$GOPATH/src/katas/errorhandling`
+
+* Passing in a reader
+
+Let's turn out `Countlines` function into a program.
+
+The code for this kata is in `$GOPATH/src/katas/linecount`
+
+Complete the program so it reads the number of lines sent to it via stdin.
+
+ % cat testdata/moby.txt | ./linecount 
+ 22659
+
+* Handling multiple files
+
+Let's extend our `linecount` program to handle files passed on the command line.
+
+The code for this kata is in `$GOPATH/src/katas/countmanyfiles`
+
+Complete the program so it counts the lines in files passed via the command line.
+
+ % ./countmanyfiles testdata/*.txt
+ testdata/dracula.txt    15973
+ testdata/pride-and-prejudice.txt        13427
+ testdata/sherlock.txt   13052
+
+* Reading all the *.txt files in a directory
+
+In the previous example we used the shell to list files to process.
+
+In this kata, let's extend our `countmanyfiles` program to walk the directory listing itself.
+
+To do this we use the [[https://golang.org/pkg/os/#File.Readdir][`ReadDir`]] method on [[https://golang.org/pkg/os/#File][`os.File`]].
+
+_Note_: Be careful to only read _files_, not directories, and do not read files that don't end in `.txt`
+
+The code for this kata is in `$GOPATH/src/katas/countdir`
+
+Complete the program so it counts the lines in files passed via the command line.
+
+ % ./countdir testdata/
+ testdata/christmas-carol.txt    4236
+ testdata/tom-sawyer.txt 9209
+
+* Let's take a break
+
+* HTTP request
+
+The Go standard library supports writing HTTP clients and servers with the [[https://golang.org/pkg/net/http/][`net/http`]] package.
+
+Using the `net/http` package is very straight forward:
+
+ resp, err := http.Get("http://example.com/")
+ if err != nil {
+         // handle error
+ }
+ 
+`resp` is a [[https://golang.org/pkg/net/http/#Response][`http.Response`]] structure, which has lots of interesting fields.
+
+Let's write a simple HTTP client that can fetch HTTP URLs.
+
+ % ./httpget http://httpbin.org/ip
+ {
+   "origin": "125.203.122.114"
+ }
+
+The code for this kata is in `$GOPATH/src/katas/httpget`
+
+* JSON parsing
+
+The service at `http://httpbin.org/` returns JSON bodies.
+
+The [[https://golang.org/pkg/encoding/json/][`encoding/json`]] package can decode JSON data into a map.
+
+ result := make(map[string]string)
+ dec := json.NewDecoder(resp.Body)
+ err := dec.Decode(&result)
+ if err != nil {
+         // handle error
+ }
+
+Let's use this to write a program that will tell us our public IP address.
+
+ % ./whatismyip 
+ My IP address is: 125.203.122.114
+
+The code for this kata is in `$GOPATH/src/katas/whatismyip`
+
+* JSON encoding
+
+If you're writing a RESTful web service it's common to have to return JSON encoded data.
+
+In Go the [[https://godoc.org/encoding/json][`encoding/json`]] package can turn Go maps and data structures into JSON.
+
+.play -edit src/jsonenc/jsonenc1.go /START OMIT/,/END OMIT/
+
+* Controlling JSON encoding
+
+The `encoding/json` package requires the fields of a struct to be public (start with an upper case letter), this means the keys in your JSON document will be upper case.
+
+We can fix this and control the output of the JSON with a _tag_.
+
+The format of the JSON tag is documented on the [[https://golang.org/pkg/encoding/json/#Marshal][`json.Encode`]] method.
+
+.play -edit src/jsonenc/jsonenc2.go /START OMIT/,/END OMIT/
+
+* JSON encoding kata
+
+The code for this kata is in `$GOPATH/src/katas/jsonenc`
+
+* Writing http servers
+
+Go's [[https://golang.org/pkg/net/http][`net/http`]] library can be used to write production web applications.
+
+Writing web servers in Go can be as simple as a few lines. Here is an example:
+
+.play -edit src/http/http1.go
+
+* Writing http servers (cont.)
+
+This is a simple HTTP handler
+
+ func index(w http.ResponseWriter, r *http.Request) {
+        fmt.Fprintln(w, "This is the index page")
+ }
+
+it takes two pameters
+
+- `w`, a `http.ResponseWriter` which is used to send data to the client
+- `r`, a `http.Request` which contains the uri, query parameters, and request body.
+
+ mux := http.NewServeMux()
+
+`http.NewServeMux` returns a `ServeMux`, what we usually call a HTTP router.
+ 
+* Writing http servers (cont.)
+
+ mux.HandleFunc("/", index)
+
+Registers our `index` function, with the top level route, `"/"`.
+
+ http.ListenAndServe(":8000", mux)
+
+Opens a socket on port 8080 and sends and requests to our `mux` (our router).
+
+`http.ListenAndServe` won't return unless something happens to that listening socket (wifi drops, cable unplugs)
+
+* go get
+
+`go`get` is a simple wrapper around `git` that knows how fetch packages from GitHub (and a few other places).
+
+If a package's import path follows the `go`get` convention, `go`get` knows how to fetch the source code and download it to your `$GOPATH`.
+
+`go`get` isn't a complete dependency manager like rubygems or npm, etc, but it good enough for writing many applications.
+
+We'll use `go`get` to fetch the source for `gorilla/mux`, a more advanced HTTP router
+
+ % go get github.com/gorilla/mux 
+ % ls $GOPATH/src/github.com/gorilla/mux
+ LICENSE                 context_gorilla.go      context_native_test.go  mux_test.go
+ README.md               context_gorilla_test.go doc.go                  old_test.go
+ bench_test.go           context_native.go       mux.go                  regexp.go
+ route.go
+
+* Using gorilla/mux
+
+The standard HTTP router, `http.ServeMux` is quite basic, so we'll upgrade to the `gorilla/mux` http router.
+
+.play -edit src/http/http2.go
+
+* Line counting HTTP service
+
+Let's write a HTTP service that counts the lines in a book via http.
+
+Features:
+
+- When the client requests `/books/{book}` we look up the book and return the number of lines counted.
+- The response to the client should be in JSON format and include the number of lines and the title of the book.
+- Book directory is configurable.
+
+ % ./httplinecount ../../../books/ &
+ [1] 17554
+ % curl http://localhost:8080/books/moby.txt
+ {"title":"moby.txt","lines":"22659"}
+
+The code for this kata is in `$GOPATH/src/katas/httplinecount`
+
+* Time for a break
+
+* Packages and applications
+
+- how to write a package
+- how to layout a project
+- package, project katas
+
+* Documenting packages with comments
+
+Go code is traditionally documented with comments in the source code. This is similar to Python's heredoc convetion.
+
+Here are some examples
+
+ // simplestrings provides simple helper functions to work with strings
+ package simplestrings
+
+ // APIVersion is the version of this package's API
+ const APIVersion = 3
+
+ // NextID returns the next ID in the sequence
+ func NextID() uint64 { ... }
+
+_Notes_
+
+- Comments directly preceed the thing they apply to, don't put an extra newline in between the comment and the symbol
+- You should comment both Public and private symbols, but godoc will only show you the documents
 
 * Scope
 
@@ -1152,223 +1795,19 @@ Most of you will be comfortable with a _function_scoped_ variable shadowing a _p
 
 But a _block_scoped_ variable shadowing a _function_scoped_ variable may be surprising.
 
-* Recap
-
-Now you know most of Go!
-
-You've learnt:
-
-- How Go code is formatted.
-- How what the zero value is and how it works.
-- Equality and type conversions
-- The short declaration syntax
-- Multiple assignment.
-- How slices work.
-- How maps work.
-
-Time for lunch!
-
-* Development environment and tooling
-
-* Development environment and tooling
-
-This section focuses on the developer experience
-
-- Installing Go.
-- Setting up a `$GOPATH` workspace.
-- Introduction to the `go` command.
-- Writing unit tests with the go test command.
-
-* Installing Go
-
-The next NNN slides give examples of how to install Go on various systems.
-
-The official installation documentation is here:
-
-.link https://golang.org/doc/install
-
-The current version of Go is 1.7.3.
-
-Minor releases, 1.8, 1.9, etc, ship twice a year. 
-
-Historically 2 or 3 bug fix releases occur during each six month period.
-
-* Installing Go on OS X
-
-Installing Go on OS X (also known as `darwin`) can be acomplished with
-
-*Max OS Installer*
-
-The Go project provides an `.pkg` installer, use:
-
-.link https://storage.googleapis.com/golang/go1.7.3.darwin-amd64.pkg
-
-_note_: Go 1.7.3 is the current releases as of this class.
-
-*Homebrew*
-
-If you use Homebrew to manage third party software on your Mac, use:
-
- brew install golang
-
-* Installing Go on Windows
-
-*MSI Installer*
-
-The Go project provides a `.msi` installer for 32bit and 64bit Windows, use:
-
-.link https://storage.googleapis.com/golang/go1.7.3.windows-amd64.msi Windows 64bit MSI installer
-.link https://storage.googleapis.com/golang/go1.7.3.windows-386.msi Windows 32bit MSI installer
-
-*.zip file*
-
-The Go project provides a `.zip` file of the Go compiler and standard library, use:
-
-.link https://storage.googleapis.com/golang/go1.7.3.windows-amd64.zip Windows 64bit zip file
-.link https://storage.googleapis.com/golang/go1.7.3.windows-386.zip Windows 32bit zip file
-
-Unzip the zip file and place it at `C:\Go`.
-
-_note_: Go 1.7.3 is the current releases as of this class.
-
-* Installing Go on Linux
-
-Depending on your Linux distribution they may have an up to date version of Go, but this is rare.
-
-The most reliable way to install the latest version of Go
-
-_note_: Go 1.7.3 is the current releases as of this class.
-
-* Go tool
-
-Your Go installation comes with a tool we call the `go` tool, because that's its name.
-
-The `go` tool can 
-
-- compile your programs
-- run your tests
-- display documentation for a package
-- fetch packages from the internet.
-
-* $GOPATH
-
-The `go` tool works inside a workspace where _all_ your Go source code is stored.
-
-All the source code for this workshop is included with this repository.
-
-You can set `$GOPATH` to be the base directory where you checked out this repository. eg.
-
- % export GOPATH=$HOME/introduction-to-go
-
-* go build
-
-TODO: go build / go install
-
-* go test
-
-TODO: go test
-
-* Writing tests
-
-TODO: writing tests
-
-* for range
-
-We s
-
-TODO: requires slices
-
-You can use `range` over arrays, slices, maps, and channels.
-
-* Structs
-
-So far we've discussed two kinds of types; _primative_ types and _slice_ types.
-
-Go supports what we call _compound_ types, that is, types that are _composed_ of other types. 
-
-We call these _Struct_ (for _structure_) types. The name will become clear shortly.
-
-* Pointers
-
-* Nil
-
-`nil` is Go's version of `NULL`, `null`, `void`.
-
-* Methods (must talk about types and packages first)
-
-* Interfaces
-
-* Empty Interface
-
-* fmt package
-
-error handling
-
-* The standard library
-
-* The standard library
-
-Go ships with a rich standard library of packages. This includes
-
-- compression
-- encoding and decoding of JSON and XML
-- network handling
-- HTTP client and server
-
-This section will focus on the important packages from the standard library with exercises.
-
-* Packages and applications
-
-* Packages and applications
-
-- how to write a package
-- how to layout a project
-- package, project katas
-
-* go doc
-
-TODO: go doc / godoc 
-
-Also, godoc.org
-
-* Documenting packages with comments
-
-Go code is traditionally documented with comments in the source code.
-
-Show examples
-
-* go get
-
-TODO: go get
-
-* Katas
-
-- String formatting, with the `fmt` package
-- Sorting with the `sort` pacakge
-- Telling time, sleeping and waiting with the `time` package
-- Reading and writing files
-- bufio
-- count the number of lines in a file (using bufio.Scanner)
-- Walking directories
-- parsing strings
-- Random numbers with the `math/rand` package
-- json parsin with the `encoding/json` package
-- executing child processes
-- os package, exit
-
-TODO
-
 * Conclusion
 
 * Conclusion
 
 Thank you very much for participating today, I hope that you enjoyed yourself and are encouraged to learn more about Go.
 
-* Out of scope
+I would like to recommend several online resources:
 
-Stuff that is out of scope for a one day event
+.link https://tour.golang.org/welcome/1 tour.golang.org
+.link https://gobyexample.com/ Go by example
 
-- Channels
-- Concurrency
-- Constant expressions
-- Variadic functions.
+I would like to recommend two books:
+
+.link https://www.amazon.co.jp/exec/obidos/ASIN/4621300253 プログラミング言語Go
+.link https://www.amazon.co.jp/exec/obidos/ASIN/477418392X/ みんなのGo言語【現場で使える実践テクニック】
+

@@ -189,7 +189,7 @@ A letter is anything that Unicode defines to be a letter, this includes Kanji, C
 
 * Identifiers (cont.)
 
-An identifier must start with a unicode letter, or the underscore character, `_`.
+An identifier must start with a Unicode letter, or the underscore character, `_`.
 
 Numbers are not permitted at the start of an identifier, but can appear later in the identifier.
 
@@ -239,7 +239,7 @@ You _declare_ a new variable with the `var` declaration.
 
 .play -edit src/variable/variable1/main.go /START OMIT/,/END OMIT/
 
-Just like constants, variable _identifiers_ can be any any valid unicode word.
+Just like constants, variable _identifiers_ can be any any valid Unicode word.
 
 - Press the *Run* button to see the result.
 
@@ -301,12 +301,12 @@ It is a syntax error to assign a new value to a constant.
 
 * Increment and decrement
 
-Go supports a limited form of variable post-increment and post-deincrement, ie. `x++`, `x--`.
+Go supports a limited form of variable post-increment and post-decrement, ie. `x++`, `x--`.
 
 .play -edit src/increment/increment1/main.go /START OMIT/,/END OMIT/
 
 - Press *Run* and see the program prints `2`,
-- Edit the sample code to subtract `1` from `i` using the deincrement operator `i--`.
+- Edit the sample code to subtract `1` from `i` using the decrement operator `i--`.
 - Press *Run* and check the program compiles and prints the correct answer, 0.
 
 * Increment and decrement (cont.)
@@ -502,7 +502,7 @@ whose size depends on the platform you used to build your Go program.
 
 Why does Go support so many kinds of integer types?
 
-Different _sized_ integer types can accomodate different ranges of numbers.
+Different _sized_ integer types can accommodate different ranges of numbers.
 
 .play -edit src/types/types1/main.go /START OMIT/,/END OMIT/
 
@@ -682,7 +682,7 @@ Which both _declares_ and _initalises_ the variables `counter` and `name` respec
 
 .code src/zerovalue/zerovalue1/main.go
 
-What will ths print?
+What will this print?
 
 - Follow [[https://play.golang.org/p/jioUB0t_LW][this link]] and press the *Run* button to see this in action.
 
@@ -812,7 +812,7 @@ The next kind of type to discuss is the _Slice_.
 
 A slice is an ordered collection of values of a _single_ type.
 
-The syntax for declaring a slice variable is very similar to declaraing a _scalar_ variable.
+The syntax for declaring a slice variable is very similar to declaring a _scalar_ variable.
 
  var i int      // an int called i
  var j []int    // a slice of ints called j
@@ -822,7 +822,7 @@ In this example,
 - `i` is a variable of type `int`. 
 - `j` is a variable of type `[]int`, that is, a slice of `int`.
 
-Slices are very important in Go programs, so we'll spend a bit of time discussiong them.
+Slices are very important in Go programs, so we'll spend a bit of time discussing them.
 
 _note_: A slice is _not_ an array. Go also supports arrays, but you'll see later than they aren't very common, or very easy to use, so we won't discuss them at the moment.
 
@@ -934,9 +934,9 @@ So far we've been using slices with a known length. You can extend the contents 
 
 .play -edit src/slices/slices8/main.go
 
-`append` increases the length of the slice to accomodate the new items, then returns a new slice value.
+`append` increases the length of the slice to accommodate the new items, then returns a new slice value.
 
-You can `append` mutliple values in one statement, providing they are all the same type.
+You can `append` multiple values in one statement, providing they are all the same type.
 
 .link https://blog.golang.org/slices Further reading: Arrays, slices (and strings): The mechanics of 'append' (blog.golang.org)
 
@@ -960,7 +960,7 @@ An important thing to remember when slicing a slice, is that both slices refer t
 
 .play -edit src/slices/slices10/main.go
 
-To create two independant slice values, you would use the `copy` function, which we'll discuss later.
+To create two independent slice values, you would use the `copy` function, which we'll discuss later.
 
 * Bounds checking
 
@@ -1041,7 +1041,7 @@ Maps map values of key type K to values of type V
 
  var m map[string]int
 
-Just like making a slice, making a map is acomplished with the `make` built-in.
+Just like making a slice, making a map is accomplished with the `make` built-in.
 
 .play -edit src/maps/maps1/main.go
 
@@ -1077,7 +1077,7 @@ In the previous slide we saw that `moons["Neptune"]` returned `0`.
 
 How can we tell if Neptune actually has no moons, or if `0` was returned because there is no entry for Neptune?
 
-Map lookups support a second syntax.
+Map look ups support a second syntax.
 
 .play -edit src/maps/maps5/main.go
 
@@ -1124,7 +1124,7 @@ Instead we can use the other condition statement, `switch`.
 
 Let's conclude this section by talking about the fmt package.
 
-`fmt` standard for formatted printing; the name is inhereted from Go's Plan 9 legacy.
+`fmt` standard for formatted printing; the name is inherited from Go's Plan 9 legacy.
 
 We've use `fmt.Println` a lot up to this point, but the `fmt` package has many other useful functions.
 
@@ -1199,7 +1199,7 @@ The current version of Go is 1.7.4.
 
 * Installing Go on OS X
 
-Installing Go on OS X (also known as `darwin`) can be acomplished with
+Installing Go on OS X (also known as `darwin`) can be accomplished with
 
 *Max OS Installer*
 
@@ -1288,7 +1288,7 @@ Will import the code for the `profile` package stored in
 
 * go build
 
-Go is a compiled language, so the usual workflow is 
+Go is a compiled language, so the usual work flow is 
 
 - Edit code
 - `go`build`
@@ -1393,7 +1393,7 @@ As we work through the katas, we'll visit some more of the Go standard library.
 
 * String formatting
 
-As a warmup, let's do a small kata together. 
+As a warm up, let's do a small kata together. 
 
 The code for this kata is in `$GOPATH/src/katas/sprintf`
 
@@ -1401,7 +1401,7 @@ If you get stuck, the answers are in `$GOPATH/src/katas/sprintf/answers_test.go`
 
 * Structs
 
-So far we've discussed two kinds of types; _primative_ types and _slice_ types.
+So far we've discussed two kinds of types; _primitive_ types and _slice_ types.
 
 Go supports what we call _compound_ types, that is, types that are _composed_ of other types. 
 
@@ -1447,7 +1447,7 @@ In Go, the method's receiver is also a value, so it's copied when you call a met
 
 * Interfaces
 
-Go is an object oriented language; we have methods on types, but Go does not support inheritence or subclasses.
+Go is an object oriented language; we have methods on types, but Go does not support inheritance or sub-classes.
 
 Go supports polymorphism, _has_a_ (not _is_a_) with _interfaces_.
 
@@ -1472,7 +1472,7 @@ The code for this kata is in `$GOPATH/src/katas/input`
 To familarise you with the `io.Reader` implementations available in the `io` package, this kata is all about Readers.
 
 - Complete the kata in `$GOPATH/src/katas/readers` by making the test pass.
-- If you get stuck, consult the documetation in the [[https://golang.org/pkg/io/][`io`]] package.
+- If you get stuck, consult the documentation in the [[https://golang.org/pkg/io/][`io`]] package.
 
 * Error handling
 
@@ -1497,8 +1497,8 @@ Any type that has an `Error()`string` method, _implements_ the `error` interface
 
 Go uses the `error` interface and a simple convention to implement error handling.
 
-- If no error occurs, the `err` value returned from a fuction or method will equal nil.
-- If an error occurs, the `err` value returned from a fuction or method will not equal nil.
+- If no error occurs, the `err` value returned from a function or method will equal nil.
+- If an error occurs, the `err` value returned from a function or method will not equal nil.
 
  if err != nil {
           // cleanup and handle error
@@ -1639,7 +1639,7 @@ The format of the JSON tag is documented on the [[https://golang.org/pkg/encodin
 
 The code for this kata is in `$GOPATH/src/katas/jsonenc`
 
-* Writing http servers
+* Writing HTTP servers
 
 Go's [[https://golang.org/pkg/net/http][`net/http`]] library can be used to write production web applications.
 
@@ -1655,7 +1655,7 @@ This is a simple HTTP handler
         fmt.Fprintln(w, "This is the index page")
  }
 
-it takes two pameters
+it takes two parameters
 
 - `w`, a `http.ResponseWriter` which is used to send data to the client
 - `r`, a `http.Request` which contains the uri, query parameters, and request body.
@@ -1726,7 +1726,7 @@ The code for this kata is in `$GOPATH/src/katas/httplinecount`
 
 * Documenting packages with comments
 
-Go code is traditionally documented with comments in the source code. This is similar to Python's heredoc convetion.
+Go code is traditionally documented with comments in the source code. This is similar to Python's heredoc convention.
 
 Here are some examples
 
@@ -1741,7 +1741,7 @@ Here are some examples
 
 _Notes_
 
-- Comments directly preceed the thing they apply to, don't put an extra newline in between the comment and the symbol
+- Comments directly precede the thing they apply to, don't put an extra newline in between the comment and the symbol
 - You should comment both Public and private symbols, but godoc will only show you the documents
 
 * Scope
