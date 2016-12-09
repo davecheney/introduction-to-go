@@ -7,10 +7,6 @@ dave@cheney.net
 http://dave.cheney.net/
 @davecheney
 
-* DRAFT PRESENTATION
-
-THIS IS A DRAFT PRESENTATION.
-
 * License and Materials
 
 This presentation is licensed under the [[https://creativecommons.org/licenses/by-sa/4.0/][Creative Commons Attribution-ShareAlike 4.0 International]] licence.
@@ -1465,18 +1461,18 @@ This is the [[https://golang.org/pkg/io/#Reader][`io.Reader`]] interface declara
 
 Go does not have an _implements_ keyword, any type with the correct set of methods _is_ an implementation of the interface.
 
+* Reading input
+
+This kata asks you to write a function that reads lines from an io.Reader and returns a string containing all the lines read.
+
+The code for this kata is in `$GOPATH/src/katas/input`
+
 * Readers
 
 To familarise you with the `io.Reader` implementations available in the `io` package, this kata is all about Readers.
 
 - Complete the kata in `$GOPATH/src/katas/readers` by making the test pass.
 - If you get stuck, consult the documetation in the [[https://golang.org/pkg/io/][`io`]] package.
-
-* Reading input
-
-This kata asks you to write a function that reads lines from an io.Reader and returns a string containing all the lines read.
-
-The code for this kata is in `$GOPATH/src/katas/input`
 
 * Error handling
 
@@ -1722,15 +1718,6 @@ The code for this kata is in `$GOPATH/src/katas/httplinecount`
 
 * Time for a break
 
-* Concurrency
-
-* Go
-
-* Channels
-
-* Select
-
-
 * Packages and applications
 
 - how to write a package
@@ -1756,15 +1743,6 @@ _Notes_
 
 - Comments directly preceed the thing they apply to, don't put an extra newline in between the comment and the symbol
 - You should comment both Public and private symbols, but godoc will only show you the documents
-
-* Out of scope
-
-Stuff that is out of scope for a one day event
-
-- Channels
-- Concurrency
-- Constant expressions
-- Variadic functions.
 
 * Scope
 
