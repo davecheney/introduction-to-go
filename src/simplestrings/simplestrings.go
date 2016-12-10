@@ -22,5 +22,5 @@ func Contains(s, substr string) bool {
 
 // HasPrefix tests whether the string s begins with prefix.
 func HasPrefix(s, prefix string) bool {
-	Index(s, prefix) == 0
+	return Index(s, prefix) == 0
 }
