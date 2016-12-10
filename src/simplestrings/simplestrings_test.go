@@ -4,13 +4,6 @@ import "testing"
 
 const weekdays = "Monday Tuesday Wednesday Thursday Friday"
 
-func TestIsTuesdayAWeekeday(t *testing.T) {
-	i := Index(weekdays, "Tuesday")
-	if i == -1 {
-		t.Fatal("Tuesday not found")
-	}
-}
-
 // test that Tuesday is a weekday
 
 // test that Sunday is not a weekday

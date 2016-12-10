@@ -1,5 +1,5 @@
 Introduction to Go
-Tokyo, Japan
+Women Who Go Tokyo
 10 Dec 2016
 
 Dave Cheney
@@ -56,7 +56,7 @@ Go is often noted for its fast compilation, but this is only one facet of the id
 
 "Clumsy type systems drive people to dynamically typed languages" -Robert Griesemer
 
-Go is an attempt to demonstrate that a language can be both fast in terms of the programs it produces and fast (productive?) for the authors.
+Go is an attempt to demonstrate that a language can be both fast in terms of the programs it produces and fast (productive?) for the programmers.
 
 * Safety
 
@@ -1201,7 +1201,7 @@ The current version of Go is 1.7.4.
 
 Installing Go on OS X (also known as `darwin`) can be accomplished with
 
-*Max OS Installer*
+*Mac*OS*Installer*
 
 The Go project provides an `.pkg` installer, use:
 
@@ -1718,12 +1718,6 @@ The code for this kata is in `$GOPATH/src/katas/httplinecount`
 
 * Time for a break
 
-* Packages and applications
-
-- how to write a package
-- how to layout a project
-- package, project katas
-
 * Documenting packages with comments
 
 Go code is traditionally documented with comments in the source code. This is similar to Python's heredoc convention.
@@ -1795,6 +1789,14 @@ Most of you will be comfortable with a _function_scoped_ variable shadowing a _p
 
 But a _block_scoped_ variable shadowing a _function_scoped_ variable may be surprising.
 
+* Question time
+
+* Question time
+
+This is your time for questions
+
+Ask me anything!
+
 * Conclusion
 
 * Conclusion
@@ -1803,8 +1805,9 @@ Thank you very much for participating today, I hope that you enjoyed yourself an
 
 I would like to recommend several online resources:
 
+.link https://dave.cheney.net/resources-for-new-go-programmers Resources for new Go programmers
 .link https://tour.golang.org/welcome/1 tour.golang.org
-.link https://gobyexample.com/ Go by example
+.link https://gobyexample.com/ Go by Example
 
 I would like to recommend two books:
 
