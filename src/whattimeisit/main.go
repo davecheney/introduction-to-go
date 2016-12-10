@@ -1,10 +1,11 @@
-package // choose a package name
+package main
 
 import (
-	// you'll need to import the fmt and time packages
+	"fmt"
+	"time"
 )
 
 func main() {
-	now := // use the time package to find the current time
-	fmt.Println("The current time is", /* print out the value of now */)
+	now := time.Now()
+	fmt.Println("The current time is", now)
 }
