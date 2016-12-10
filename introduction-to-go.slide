@@ -1414,7 +1414,7 @@ These are called _struct_ (for _structure_) types. We declare a struct like this
 
 `Point` is a position in two dimensional space, it has two fields, `X` and `Y`.
 
-- Complete the kata in `$GOPATH/src/katas/points` by making all the tests pass.
+- Follow [[https://play.golang.org/p/fAnPV1MojK][this link]] to complete the example
 
 * Methods
 
