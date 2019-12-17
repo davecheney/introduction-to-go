@@ -5,3 +5,5 @@ simplestrings/simplestrings.go:6.19,8.24 2 1
 simplestrings/simplestrings.go:11.3,11.26 1 1
 simplestrings/simplestrings.go:8.24,9.9 1 1
 simplestrings/simplestrings.go:11.26,13.4 1 1
+simplestrings/simplestrings.go:19.38,21.2 1 0
+simplestrings/simplestrings.go:24.39,26.2 1 0

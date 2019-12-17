@@ -8,17 +8,19 @@ import (
 )
 
 func main() {
-	resp, err := http.Get("http://httpbin.org/ip")
+	resp, err := http.Get("http://httpbin.org/html")
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer resp.Body.Close()
 
-	result := make(map[string]string)
+	result := make(map[string]interface{})
 	dec := json.NewDecoder(resp.Body)
 	if err := dec.Decode(&result); err != nil {
 		log.Fatal(err)
 	}
 
-	fmt.Println("My IP address is:", result["origin"])
+	for key, value := range result {
+		fmt.Println("Key:", key, "Value:", value)
+	}
 }

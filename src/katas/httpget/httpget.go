@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"io"
 	"log"
 	"net/http"
@@ -11,6 +12,8 @@ func main() {
 	if len(os.Args) < 2 {
 		log.Fatalf("usage: %s $URL", os.Args[0])
 	}
+
+	fmt.Println("Args: ", os.Args[0], os.Args[1])
 
 	resp, err := http.Get(os.Args[1])
 	if err != nil {

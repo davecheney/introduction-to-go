@@ -13,3 +13,12 @@ func TestPointString(t *testing.T) {
 		t.Fatalf("got %q, expected %q", got, want)
 	}
 }
+
+func TestPointGetX(t *testing.T) {
+	p := Point{X: 100, Y: 200}
+	got := p.GetX()
+	want := 100
+	if got != want {
+		t.Fatalf("GetX: got %v, want %v", got, want)
+	}
+}

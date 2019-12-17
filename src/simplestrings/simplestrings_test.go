@@ -11,10 +11,23 @@ func TestIsTuesdayAWeekeday(t *testing.T) {
 	}
 }
 
-// test that Tuesday is a weekday
+func TestSundayIsNotAWeekday(t *testing.T) {
+	i := Index(weekdays, "Sunday")
+	if i != -1 {
+		t.Fatal("Sunday found unexpectedly")
+	}
+}
 
-// test that Sunday is not a weekday
+func TestEmptyStringReturnsZero(t *testing.T) {
+	i := Index(weekdays, "")
+	if i != 0 {
+		t.Fatal("expected i == 0")
+	}
+}
 
-// test that an empty search string returns 0
-
-// test that the string Monday is not found in the empty string
+func TestMondayNotFoundInEmptyString(t *testing.T) {
+	i := Index("", "Monday")
+	if i != -1 {
+		t.Fatal("found Monday in empty string")
+	}
+}
