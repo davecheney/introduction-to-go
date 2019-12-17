@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 func f() {
 	x := 200
 	fmt.Println("inside f: x =", x)
