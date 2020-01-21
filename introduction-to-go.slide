@@ -458,7 +458,7 @@ Go is a strongly typed language, like Java, C, C++, and Python. Go has nine kind
 
 - strings: `string`.
 - signed integers: `int8`, `int16`, `int32`, `int64`.
-- unsigned integers: `uint8`, `uint6`, `uint32`, `uint64`.
+- unsigned integers: `uint8`, `uint16`, `uint32`, `uint64`.
 - aliases: `byte`, `rune`, `int`, `uint`.
 - booleans: `bool`.
 - IEEE floating point: `float32`, `float64`.
